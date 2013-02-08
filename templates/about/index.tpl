@@ -16,10 +16,11 @@
 <h3>{translate key="about.people"}</h3>
 <ul class="plain">
 	{*{if not (empty($journalSettings.mailingAddress) && empty($journalSettings.contactName) && empty($journalSettings.contactAffiliation) && empty($journalSettings.contactMailingAddress) && empty($journalSettings.contactPhone) && empty($journalSettings.contactFax) && empty($journalSettings.contactEmail) && empty($journalSettings.supportName) && empty($journalSettings.supportPhone) && empty($journalSettings.supportEmail))}*}{*Not useful anymore. EL on April 18, 2012*}
-		<li>&#187; <a href="{url op="contact"}">{translate key="about.contact"}</a></li>
-	{*{/if}*}{*Not useful anymore. EL on April 18, 2012*}
+		<li>&#187; <a href="{url op="contact"}">Ethics Committee Membership</a></li>
+		<li>&#187; Researcher's directory (coming soon...)</li>
+	{*{/if}*}{*Not useful anymore. EL on April 18, 2012
 	<li>&#187; <a href="{url op="editorialTeam"}">{translate key="about.editorialTeam"}</a></li>
-	{*{iterate from=peopleGroups item=peopleGroup}
+	{iterate from=peopleGroups item=peopleGroup}
 		<li>&#187; <a href="{url op="displayMembership" path=$peopleGroup->getId()}">{$peopleGroup->getLocalizedTitle()|escape}</a></li>
 	{/iterate}
 	{call_hook name="Templates::About::Index::People"}*}{*Not useful anymore. EL on April 18, 2012*}
@@ -31,7 +32,10 @@
 <ul class="plain">
 
 {* "policie" page changed for SOP pdf by EL on April 10 2012*}
-<li>&#187; <a title="WPRO Standard Operating Procedures" href="/public/WPRO_ERC_SOP_Final2010_web.pdf" target="_blank">WPRO ERC Standard Operating Procedures.<br /></a></li>
+<li>&#187; <a title="Standard Operating Procedures (khmer)" href="/camhrp/public/Cam_IRBs_HR_SOP_khmer.pdf" target="_blank">Standard Operating Procedures (khmer)<br /></a></li>
+<li>&#187; <a title="Standard Operating Procedures (engl)" href="/camhrp/public/Cam_IRBs_HR_SOP_eng.pdf" target="_blank">Standard Operating Procedures (engl)<br /></a></li>
+<li>&#187; {*<a title="Userguide for investigators (engl)" href="/camhrp/public/Cam_IRBs_HR_Investigator_Userguide_khmer.pdf" target="_blank">*}Userguide for investigators (khmer) <i>...coming soon...</i><br />{*</a>*}</li>
+<li>&#187; {*<a title="Userguide for investigators (khmer)" href="/camhrp/public/Cam_IRBs_HR_Investigator_Userguide_engl.pdf" target="_blank">*}Userguide for investigators (engl)<i>...coming soon...</i><br />{*</a>*}</li>
 </ul>
 </div>
 

@@ -58,7 +58,7 @@ class SuppFileForm extends Form {
 
 		// Validation checks for this form
                 // Comment out, AIM, June 1, 2011
-		//$this->addCheck(new FormValidatorLocale($this, 'title', 'required', 'author.submit.suppFile.form.titleRequired'));
+		//$this->addCheck(new FormValidatorLocale($this, 'title', 'required', 'common.submit.suppFile.form.titleRequired'));
 		//$this->addCheck(new FormValidatorPost($this));
 	}
 
@@ -95,16 +95,14 @@ class SuppFileForm extends Form {
                 // Start Edit Jan 31 2012
                 // Add Options drop-down list for WHO journals
                 $typeOptions = array(
-                    "author.submit.suppFile.who.summary" => "author.submit.suppFile.who.summary",
-                    "author.submit.suppFile.who.informedConsent" => "author.submit.suppFile.who.informedConsent",
-                    "author.submit.suppFile.who.localEthicalApproval" => "author.submit.suppFile.who.localEthicalApproval",
-                    "author.submit.suppFile.who.funding" => "author.submit.suppFile.who.funding",
-                    "author.submit.suppFile.who.cv" => "author.submit.suppFile.who.cv",
-                    "author.submit.suppFile.who.questionnaire" => "author.submit.suppFile.who.questionnaire",
-                    "author.submit.suppFile.who.ethicalClearance" => "author.submit.suppFile.who.ethicalClearance",
-                    "author.submit.suppFile.who.proofOfRegistration" => "author.submit.suppFile.who.proofOfRegistration",
-                    "author.submit.suppFile.who.otherErcDecision" => "author.submit.suppFile.who.otherErcDecision",
-                    "common.other" => "common.other"
+                    "SUMMARY" => "common.submit.suppFile.who.summary",
+                    "INFORMED_CONSENT" => "common.submit.suppFile.who.informedConsent",
+                    "FUNDING" => "common.submit.suppFile.who.funding",
+                    "CV" => "common.submit.suppFile.who.cv",
+                    "QUESTIONNAIRE" => "common.submit.suppFile.who.questionnaire",
+                    "PROOF_OF_REGISTRATION" => "common.submit.suppFile.who.proofOfRegistration",
+                    "ERC_DECISION" => "common.submit.suppFile.who.otherErcDecision",
+                    "OTHER" => "common.other"
 		);
 
 		$templateMgr->assign('typeOptions', $typeOptions);
@@ -112,13 +110,13 @@ class SuppFileForm extends Form {
 
                 /*
 		$typeOptionsOutput = array(
-			'author.submit.suppFile.researchInstrument',
-			'author.submit.suppFile.researchMaterials',
-			'author.submit.suppFile.researchResults',
-			'author.submit.suppFile.transcripts',
-			'author.submit.suppFile.dataAnalysis',
-			'author.submit.suppFile.dataSet',
-			'author.submit.suppFile.sourceText'
+			'common.submit.suppFile.researchInstrument',
+			'common.submit.suppFile.researchMaterials',
+			'common.submit.suppFile.researchResults',
+			'common.submit.suppFile.transcripts',
+			'common.submit.suppFile.dataAnalysis',
+			'common.submit.suppFile.dataSet',
+			'common.submit.suppFile.sourceText'
 		);
 		$typeOptionsValues = $typeOptionsOutput;
 		array_push($typeOptionsOutput, 'common.other');
@@ -155,7 +153,12 @@ class SuppFileForm extends Form {
 			$this->addError('publicIssueId', Locale::translate('author.suppFile.suppFilePublicIdentificationExists'));
 			$this->addErrorField('publicSuppFileId');
 		}
-
+		
+		import ('classes.file.ArticleFileManager');
+		$articleFileManager = new ArticleFileManager($this->article->getArticleId());
+		if (!$articleFileManager->uploadedFileExists('uploadSuppFile')){
+			 $this->addError('uploadSuppFile', Locale::translate('author.submit.form.noFileSelected'));	
+		}		
 		return parent::validate();
 	}
 
@@ -251,17 +254,51 @@ class SuppFileForm extends Form {
 				ArticleSearchIndex::updateFileIndex($this->article->getArticleId(), ARTICLE_SEARCH_SUPPLEMENTARY_FILE, $fileId);
 
                                 // Insert new supplementary file
-                                $suppFile = new SuppFile();
-                                $suppFile->setArticleId($this->article->getArticleId());
-                                $suppFile->setFileId($fileId);
-                                $this->setSuppFileData($suppFile);
+                $suppFile = new SuppFile();
+                $suppFile->setArticleId($this->article->getArticleId());
+                $suppFile->setFileId($fileId);
+                $this->setSuppFileData($suppFile);
 
-                                $suppFileDao->insertSuppFile($suppFile);
-                                $this->suppFileId = $suppFile->getId();
+                $suppFileDao->insertSuppFile($suppFile);
+                $this->suppFileId = $suppFile->getId();
 			} else {
 				$fileId = 0;
 			}
 		}
+		
+		// Notifications
+		import('lib.pkp.classes.notification.NotificationManager');
+		$notificationManager = new NotificationManager();
+		$journal =& Request::getJournal();
+		$url = Request::url($journal->getPath(), 'sectionEditor', 'submissionReview', array($this->article->getArticleId()));
+		
+		$editAssignmentDao =& DAORegistry::getDAO('EditAssignmentDAO');
+		$notificationSectionEditors = array();
+		$sectionEditors = $editAssignmentDao->getEditorAssignmentsByArticleId3($this->article->getArticleId());
+		
+		foreach ($sectionEditors as $sectionEditorEntry) {
+			$sectionEditor =& $sectionEditorEntry['user'];
+            $notificationSectionEditors[] = array('id' => $sectionEditor->getId());
+            unset($sectionEditor);
+        }
+        
+		if ($suppFile->getData('type') == 'RAW_DATA') $message = 'notification.type.rawDataSubmitted'; 
+        if ($suppFile->getData('type') == 'OTHER_OUTPUTS') $message = 'notification.type.otherSuppResearchOutput';
+        if ($suppFile->getData('type') == 'PROGRESS_REPORT') $message = 'notification.type.progressReport';
+        if ($suppFile->getData('type') == 'COMPLETION_REPORT') $message = 'notification.type.completionReport';
+        if ($suppFile->getData('type') == 'EXTENSION_REQUEST') $message = 'notification.type.extensionRequest';
+        if ($this->getData('type') == "Supp File") $message = 'notification.type.suppFile';
+                    
+        if (isset($message)){
+        	foreach ($notificationSectionEditors as $userRole) {
+            	$notificationManager->createNotification(
+                	$userRole['id'], $message,
+                	$this->article->getLocalizedTitle(), $url, 1, NOTIFICATION_TYPE_SUPP_FILE_MODIFIED
+            	);
+       		}
+        }
+		
+		
 		return $this->suppFileId;
 	}
 
@@ -279,11 +316,11 @@ class SuppFileForm extends Form {
                     $otherFileType = trim($this->getData('otherFileType'));
 
                     $suppFileType = $fileTypes[0];
-                    if($suppFileType == Locale::translate('common.other') && $otherFileType != "") $suppFileType = $otherFileType;
+                    if($suppFileType == 'OTHER' && $otherFileType != "") $suppFileType = $otherFileType;
                     $count = 1;
                     foreach ($fileTypes as $type) {
                         if($count > 1) {
-                            if($type == Locale::translate('common.other') && $otherFileType != "")
+                            if($type == 'OTHER' && $otherFileType != "")
                                 $type = $otherFileType;
 
                             $suppFileType = $suppFileType . ', ' . $type;
@@ -291,7 +328,26 @@ class SuppFileForm extends Form {
                         $count++;
                     }
                     $suppFile->setType($suppFileType);
-                    $suppFile->setData('title', array($this->getDefaultFormLocale() => ($suppFileType)));
+                    
+                    $countTitle = 0;
+                	foreach ($fileTypes as $type) {
+                    	if($countTitle >= 1) {
+                        	if($type == 'OTHER' && $otherFileType != ""){
+                            	$type = $otherFileType;
+                        		$suppFileTitle = $suppFileTitle . ', ' . $type;
+                        	}
+                        	else $suppFileTitle = $suppFileTitle . ', ' . $this->getTypeByKey($type);
+                    	} else if ($countTitle < 1) {
+                        	if($type == 'OTHER' && $otherFileType != ""){
+                            	$type = $otherFileType;
+                        		$suppFileTitle = $type;
+                        	}
+                        	else $suppFileTitle = $this->getTypeByKey($type);              
+                    	}	
+                    	$countTitle++;
+                	}
+                	echo $suppFileTitle;
+                    $suppFile->setsssData('title', array($this->getDefaultFormLocale() => ($suppFileTitle)));
                 }
                 else {
                     $suppFile->setData('title', array($this->getDefaultFormLocale() => ($this->getData('type'))));
@@ -309,6 +365,43 @@ class SuppFileForm extends Form {
 		//$suppFile->setShowReviewers($this->getData('showReviewers')==1?1:0);
                 $suppFile->setShowReviewers(1);
 		//$suppFile->setPublicSuppFileId($this->getData('publicSuppFileId'));
+	}
+
+	/**
+	 * Get type (method/approach).
+	 * @return string
+	 */
+	function getTypeByKey($key) {
+		switch ($key) {
+			case 'SUMMARY':
+				return Locale::translate('common.submit.suppFile.who.summary');
+			case 'INFORMED_CONSENT':
+				return Locale::translate('common.submit.suppFile.who.informedConsent');
+			case 'FUNDING':
+				return Locale::translate('common.submit.suppFile.who.funding');
+			case 'CV':
+				return Locale::translate('common.submit.suppFile.who.cv');
+			case 'QUESTIONNAIRE':
+				return Locale::translate('common.submit.suppFile.who.questionnaire');
+			case 'PROOF_OF_REGISTRATION':
+				return Locale::translate('common.submit.suppFile.who.proofOfRegistration');
+			case 'ERC_DECISION':
+				return Locale::translate('common.submit.suppFile.who.otherErcDecision');
+			case 'FINAL_DECISION':
+				return Locale::translate('common.submit.suppFile.who.finalDecision');
+			case 'RAW_DATA':
+				return Locale::translate('common.submit.suppFile.who.rawData');
+			case 'EXTENSION_REQUEST':
+				return Locale::translate('common.submit.suppFile.who.extensionRequest');
+			case 'COMPLETION_REPORT':
+				return Locale::translate('common.submit.suppFile.who.completionReport');
+			case 'PROGRESS_REPORT':
+				return Locale::translate('common.submit.suppFile.who.progressReport');
+			case 'OTHER_OUTPUTS':
+				return Locale::translate('common.submit.suppFile.who.otherOutputs');
+			default:
+				return $key;
+		}
 	}
 }
 

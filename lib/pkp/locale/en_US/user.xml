@@ -11,8 +11,11 @@
   -->
 
 <locale name="en_US" full_name = "English">
-	<message key="user.affiliation">Affiliation</message>
-	<message key="user.affiliation.description">(Your institution, e.g. "Simon Fraser University")</message>
+	<message key="user.affiliation">Institutional Affiliation</message>
+    <message key="user.uhsStudent">UHS Student</message>
+    <message key="user.studentId">Student ID</message>
+    <message key="user.tel">Phone number</message>
+	<message key="user.affiliation.description">(institution, e.g. "Univesrity of Health Sciences, Phonm Penh")</message>
 	<message key="user.affiliations">Affiliations</message>
 	<message key="user.authorization.accessDenied">Access denied.</message>
 	<message key="user.authorization.processAuthenticationTokenRequired">The process authentication token is missing or invalid.</message>
@@ -22,7 +25,7 @@
 	<message key="user.authorization.restrictedSiteAccess">You have been denied access. Access to this site is currently restricted.</message>
 	<message key="user.authorization.roleBasedAccessDenied">The current role does not have access to this operation.</message>
 	<message key="user.authorization.userGroupRequired">You have to set a valid user group to access this operation.</message>
-	<message key="user.biography">Bio statement</message>
+	<message key="user.biography">Official Designation or Title or Position</message>
 	<message key="user.biography.description">(E.g., department and rank)</message>
 	<message key="user.changeMyPassword">Change My Password</message>
 	<message key="user.changePassword">Change Password</message>
@@ -68,12 +71,16 @@
 	<message key="user.password">Password</message>
 	<message key="user.repeatPassword">Repeat Password</message>
 	<message key="user.phone">Phone</message>
+    <message key="user.phoneInstruct">Please include the country and area codes.</message>
 	<message key="user.profile.changePasswordInstructions">Enter your current and new passwords below to change the password for your account.</message>
 	<message key="user.profile.editProfile">Edit Profile</message>
 	<message key="user.profile.form.emailRequired">A valid email address is required.</message>
-	<message key="user.profile.form.affiliationRequired">An affiliation is required.</message>
 	<message key="user.profile.form.firstNameRequired">A first name is required.</message>
 	<message key="user.profile.form.lastNameRequired">A last name is required.</message>
+    <message key="user.profile.form.affiliationRequired">The affiliation is required.</message>
+    <message key="user.profile.form.phoneRequired">The phone number is required.</message>
+    <message key="user.profile.form.mailingAddressRequired">The mailing address is required.</message>
+    <message key="user.profile.form.countryRequired">The country of usual residence is required.</message>
 	<message key="user.profile.form.newPasswordRequired">You must enter your new password.</message>
 	<message key="user.profile.form.oldPasswordInvalid">The current password you entered was incorrect.</message>
 	<message key="user.profile.form.openAccessNotifications">Issue open access email notifications</message>
@@ -115,12 +122,17 @@
 	<message key="user.register.usernameRestriction">The username must contain only lowercase letters, numbers, and hyphens/underscores.</message>
 	<message key="user.role.reader">Reader</message>
 	<message key="user.role.readers">Readers</message>
-	<message key="user.role.reviewer">ERC Member</message>/*MSB replaced Reviewers with ERC Member*/)
-	<message key="user.role.reviewers">ERC Members</message> /*From reviewers*/
+	<message key="user.role.reviewer">NECHR Member</message>/*MSB replaced Reviewers with NECHR Member*/)
+	<message key="user.role.reviewers">Ethics Committees Members</message> /*From reviewers*/
+	<message key="user.role.technicalReviewers">Technical Reviewers</message> /*From reviewers*/
 	<message key="user.role.siteAdmin">Site Administrator</message>
 	<message key="user.role.siteAdmins">Site Administrators</message>
 	<message key="user.roles">Roles</message>
-	<message key="user.salutation">Salutation</message>
+	<message key="user.salutation">Surname</message>
+    <message key="user.salutation.dr">Dr.</message>
+    <message key="user.salutation.prof">Prof.</message>
+    <message key="user.salutation.mr">Mr.</message>
+    <message key="user.salutation.ms">Ms.</message>
 	<message key="user.sendPassword">Confirmation</message>
 	<message key="user.sendPassword.description">Send me a confirmation email including my username and password</message>
 	<message key="user.signature">Signature</message>
@@ -129,5 +141,5 @@
 	<message key="user.userHome">User Home</message>
 	<message key="user.username">Username</message>
 	<message key="user.workingLanguages">Working languages</message>
-	<message key="user.register.completeForm">Fill in this form to register with this journal.</message>
+	<message key="user.register.completeForm">Fill in this form to register to the Cambodia Health Research Portal.</message>
 </locale>

@@ -384,7 +384,11 @@ class PKPUser extends DataObject {
 	 */
 	function getInterests() {
 		$interestDao =& DAORegistry::getDAO('InterestDAO');
-		return implode(", ", $interestDao->getInterests($this->getId()));
+		$userDao =& DAORegistry::getDAO('UserDAO');
+		$interests = $interestDao->getInterests($this->getId());
+		$interestsFullNames = array();
+		foreach ($interests as $interest) array_push($interestsFullNames, $userDao->getReviewingInterest($interest));
+		return implode(", ", $interestsFullNames);
 	}
 
 	/**
@@ -584,7 +588,100 @@ class PKPUser extends DataObject {
 			return ($salutation != ''?"$salutation ":'') . "$firstName " . ($middleName != ''?"$middleName ":'') . $lastName;
 		}
 	}
-
+	
+	function getFunctions(){
+		$roleDao =& DAORegistry::getDAO('RoleDAO');
+		$userSettingsDao =& DAORegistry::getDAO('UserSettingsDAO');
+		$roles =& $roleDao->getRolesByUserId($this->getId(), '4');
+		$functions;
+		foreach ($roles as $role){
+			$roleId =& $role->getRoleId();
+			if ($roleId == '512'){
+				if($userSettingsDao->getSetting($this->getId(), 'secretaryStatus', '4') && ($userSettingsDao->getSetting($this->getId(), 'secretaryStatus', '4') != "Retired")){
+					if ($functions != null){
+						$functions = $functions . ' & ' . $userSettingsDao->getSetting($this->getId(), 'secretaryStatus', '4');
+					}
+					else {
+						$functions = $userSettingsDao->getSetting($this->getId(), 'secretaryStatus', '4');
+					}
+				}
+			}
+			if ($roleId == '4096'){
+				if ($userSettingsDao->getSetting($this->getId(), 'uhsMemberStatus', '4') && ($userSettingsDao->getSetting($this->getId(), 'uhsMemberStatus', '4') != "Retired")){
+					if ($functions != null){
+						$functions = $functions . ' & ' . $userSettingsDao->getSetting($this->getId(), 'uhsMemberStatus', '4'); 
+					}else {
+						$functions = $userSettingsDao->getSetting($this->getId(), 'uhsMemberStatus', '4'); 
+					}
+				}
+				if ($userSettingsDao->getSetting($this->getId(), 'nechrMemberStatus', '4') && ($userSettingsDao->getSetting($this->getId(), 'nechrMemberStatus', '4') != "Retired")){
+					if ($functions != null){
+						$functions = $functions . ' & ' . $userSettingsDao->getSetting($this->getId(), 'nechrMemberStatus', '4'); 
+					}else {
+						$functions = $userSettingsDao->getSetting($this->getId(), 'nechrMemberStatus', '4'); 
+					}
+				}
+				if ($this->isLocalizedExternalReviewer() == "Yes"){
+					if ($functions != null){
+						$functions = $functions . ' & IRB Member'; 
+					}else {
+						$functions = 'IRB Member'; 
+					}
+				}	
+			}
+			if ($roleId == '65536'){
+				if ($functions != null){
+					$functions = $functions . ' & ' . 'Investigator';
+				}
+				else {
+					$functions = 'Investigator';
+				}
+			}
+			if ($roleId == '256'){
+				if ($functions != null){
+					$functions = $functions . ' & ' . 'Coordinator';
+				}
+				else {
+					$functions = 'Coordinator';
+				}
+			}
+		}
+		return $functions;
+	}
+	
+	function getSecretaryEthicsCommittee(){
+		$ethicsCommittee;
+		$userSettingsDao =& DAORegistry::getDAO('UserSettingsDAO');
+		if (($userSettingsDao->getSetting($this->getId(), 'secretaryStatus', '4')) == "IRB Chair"){
+			$ethicsCommittee = 'UHS';
+		}
+		if (($userSettingsDao->getSetting($this->getId(), 'secretaryStatus', '4')) == "IRB Chair"){
+			$ethicsCommittee = 'NECHR';
+		}
+		return $ethicsCommittee;
+	}
+	
+	function isNechrMember(){
+		$nechrMember = false;
+		$userSettingsDao =& DAORegistry::getDAO('UserSettingsDAO');
+		$userStatus = $userSettingsDao->getSetting($this->getId(), 'nechrMemberStatus', '4');
+		if ($userStatus == "NECHR Chair" || $userStatus == "NECHR Vice-Chair" || $userStatus == "NECHR Member"){
+			$nechrMember = true;
+		}
+		return $nechrMember;
+	}
+	
+	function isUhsMember(){
+		$uhsMember = false;
+		$userSettingsDao =& DAORegistry::getDAO('UserSettingsDAO');
+		$userStatus = $userSettingsDao->getSetting($this->getId(), 'uhsMemberStatus', '4');
+		if ($userStatus == "UHS Chair" || $userStatus == "UHS Vice-Chair" || $userStatus == "UHS Member"){
+			$uhsMember = true;
+		}
+		return $uhsMember;
+	}
+	
+	
 	function getContactSignature() {
 		$signature = $this->getFullName();
 		if ($a = $this->getLocalizedAffiliation()) $signature .= "\n" . $a;
@@ -593,8 +690,6 @@ class PKPUser extends DataObject {
 		$signature .= "\n" . $this->getEmail();
 		return $signature;
 	}
-	
-	
 	/*
 	 * Getters and setters for additional user settings: health and wpro affiliation
 	 * Added by aglet
@@ -625,6 +720,35 @@ class PKPUser extends DataObject {
 	function setHealthAffiliation($healthAffiliation, $locale) {
 		return $this->setData('healthAffiliation', $healthAffiliation, $locale);
 	}
+
+
+			//Added by EL on May 8, 2012
+
+			/**
+	 		* Get localized health affiliation
+	 		*/
+			function getLocalizedFieldOfActivity() {
+				return $this->getLocalizedData('fieldOfActivity');
+			}
+
+			/**
+	 		* Get user field of Activity.
+	 		* @param $locale string
+	 		* @return string
+	 		*/
+			function getFieldOfActivity($locale) {
+				return $this->getData('fieldOfActivity', $locale);
+			}
+
+			/**
+	 		* Set user field of activity.
+	 		* @param $fieldOfActivity string
+	 		* @param $locale string
+	 		*/
+			function setFieldOfActivity($fieldOfActivity, $locale) {
+				return $this->setData('fieldOfActivity', $fieldOfActivity, $locale);
+			}
+			
 	
 	/**
 	 * Get localized wpro affiliation

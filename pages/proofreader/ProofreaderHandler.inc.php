@@ -110,8 +110,8 @@ class ProofreaderHandler extends Handler {
          *********************************************************************/
 		$technicalUnitDAO =& DAORegistry::getDAO('TechnicalUnitDAO');
 		$technicalUnits =& $technicalUnitDAO->getTechnicalUnits();
-        $countryDAO =& DAORegistry::getDAO('AsiaPacificCountryDAO');
-        $countries =& $countryDAO->getAsiaPacificCountries();
+        $countryDAO =& DAORegistry::getDAO('ProvincesOfCambodiaDAO');
+        $countries =& $countryDAO->getProvincesOfCambodia();
        
 		$templateMgr->assign_by_ref('technicalUnits', $technicalUnits);
         $templateMgr->assign_by_ref('countries', $countries);

@@ -16,9 +16,13 @@
 	<message key="editor.article.reviewForms">Review Forms</message>
 	<message key="editor.article.selectReviewForm">Select Review Form</message>
 	<message key="editor.article.clearReviewForm">Clear Review Form</message>
+    <message key="editor.article.createExternalReview">Create IRB Member</message>
+    <message key="editor.article.backToReview">Back to review page</message>
+    <message key="editor.article.assignAndNotify">Assign and notify</message>
+
 	<!-- Edited spf 3 March 2012
-	  Replace editor with ERC Secretary -->
-	<message key="editor.home">ERC Secretary Home</message> 
+	  Replace editor with NECHR Secretary -->
+	<message key="editor.home">Coordinator Home</message> 
 	<message key="editor.article.confirmChangeReviewForm">Warning: Changing the review form will affect any answers reviewers have made using this form. Are you sure you wish to continue?</message>
 	<message key="editor.submissionsAndPublishing">Submissions</message>
 	<message key="editor.submissionQueue">Submission Queue</message>
@@ -26,19 +30,19 @@
 	<message key="editor.publishing">Proposal Approval</message>
 	<message key="editor.publishedIssues">Approved Proposals</message>
 	<message key="editor.allSections">All Sections</message>
-	<message key="editor.allEditors">ERC Secretariat</message>
+	<message key="editor.allEditors">NECHR Secretariat</message>
 	<message key="editor.me">Me</message>
 	<message key="editor.submissionArchive.noSubmissions">No submissions in the archive.</message>
 	<message key="editor.submissionArchive.saveChanges">Save changes to archived submissions? Submissions marked for deletion will be permanently deleted from the system.</message>
 	<message key="editor.submissionArchive.confirmDelete">Are you sure you want to permanently delete this submission?</message>
 	<message key="editor.submissionReview.confirmDecision">Are you sure you wish to record this decision?</message>
-	<message key="editor.submissionReview.emailWillArchive">This submission will be archived after the Notify RTO email is either sent or its Skip Email button is pressed.</message>
-	<message key="editor.submissionReview.cannotSendToCopyediting">Before sending a submission, use Notify RTO link to inform RTO of decision and select the version to be sent.</message>
+	<message key="editor.submissionReview.emailWillArchive">This submission will be archived after the notify investigator email is either sent or its Skip Email button is pressed.</message>
+	<message key="editor.submissionReview.cannotSendToCopyediting">Before sending a submission, use Notify Investigator link to inform Investigator of decision and select the version to be sent.</message>
 	<message key="editor.submissionReview.sendToCopyediting">Send to Copyediting</message>
 	<message key="editor.notifyUsers">Notify Users</message>
 	<message key="editor.notifyUsers.allUsers">All users associated with this site. ({$count} users)</message>
 	<message key="editor.notifyUsers.allReaders">All guest ({$count} users)</message>
-	<message key="editor.notifyUsers.allAuthors">All RTOs ({$count} users)</message>
+	<message key="editor.notifyUsers.allAuthors">All Investigators ({$count} users)</message>
 	<message key="editor.notifyUsers.allIndividualSubscribers">All individual subscribers ({$count} users)</message>
 	<message key="editor.notifyUsers.allInstitutionalSubscribers">All institutional subscribers ({$count} users)</message>
 	<message key="editor.notifyUsers.inProgress">Notifying users...</message>
@@ -46,7 +50,7 @@
 	<message key="editor.notifyUsers.allUsers">Send this message to all users associated with this site ({$count} users)</message>
 	<message key="editor.notifyUsers.interestedUsers">Send this message to the users associated with this site who have indicated that they wish to receive updates ({$count} users)</message>
 	<message key="editor.notifyUsers.includeToc">Include the table of contents:</message>
-	<message key="editor.editorAdministration">ERC Administration</message>
+	<message key="editor.editorAdministration">NECHR Administration</message>
 	<message key="editor.issues.createIssue">Create Issue</message>
 	<message key="editor.issues.backIssues">Back Issues</message>
 	<message key="editor.issues.futureIssues">Future Issues</message>
@@ -120,15 +124,16 @@
 	<message key="editor.article.setDueDate">Set Due Date</message>
 	<message key="editor.article.addReviewer">Add Reviewer</message>
 	<message key="editor.article.toReviewer">To Reviewer</message>
-	<message key="editor.article.notifyReviewer">Notify ERC Members</message>
+	<message key="editor.article.notifyReviewer">Notify NECHR Members</message>
 	<message key="editor.article.initiateReview">Initiate Review</message>
 	<message key="editor.article.cancelReview">Cancel Request</message>
 	<message key="editor.article.clearReview">Clear Reviewer</message>
 	<message key="editor.article.enterRecommendation">Enter Recommendation</message>
 	<message key="editor.article.enterReviewerRecommendation">Enter Reviewer Recommendation</message>
 	<message key="editor.article.recommendation">Recommendation</message>
-	<message key="editor.article.selectReviewer">Add Other Primary Reviewer</message>
-	<message key="editor.article.unassignedReviewers">Unassigned ERC Members</message>
+	<message key="editor.article.selectReviewer">Assign another IRB Member</message>
+	<message key="editor.article.unassignedReviewers">Unassigned NECHR Members</message>
+    <message key="editor.article.assignExternalReviewers">Assign IRB Member(s)</message>
 	<message key="editor.article.replaceReviewer">Replace Reviewer</message>
 	<message key="editor.article.editorToEnter">Editor to enter recommendation/comments for reviewer</message>
 	<message key="editor.article.uploadReviewForReviewer">Upload review</message>
@@ -148,7 +153,7 @@
 	<message key="editor.article.selectCopyeditor">Assign Copyeditor</message>
 	<message key="editor.article.replaceCopyeditor">Replace Copyeditor</message>
 	<message key="editor.article.editorsCopyedit">Editor's Copyedit</message>
-	<message key="editor.article.showAuthor">Let author view file</message>
+	<message key="editor.article.showAuthor">Share to Investigator</message>
 	<message key="editor.article.showCopyeditor">Show version to copyeditor</message>
 	<message key="editor.article.rateReviewer">Reviewer rating</message>
 	<message key="editor.article.reviewerRating.veryGood">5 High</message>
@@ -163,8 +168,8 @@
 	<message key="editor.article.authorProofing">Author Proofing</message>
 	<message key="editor.article.archiveSubmission">Reject and Archive Submission</message>
 	<message key="editor.article.restoreToQueue">Restore to Active List</message>
-	<message key="editor.article.assignSectionEditor">Add ERC Secretary</message>
-	<message key="editor.article.assignEditor">Add ERC Secretary</message>
+	<message key="editor.article.assignSectionEditor">Assign IRB Chair</message>
+	<message key="editor.article.assignEditor">Assign IRB Chair</message>
 	<message key="editor.article.selectEditor">Select {$roleName}</message>
 
 	<!-- *********************************************
@@ -173,9 +178,12 @@
 	 * Last Update: 5/3/2011
 	********************************************** -->
 	<message key="editor.article.setApprovalDate">Set Approval Date</message>
+    <message key="editor.article.setApprovalDateInstruct">Please select the date of approbation. If no date is entered, today's date will be selected.</message>
 	<message key="editor.article.uploadRecordDecision">Upload and Submit Decision</message>
 	<message key="editor.article.uploadFinalDecisionFile">Upload Decision File</message>
+    <message key="editor.article.uploadFinalDecisionFileInstruct">Please select and upload the approbation letter.</message>
 	<message key="editor.article.selectDecision">Select decision</message>
+    <message key="editor.article.selectDecisionInstruct">Please select the final decision. This decision can't be undone.</message>
 	<message key="editor.article.decision.accept">Approved</message>
 	<message key="editor.article.decision.pendingRevisions">Revisions Required</message >
 	<message key="editor.article.decision.resubmit">Revise and Resubmit</message>
@@ -188,7 +196,13 @@
 	<message key="editor.article.decision.done">Review Not Required (Research Completed)</message>
 	<message key="editor.article.decision.researchCompleted">Research Completed</message>
 	<message key="editor.article.selectInitialReview">Select Initial Review</message>
-	<message key="editor.article.selectExemptionDecision">Select Review Process</message>
+    <message key="editor.article.selectExemptionDecision">Select Review Process</message>
+    <message key="editor.article.selectExternalReview">External Review Decision</message>
+    <message key="editor.article.externalReviewDecisionInstruct">Please select if the proposal passed the external review (Approved) or not (Incomplete)</message>
+    <message key="editor.article.selectExternalReviewInstruct">Please select if this proposal requires a external review or not.</message>
+    <message key="editor.article.selectInitialReviewInstruct">Please check all the information submitted and the files downloaded (SUMMARY link above) in order to decide if the proposal is incomplete or not.</message>
+	<message key="editor.article.selectReviewProcess">Select Review Process</message>
+    <message key="editor.article.selectReviewProcessInstruct">Please select the type of review needed. If the proposal does'nt need any review, please select 'Exemption of Review'.</message>
 	<message key="editor.submissionReview.confirmInitialReview">Are you sure you wish to record this initial review?</message>
 	<message key="editor.submissionReview.confirmExemption">Are you sure you wish to record this decision?</message>
 	<message key="editor.submissionReview.confirmReviewSelection">Are you sure you wish to record this decision?</message>
@@ -198,6 +212,7 @@
 	<message key="editor.article.waitingForResubmission">Waiting for resubmission of proposal</message>
 	<message key="editor.article.submissionStatus">Submission Status</message>
 	<message key="editor.article.reasonsForExemption">Reasons for Exemption</message>
+    <message key="editor.article.reasonsForExemptionInstruct">If not already done, please select the resasons of the exemption.</message>
 	<message key="editor.article.selectContinuingReview">Select Type of Continuing Review</message>
 	<message key="editor.article.exemption.instructions">(Please check all that apply)</message>
 	<message key="editor.article.exemption.noHumanParticipants">The research does not involve human participants.</message>	
@@ -205,8 +220,9 @@
 	<message key="editor.article.exemption.publicOfficials">Public officials are interviewed in their official capacity on issues that are in the public domain.</message>
 	<message key="editor.article.exemption.limitedObservation">The intervention is limited to the observation of public behavior.</message>
 	<message key="editor.article.exemption.limitedPublicHealthSurveillance">The intervention is limited to public health surveillance or routine evaluation of health programmes carried out pursuant to statutory or regulatory authority.</message>
-	<message key="editor.article.exemption.registered">Proposals registered in WPRO Research Registry when the study has been reviewed and approved by World Health Organizations's Ethics Review Committee (WHOERC).</message>
-	<message key="editor.minutes.minutes">Minutes</message>
+	<message key="editor.article.exemption.registered">Proposals registered in the Cambodia Health Research Portal when the study has been reviewed and approved by the National Ethics Committee for Health Research.</message>
+	<message key="editor.metadataExport">Metadata to export</message>
+    <message key="editor.minutes.minutes">Minutes</message>
 	<message key="editor.minutes.uploadMinutes">Upload Minutes</message>
 	<message key="editor.minutes.attendance">Attendance</message>
 	<message key="editor.minutes.announcements">Announcements</message>
@@ -281,6 +297,9 @@
 	********************************************** -->
 	<message key="editor.meetings">Meetings</message>
 	<message key="editor.meetings.setMeeting">Set a Meeting</message>
+    <message key="editor.meetings.setDate">Set Date</message>
+    <message key="editor.meetings.setTime">Set Time</message>
+    <message key="editor.meetings.setLocation">Set Location</message>
 	<message key="editor.meetings.viewMeeting">Meeting Details</message>
 	<message key="editor.meetings.meetingId">Meeting ID</message>
 	<message key="editor.meetings.reviewers">Reviewers</message>
@@ -353,7 +372,7 @@
 	<message key="editor.minutes.initialReview.confidentiality">Privacy and Confidentiality</message>
 	<message key="editor.minutes.initialReview.consentDocument">Consent Document</message>
 	<message key="editor.minutes.initialReview.otherConsiderations">Additional Considerations</message>
-	<message key="editor.minutes.initialReview.localIrbApproval">Local IRB/ERC Approval</message>
+	<message key="editor.minutes.initialReview.localIrbApproval">Local IRB/NECHR Approval</message>
 	<message key="editor.minutes.initialReview.other">Other</message>
 	<message key="editor.minutes.addDiscussionItem">Add a Discussion Item</message>
 	<message key="editor.minutes.addItem">Add Item</message>
@@ -398,9 +417,9 @@
 	<message key="editor.minutes.confirmContinuingReview">This cannot be undone. Are you sure you want to submit this review?</message>
 	<message key="editor.minutes.confirmInitialReview">This cannot be undone. Are you sure you want to submit this review?</message>
 	<message key="editor.minutes.proposalsForInitialReview">Proposals for Initial Review</message>
-	<message key="editor.minutes.noProposalsForInitialReview">No proposals are assigned for initial ERC Review.</message>
+	<message key="editor.minutes.noProposalsForInitialReview">No proposals are assigned for initial NECHR Review.</message>
 	<message key="editor.minutes.proposalsForContinuingReview">Proposals for Continuing Review</message>
-	<message key="editor.minutes.noProposalsForContinuingReview">No proposals are assigned for continuing ERC Review.</message>
+	<message key="editor.minutes.noProposalsForContinuingReview">No proposals are assigned for continuing NECHR Review.</message>
 	<message key="editor.minutes.uploadContinuingReviews">Upload Continuing Reviews</message>
 	<message key="editor.minutes.completeContinuingReviews">Complete Continuing Reviews</message>
 	<message key="editor.submission.dateOfApproval">Date of Approval</message>
@@ -410,35 +429,174 @@
 	 * Added by igmallare
 	 * Last Update: 10/10/2011
 	********************************************** -->
-	<message key="editor.reports.reportGenerator">Report Generator</message>
+	<message key="editor.reports">Research proposals report </message>
+    <message key="editor.reports.criterias">Criteria(s)</message>
+    <message key="editor.reports.noCriterias">No criterias</message>
+    <message key="editor.reports.inclusive">inclusive</message>
+    <message key="editor.reports.submittedBefore">submitted before </message>
+    <message key="editor.reports.submittedAfter">submitted after </message>
+    <message key="editor.reports.approvedBefore">approved before </message>
+    <message key="editor.reports.approvedAfter">approved after </message>
+    <message key="editor.reports.dates">Dates</message>
+    <message key="editor.reports.startDate">Start Date</message>
+    <message key="editor.reports.endDate">End Date</message>
+    <message key="editor.reports.before">Before</message>
+    <message key="editor.reports.after">After</message>
+    <message key="editor.reports.startDateBefore">start date before </message>
+    <message key="editor.reports.startDateAfter">start date after </message>
+    <message key="editor.reports.endDateBefore">end date before </message>
+    <message key="editor.reports.endDateAfter">end date after </message>
+    <message key="editor.reports.lessThan">Less than or equal to</message>
+    <message key="editor.reports.greaterThan">Greater than or equal to</message>
+    <message key="editor.reports.or">or </message>
+    <message key="editor.reports.orCap">OR </message>
+    <message key="editor.reports.and">and </message>
+    <message key="editor.reports.to"> to </message>
+    <message key="editor.reports.committeeDecision">committee's decision is </message>
+    <message key="editor.reports.isStudentResearch">is conducted by a student </message>
+    <message key="editor.reports.isNotStudentResearch">is not conducted by a student </message>
+    <message key="editor.reports.aDegree1">is conducted by a student in a </message>
+    <message key="editor.reports.aDegree2">academic degree </message>
+    <message key="editor.reports.undergraduate">undergraduate </message>
+    <message key="editor.reports.master">master </message>
+    <message key="editor.reports.postDoc">post-doc </message>
+    <message key="editor.reports.phd">Ph.D. </message>
+    <message key="editor.reports.other">other </message>
+    <message key="editor.reports.underReview">Under Review</message>
+    <message key="editor.reports.decisionAvailable">Decision Available</message>
+    <message key="editor.reports.pSponsor">the primary sponsor is </message>
+    <message key="editor.reports.sSponsor">the secondary sponsor list includes </message>
+    <message key="editor.reports.rField">the research field list includes </message>
+    <message key="editor.reports.pType">the proposal type list includes </message>
+    <message key="editor.reports.pType">the proposal type list includes </message>
+    <message key="editor.reports.bothDataCollection">with primary and secondary data collections </message>
+    <message key="editor.reports.dataCollection1">with only </message>
+    <message key="editor.reports.dataCollection2">data collection(s) </message>
+    <message key="editor.reports.primaryDC">primary </message>
+    <message key="editor.reports.secondaryDC">secondary </message>
+    <message key="editor.reports.bothDC">both </message>
+    <message key="editor.reports.multiCountry">Multi-country research</message>
+    <message key="editor.reports.isMultipleCountry">is conducted in multiple countries </message>
+    <message key="editor.reports.isNotMultipleCountry">is conducted only in Cambodia </message>
+    <message key="editor.reports.provinceList">the list of provinces includes </message>
+    <message key="editor.reports.province">Province(s)</message>
+    <message key="editor.reports.filterBy">Filter by</message> 
+    <message key="editor.reports.filterBy.decisions">Decision(s)</message>
+    <message key="editor.reports.filterBy.addAnotherdecision">Add another decision</message>
+    <message key="editor.reports.filterBy.addAnotherPSponsor">Add another primary sponsor</message>
+    <message key="editor.reports.filterBy.addAnotherSSponsor">Add another secondary sponsor</message>
+    <message key="editor.reports.filterBy.addAnotherRField">Add another research field</message>
+    <message key="editor.reports.filterBy.addAnotherPType">Add another proposal type</message>
+    <message key="editor.reports.filterBy.addAnotherProvince">Add another province</message>
+    <message key="editor.reports.checkAll">Check All</message>
+    <message key="editor.reports.uncheckAll">Uncheck All</message>
+    <message key="editor.reports.reportGenerator">Report Generator</message>
 	<message key="editor.reports.generateReport">Generate Report</message>
-	<message key="editor.reports.submissions">Submissions</message>
+	<message key="editor.reports.submissions">Proposals</message>
 	<message key="editor.reports.meetingAttendance">Meeting Attendance</message>
-	<message key="editor.reports.submissions">Submissions</message>
-	<message key="editor.reports.ercMemberRequired">Select at least one (1) ERC member</message>
-	<message key="editor.reports.selectAtLeastOneErcMember">Select at least one (1) ERC member for the report</message>
+	<message key="editor.reports.ercMemberRequired">Select at least one (1) NECHR member</message>
+	<message key="editor.reports.selectAtLeastOneErcMember">Select at least one (1) NECHR member for the report</message>
 	<message key="editor.reports.dateRange">Pick a date range for the report (optional)</message>
 	<message key="editor.reports.preview">Preview</message>
 	<message key="editor.reports.previewReport">Preview Report</message>
 	<message key="editor.reports.meetingDate">Meeting schedule</message>
 	<message key="editor.reports.isPresent">Is present?</message>
 	<message key="editor.reports.reason">Reason (if absent)</message>
-	
-	<!-- *********************************************
-	* Additional keys for submissions report
-	* Added by MSB, Oct11,2011
+    <message key="editor.reports.review">Review</message>
+	<message key="editor.reports.whoId">Proposal ID</message>
+    <message key="editor.reports.erc">Ethics Committee</message>
+    <message key="editor.reports.decision">Last IRB Chair decision</message>
+    <message key="editor.reports.submitDate">Date Submitted</message>
+    <message key="editor.reports.approveDate">Date Approved</message>
+    <message key="editor.reports.approveDateInstruct">Choosing an approval date will automatically select an "approved" decision.</message>
+	<message key="editor.reports.author">Primary Investigator</message>
+    <message key="editor.reports.authorAffiliation">PI Affiliation</message>
+    <message key="editor.reports.authorEmail">PI E-Mail</message>
+	<message key="editor.reports.engScientificTitle">English Scientific Title</message>
+    <message key="editor.reports.engPublicTitle">English Public Title</message>
+	<message key="editor.reports.camScientificTitle">Khmer Scientific Title</message>
+    <message key="editor.reports.camPublicTitle">Khmer Public Title</message>
+    <message key="editor.reports.studentInstitution">Student Institution</message>
+    <message key="editor.reports.studentAcademicDegree">Student Academic Degree</message>
+    
+    <message key="editor.reports.studentSupervisorName">Student' supervisor name</message>
+    <message key="editor.reports.studentSupervisorAffiliation">Student' supervisor affiliation</message>
+    <message key="editor.reports.studentSupervisorEmail">Student' supervisor Email</message>
+    
+    <message key="editor.reports.primarySponsor">Primary Sponsor</message>
+    <message key="editor.reports.secondarySponsor">Secondary Sponsor(s)</message>
+    <message key="editor.reports.researchField">Research Field(s)</message>
+    <message key="editor.reports.proposalType">Proposal Type(s)</message>
+    <message key="editor.reports.proposalType.pnhs">Proposal wihtout Human Subjects</message>
+    <message key="editor.reports.duration">Dates of Research</message>
+	<message key="editor.reports.country">Geographical Area(s)</message>
+    <message key="editor.reports.dataCollection">Data Collection</message>
+	<message key="editor.reports.budget">Estimated Budget</message>
+    <message key="editor.reports.currency">Currency</message>
+	<message key="editor.reports.otherErcReview">Other ERC Review</message>
+	<message key="editor.reports.abstract">Abstract</message>
+    <message key="editor.reports.industryGrant">Industry Grant(s)</message>
+    <message key="editor.reports.agencyGrant">Agency Grant(s)</message>    
+    <message key="editor.reports.mohGrant">Cambodia MoH Grant</message>
+    <message key="editor.reports.governmentGrant">Cambodia Government Grant</message>
+    <message key="editor.reports.universityGrant">University Grant</message>
+    <message key="editor.reports.selfFunding">Self Funding</message>
+    <message key="editor.reports.otherGrant">Other Grant</message>
+    
+    <!-- Risk Assesment -->
+    
+    <message key="editor.reports.identityRevealedAbb">Identity revealed</message>
+    <message key="editor.reports.unableToConsentAbb">Unable to consent</message>
+    <message key="editor.reports.under18Abb">Under 18</message>
+    <message key="editor.reports.dependentRelationshipAbb">Dependent relationship</message>
+    <message key="editor.reports.ethnicMinorityAbb">Ethnic minority group</message>
+    <message key="editor.reports.impairmentAbb">Intellectual or mental impairment</message>
+    <message key="editor.reports.pregnantAbb">Pregnant</message>
+    <message key="editor.reports.newTreatmentAbb">New treatment</message>
+    <message key="editor.reports.bioSamplesAbb">Biological samples</message>
+    <message key="editor.reports.radiationAbb">Radiation</message>
+    <message key="editor.reports.distressAbb">Distress</message>
+    <message key="editor.reports.inducementsAbb">Inducements</message>
+    <message key="editor.reports.sensitiveInfoAbb">Sensitive information</message>
+    <message key="editor.reports.deceptionAbb">Deception</message>
+    <message key="editor.reports.reproTechnologyAbb">Reproductive technology</message>
+    <message key="editor.reports.geneticsAbb">Human genetic or genomic</message>
+    <message key="editor.reports.stemCellAbb">Stem cell</message>
+    <message key="editor.reports.biosafetyAbb">Biosafety</message>
+    <message key="editor.reports.exportAbb">Sample export</message>
+    <message key="editor.reports.riskLevelAbb">Risk level</message>
+    <message key="editor.reports.riskUnder">No more than minimal risk</message>
+    <message key="editor.reports.riskMinor">Minor increase over minimal risk</message>
+    <message key="editor.reports.riskMajor">More than minor increase over minimal risk</message>
+    <message key="editor.reports.listRisksAbb">List of risks</message>
+    <message key="editor.reports.howRisksMinimizedAbb">How risks managed</message>
+    <message key="editor.reports.riskApplyToAbb">Risks apply to</message>
+    <message key="editor.reports.researchTeam">Research Team</message>
+    <message key="editor.reports.researchSubjects">Research Subjects</message>
+    <message key="editor.reports.widerCommunity">Wider Community</message> 
+    <message key="editor.reports.nobody">Nobody</message> 
+    <message key="editor.reports.benefitsFromTheProjectAbb">Benefits</message>
+    <message key="editor.reports.directBenefits">Direct benefit to participants</message>
+    <message key="editor.reports.participantCondition">Generalizable knowledge about participants' condition or disorder</message>
+    <message key="editor.reports.diseaseOrCondition">Generalizable knowledge about disease or condition under study </message>
+    <message key="editor.reports.noBenefits">No benefits</message>
+    <message key="editor.reports.multiInstitutionsAbb">Multi-institutions</message>
+    <message key="editor.reports.conflictOfInterestAbb">Conflict of Interest</message>
+    
+    <!-- End Risk Assesment -->
+    
+	<message key="editor.reports.countryRequired">Select at least (1) country for the report.</message>	
+	<message key="editor.reports.externalUnitRequired">Select at least (1) external unit for the report.</message>	
+	<message key="editor.reports.decisionRequired">Select at least (1) decision for the report.</message>	
+        
+    <!-- *********************************************
+	* Additional keys for sending emails
+	* Added by AIM, Jul25,2012
 	*
 	********************************************* -->
-	<message key="editor.reports.whoId">WHO ID</message>
-	<message key="editor.reports.author">Author</message>
-	<message key="editor.reports.submitDate">Date Submitted</message>
-	<message key="editor.reports.title">Title</message>
-	<message key="editor.reports.country">Country</message>
-	<message key="editor.reports.decision">Decision</message>
-	<message key="editor.reports.technicalUnit">Technical Unit</message>
-	<message key="editor.reports.allTechnicalUnits">All Technical Units</message>
-	<message key="editor.reports.allCountries">All Countries</message>	
-	<message key="editor.reports.countryRequired">Select at least (1) country for the report.</message>	
-	<message key="editor.reports.technicalUnitRequired">Select at least (1) technical unit for the report.</message>	
-	<message key="editor.reports.decisionRequired">Select at least (1) decision for the report.</message>	
+        <message key="editor.email.send">Send an Email</message>
+        <message key="editor.email.sendOrganizeMeeting">Send an Email for organizing a meeting</message>
+	<message key="editor.email.allUsers">Send to All</message>
+	<message key="editor.email.ERCMembers">Send to an email to NECHR Members</message>
+	<message key="editor.email.RTOs">Send to investigators only</message>
 </locale>

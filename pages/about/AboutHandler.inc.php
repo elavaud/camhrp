@@ -119,16 +119,29 @@ class AboutHandler extends Handler {
 		$templateMgr =& TemplateManager::getManager();
 		$userSettingsDao =& DAORegistry::getDAO('UserSettingsDAO');	
 		
-		$secretary =& $userSettingsDao->getUsersBySetting("affiliation", "WPRO-ERC, Secretary");
+		$secretary =& $userSettingsDao->getUsersBySetting("secretaryStatus", "IRB Chair");
 		$secretary =& $secretary->toArray();
 		
-		$adsecretary =& $userSettingsDao->getUsersBySetting("affiliation", "WPRO-ERC, Secretary Administrative Assistant");
-		$adsecretary =& $adsecretary->toArray();
-
+		$nechrChair =& $userSettingsDao->getUsersBySetting("nechrMemberStatus", "NECHR Chair");
+		$nechrChair =& $nechrChair->toArray();
+		
+		$nechrViceChair =& $userSettingsDao->getUsersBySetting("nechrMemberStatus", "NECHR Vice-Chair");
+		$nechrViceChair =& $nechrViceChair->toArray();		
+		
+		$nechrMembers =& $userSettingsDao->getUsersBySetting("nechrMemberStatus", "NECHR Member");
+		$nechrMembers =& $nechrMembers->toArray();
+		
+		$templateMgr->assign_by_ref('nechrChair', $nechrChair);
+		$templateMgr->assign_by_ref('nechrViceChair', $nechrViceChair);	
+		$templateMgr->assign_by_ref('nechrMembers', $nechrMembers);
 		$templateMgr->assign_by_ref('secretary', $secretary);
-		$templateMgr->assign_by_ref('adsecretary', $adsecretary);
+
 		
 		$templateMgr->display('about/contact.tpl');
+		
+		//$adsecretary =& $userSettingsDao->getUsersBySetting("affiliation", "NECHR, Secretary Administrative Assistant");
+		//$adsecretary =& $adsecretary->toArray();
+		//$templateMgr->assign_by_ref('adsecretary', $adsecretary);		
 	}
 
 	/**
@@ -211,32 +224,23 @@ class AboutHandler extends Handler {
 		$templateMgr =& TemplateManager::getManager();
 		$userSettingsDao =& DAORegistry::getDAO('UserSettingsDAO');
 		
-		$chair =& $userSettingsDao->getUsersBySetting("ercMemberStatus", "WPRO-ERC, Chair");
-		$chair =& $chair->toArray();
-		
-		$viceChair =& $userSettingsDao->getUsersBySetting("ercMemberStatus", "WPRO-ERC, Vice-Chair");
-		$viceChair =& $viceChair->toArray();
-				
-		$secretary =& $userSettingsDao->getUsersBySetting("ercMemberStatus", "WPRO-ERC, Secretary");
+		$secretary =& $userSettingsDao->getUsersBySetting("secretaryStatus", "UHS Secretary");
 		$secretary =& $secretary->toArray();
-		
-		$secretaryAA =& $userSettingsDao->getUsersBySetting("ercMemberStatus", "WPRO-ERC, Secretary Administrative Assistant");
-		$secretaryAA =& $secretaryAA->toArray();
 
-		$ercMembers =& $userSettingsDao->getUsersBySetting("ercMemberStatus", "WPRO-ERC, Member");
-		$ercMembers =& $ercMembers->toArray();
+		$nechrChair =& $userSettingsDao->getUsersBySetting("uhsMemberStatus", "UHS Chair");
+		$nechrChair =& $nechrChair->toArray();
 		
-		$extMembers =& $userSettingsDao->getUsersBySetting("ercMemberStatus", "WPRO-ERC, External Member");
-		$extMembers =& $extMembers->toArray();
-							
-		$templateMgr->assign_by_ref('userSettingsDao', $userSettingsDao);
+		$nechrViceChair =& $userSettingsDao->getUsersBySetting("uhsMemberStatus", "UHS Vice-Chair");
+		$nechrViceChair =& $nechrViceChair->toArray();	
 		
-		$templateMgr->assign_by_ref('chair', $chair);
-		$templateMgr->assign_by_ref('viceChair', $viceChair);		
+		$nechrMembers =& $userSettingsDao->getUsersBySetting("uhsMemberStatus", "UHS Member");
+		$nechrMembers =& $nechrMembers->toArray();
+		
+		$templateMgr->assign_by_ref('nechrChair', $nechrChair);
+		$templateMgr->assign_by_ref('nechrViceChair', $nechrViceChair);
+	
+		$templateMgr->assign_by_ref('nechrMembers', $nechrMembers);
 		$templateMgr->assign_by_ref('secretary', $secretary);
-		$templateMgr->assign_by_ref('secretaryAA', $secretaryAA);
-		$templateMgr->assign_by_ref('ercMembers', $ercMembers);
-		$templateMgr->assign_by_ref('extMembers', $extMembers);
 		
 		$templateMgr->display('about/editorialTeam.tpl');
 	}
@@ -379,8 +383,7 @@ class AboutHandler extends Handler {
 		$journalSettingsDao =& DAORegistry::getDAO('JournalSettingsDAO');
 		$sectionDao =& DAORegistry::getDAO('SectionDAO');
 		
-		/* Commented out by EL on April 4 2012 */
-		//$sectionEditorsDao =& DAORegistry::getDAO('SectionEditorsDAO');
+		$sectionEditorsDao =& DAORegistry::getDAO('SectionEditorsDAO');
 		
 		$journal =& Request::getJournal();
 		$templateMgr =& TemplateManager::getManager();
@@ -388,14 +391,13 @@ class AboutHandler extends Handler {
 		$sections =& $sections->toArray();
 		$templateMgr->assign_by_ref('sections', $sections);
 
-		/* Commented out by EL on April 4 2012 */
-		/*
+
 		$sectionEditorEntriesBySection = array();
 		foreach ($sections as $section) {
 			$sectionEditorEntriesBySection[$section->getId()] =& $sectionEditorsDao->getEditorsBySectionId($journal->getId(), $section->getId());
 		}
 		$templateMgr->assign_by_ref('sectionEditorEntriesBySection', $sectionEditorEntriesBySection);
-		*/
+		
 		$templateMgr->display('about/editorialPolicies.tpl');
 	}
 

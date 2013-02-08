@@ -26,7 +26,13 @@
 	</tr>
 	<tr valign="top">
 		<td class="label">{translate key="user.salutation"}</td>
-		<td class="value">{$user->getSalutation()|escape|default:"&mdash;"}</td>
+		<td class="value">
+		{if $user->getSalutation() == "Prof."}{translate key="user.salutation.prof"}
+		{elseif $user->getSalutation() == "Dr."}{translate key="user.salutation.dr"}
+		{elseif $user->getSalutation() == "Ms."}{translate key="user.salutation.ms"}
+		{elseif $user->getSalutation() == "Mr."}{translate key="user.salutation.mr"}
+		{else}&mdash;{/if}		
+		</td>
 	</tr>
 	<tr valign="top">
 		<td class="label">{translate key="user.firstName"}</td>

@@ -17,18 +17,27 @@
 function confirmForgottenUpload() {
 	var fieldValue = document.submitForm.uploadSuppFile.value;
 	if (fieldValue) {
-		return confirm("{/literal}{translate key="author.submit.forgottenSubmitSuppFile"}{literal}");
+		return confirm('{/literal}{translate key="author.submit.forgottenSubmitSuppFile"}{literal}');
 	}
 	return true;
 }
 // -->
 
+function checkSize(){
+	var fileToUpload = document.getElementById('uploadSuppFile');
+	var check = fileToUpload.files[0].fileSize;
+	var valueInKb = Math.ceil(check/1024);
+	if (check > 5242880){
+		alert ('{/literal}{translate key="common.fileTooBig1"}{literal}'+valueInKb+'{/literal}{translate key="common.fileTooBig2"}{literal}5 Mb.');
+		return false
+	}
+}
 
 $(document).ready(function() {
    $('#fileType').change(function(){
         var isOtherSelected = false;
         $.each($('#fileType').val(), function(key, value){
-            if(value == "{/literal}{translate key="common.other"}{literal}") {
+            if(value == "OTHER") {
                 isOtherSelected = true;
             }
         });
@@ -43,7 +52,7 @@ $(document).ready(function() {
 </script>
 {/literal}
 
-<form name="submitForm" method="post" action="{url op="saveSubmit" path=$submitStep}" enctype="multipart/form-data">
+<form name="submitForm" method="post" action="{url op="saveSubmit" path=$submitStep}" onSubmit="return checkSize()" enctype="multipart/form-data">
 <input type="hidden" name="articleId" value="{$articleId|escape}" />
 {include file="common/formErrors.tpl"}
 
@@ -84,11 +93,11 @@ $(document).ready(function() {
 
 <table class="data" width="100%">
 <tr>
-	<td width="30%" class="label">Select file type(s)<br />(Hold down the CTRL button to select multiple options.)</td>
+	<td width="30%" class="label">{translate key="author.submit.suppFileInstruct"}</td>
 	<td width="35%" class="value">
 <!--Start Edit Jan 30 2012-->
-                <select name="fileType[]" id="fileType" multiple="multiple" size="10" class="selectMenu">
-                    {html_options_translate options=$typeOptions translateValues="true" selected=$fileType}
+                <select name="fileType[]" id="fileType" multiple="multiple" size="8" class="selectMenu">
+                    {html_options_translate options=$typeOptions selected=$fileType}
                 </select>
                 <!-- {*
                 <select name="type" class="selectMenu" id="type" size="1">{html_options_translate output=$typeOptionsOutput values=$typeOptionsValues translateValues="true" selected=$type}</select>
@@ -96,14 +105,14 @@ $(document).ready(function() {
         </td>
         <td style="vertical-align: bottom;">
                 <div id="divOtherFileType" style="display: none;">
-                    <span class="label" style="font-style: italic;">Specify "Other" file type</span> <br />
+                    <span class="label" style="font-style: italic;">{translate key="author.submit.suppFileSpecify"}</span> <br />
                     <input type="text" name="otherFileType" id="otherFileType" size="20" /> <br />
                 </div>
         </td>
         <!--End Edit -->
 </tr>
 <tr>
-        <td width="30%" class="label">Select file to upload</td>
+        <td width="30%" class="label">{translate key="author.submit.suppFileUploadInstruct"}</td>
         <td width="70%" class="value" colspan="2">
                 <input type="file" name="uploadSuppFile" id="uploadSuppFile"  class="uploadField" />
                 <input name="submitUploadSuppFile" type="submit" class="button" value="{translate key="common.upload"}" /> 

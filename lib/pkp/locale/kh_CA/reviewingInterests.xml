@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : reviewingInterests.xml
+    Created on : December 18, 2012
+    Author     : EL
+    Description: List of possible reviewing interests
+-->
+
+<reviewingInterests>
+    <reviewingInterest name="Accidents and injuries" code="AI" />
+    <reviewingInterest name="Adolescent health" code="AH" />
+    <reviewingInterest name="Antimicrobial Resistance" code="AR" />
+    <reviewingInterest name="Bacterial diseases" code="BD" />
+    <reviewingInterest name="Biostatistics" code="Bi" />
+    <reviewingInterest name="Blindness and eye diseases" code="BED" />
+    <reviewingInterest name="Blood safety" code="BS" />
+    <reviewingInterest name="Cancer" code="Ca" />
+    <reviewingInterest name="Cardiovascular diseases" code="CaD" />
+    <reviewingInterest name="Chemical safety" code="CS" />
+    <reviewingInterest name="Child health" code="CH" />
+    <reviewingInterest name="Cholera" code="Ch" />
+    <reviewingInterest name="Chronic diseases" code="ChD" />
+    <reviewingInterest name="Complementary and alternative medicine" code="CAM" />
+    <reviewingInterest name="Communicable diseases" code="CoD" />
+    <reviewingInterest name="Deafness" code="Dea" />
+    <reviewingInterest name="Demographics" code="Dem" />
+    <reviewingInterest name="Diabetes mellitus" code="DM" />
+    <reviewingInterest name="Diarrhea" code="Drh" />
+    <reviewingInterest name="Disabilities" code="Dsb" />
+    <reviewingInterest name="Disasters" code="Dss" />
+    <reviewingInterest name="Education and training" code="ET" />
+    <reviewingInterest name="Emergency Medicine" code="EM" />
+    <reviewingInterest name="Environmental health" code="EH" />
+    <reviewingInterest name="Epidemiology" code="Epd" />
+    <reviewingInterest name="Epilepsy" code="Epl" />
+    <reviewingInterest name="Essential medicines and pharmaceuticals" code="EMP" />
+    <reviewingInterest name="Ethics" code="Eth" />
+    <reviewingInterest name="Food Insecurity" code="FI" />
+    <reviewingInterest name="Food safety" code="FS" />
+    <reviewingInterest name="Fungal diseases" code="FD" />
+    <reviewingInterest name="Genomics" code="Gen" />
+    <reviewingInterest name="Health economics" code="HEc" />
+    <reviewingInterest name="Health equity" code="HEq" />
+    <reviewingInterest name="Health financing and insurance" code="HFI" />
+    <reviewingInterest name="Health of the elderly" code="HEl" />
+    <reviewingInterest name="Health policy" code="HPo" />
+    <reviewingInterest name="Health promotion" code="HPr" />
+    <reviewingInterest name="Health services development" code="HSD" />
+    <reviewingInterest name="Hepatitis" code="Hep" />
+    <reviewingInterest name="HIV/AIDS" code="HIV" />
+    <reviewingInterest name="Human reproduction" code="HR" />
+    <reviewingInterest name="Human resources for health" code="HRH" />
+    <reviewingInterest name="Immunization/ Vaccines" code="IV" />
+    <reviewingInterest name="Laboratory techniques and procedures" code="LTP" />
+    <reviewingInterest name="Legislation (health)" code="Leg" />
+    <reviewingInterest name="Leprosy" code="Lep" />
+    <reviewingInterest name="Influenza" code="Inf" />
+    <reviewingInterest name="Lymphatic filariasis" code="LF" />
+    <reviewingInterest name="Malaria" code="Mal" />
+    <reviewingInterest name="Maternal health" code="MaH" />
+    <reviewingInterest name="Measles" code="Mea" />
+    <reviewingInterest name="Mental health" code="MeH" />
+    <reviewingInterest name="Migration" code="Mig" />
+    <reviewingInterest name="Mortality" code="Mor" />
+    <reviewingInterest name="Medical Technology" code="MT" />
+    <reviewingInterest name="Modelling" code="Mod" />
+    <reviewingInterest name="Neonatal Health" code="NH" />
+    <reviewingInterest name="Nursing and midwifery" code="NM" />
+    <reviewingInterest name="Nutrition" code="Nut" />
+    <reviewingInterest name="Non-communicable diseases" code="NCD" />
+    <reviewingInterest name="Obesity" code="Obe" />
+    <reviewingInterest name="Occupational health" code="OcH" />
+    <reviewingInterest name="Oral health" code="OrH" />
+    <reviewingInterest name="Trachoma" code="Tra" />
+    <reviewingInterest name="Transplantation" code="Tra" />
+    <reviewingInterest name="Parasitic diseases" code="PD" />
+    <reviewingInterest name="Poliomyelitis" code="Pol" />
+    <reviewingInterest name="Primary health care" code="PHC" />
+    <reviewingInterest name="Qualitative methodology" code="QM" />
+    <reviewingInterest name="Quality assessment" code="QA" />
+    <reviewingInterest name="Randomized control trials" code="RCT" />
+    <reviewingInterest name="Reproductive health" code="RH" />
+    <reviewingInterest name="Respiratory tract diseases" code="RTD" />
+    <reviewingInterest name="Schistosomiasis" code="Sch" />
+    <reviewingInterest name="Sexually transmitted infections" code="STI" />
+    <reviewingInterest name="Sexual Health" code="SH" />
+    <reviewingInterest name="Smoking/tobacco" code="ST" />
+    <reviewingInterest name="Substance abuse" code="SA" />
+    <reviewingInterest name="Suicide" code="Sui" />
+    <reviewingInterest name="Surveillance" code="Sur" />
+    <reviewingInterest name="Systematic reviews/meta-analyses" code="SMA" />
+    <reviewingInterest name="Toxicology" code="Tox" />
+    <reviewingInterest name="Urban Health" code="UH" />
+    <reviewingInterest name="Tuberculosis" code="Tub" />
+    <reviewingInterest name="Vector control" code="VC" />
+    <reviewingInterest name="Veterinary public health" code="VPH" />
+    <reviewingInterest name="Violence" code="Vio" />
+    <reviewingInterest name="Viral diseases" code="VD" />
+    <reviewingInterest name="Water/ sanitation" code="WS" />
+    <reviewingInterest name="Women's health" code="WH" />
+</reviewingInterests>

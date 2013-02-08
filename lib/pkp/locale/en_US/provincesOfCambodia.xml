@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : provincesOfCambodia.xml
+    Created on : May 2012
+    Author     : Edouard Lavaud
+    Description:
+        For use in country where proposal is submitted.
+-->
+
+<countries>
+    <country code="BMC" name="Banteay Meanchey Province"/>
+    <country code="BTB" name="Battambang Province"/>
+    <country code="KPC" name="Kampong Cham Province"/>
+    <country code="KPH" name="Kampong Chhnang Province"/>
+    <country code="KPS" name="Kampong Speu Province"/>
+    <country code="KPT" name="Kampong Thom Province"/>
+    <country code="KP" name="Kampot Province"/>
+    <country code="KD" name="Kandal Province"/>
+    <country code="KK" name="Koh Kong Province"/>
+    <country code="KEP" name="Kep Province"/>
+    <country code="KR" name="Kratie Province"/>
+    <country code="MDK" name="Mondulkiri Province"/>
+    <country code="OMC" name="Oddar Meanchey Province"/>
+    <country code="PL" name="Pailin Province"/>
+    <country code="PPM" name="Phnom Penh Municipality"/>
+    <country code="PS" name="Preah Sihanouk Province"/>
+    <country code="PV" name="Preah Vihear Province"/>
+    <country code="PRS" name="Pursat Province"/>
+    <country code="PVG" name="Prey Veng Province"/>
+    <country code="RNK" name="Ratanakiri Province"/>
+    <country code="SR" name="Siem Reap Province"/>
+    <country code="ST" name="Stung Treng Province"/>
+    <country code="SRG" name="Svay Rieng Province"/>
+    <country code="TK" name="Takeo Province"/>
+</countries>

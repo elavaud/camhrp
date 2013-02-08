@@ -47,7 +47,8 @@
 
 <table class="data" width="100%">
 	<tr valign="top">	
-		<td width="20%" class="label">{fieldLabel name="sectionId" required="true" key="section.section"}</td>
+		<td width="20%" class="label">
+		{fieldLabel name="sectionId" required="true" key="section.section"}</td>
 		<td width="80%" class="value"><select name="sectionId" id="sectionId" size="1" class="selectMenu">{html_options options=$sectionOptions selected=$sectionId}</select></td>
 	</tr>
 </table>
@@ -109,6 +110,7 @@ function checkSubmissionChecklist() {
 	<div class="separator"></div>	
 {/if}
 
+<!-- Doesn't allow dual languages -> manually
 {if $currentJournal->getLocalizedSetting('submissionChecklist')}
 {foreach name=checklist from=$currentJournal->getLocalizedSetting('submissionChecklist') key=checklistId item=checklistItem}
 	{if $checklistItem.content}
@@ -130,6 +132,39 @@ function checkSubmissionChecklist() {
 	</div>{* checklist *}
 	<div class="separator"></div>
 {/if}
+-->
+<h3>{translate key="author.submit.submissionChecklist"}</h3>
+<p>{translate key="author.submit.submissionChecklistDescription"}</p>
+	<table width="100%" class="data">
+		<tr valign="top">
+			<td width="5%"><input type="checkbox" id="checklist" name="checklist[]" value="1"{if $articleId || $submissionChecklist} checked="checked"{/if} /></td>
+			<td width="95%">{translate key="author.submit.submissionChecklist1"}</label></td>
+		</tr>
+	</table>
+<div class="separator"></div>
+
+<h3>{translate key="author.submit.documentChecklist"}</h3>
+<p>{translate key="author.submit.documentChecklistDescription"}</p>
+	<table width="100%" class="data">
+		<tr valign="top">
+			<td width="5%"><input type="checkbox" id="checklist" name="checklist[]" value="1"{if $articleId || $submissionChecklist} checked="checked"{/if} /></td>
+			<td width="95%">{translate key="author.submit.documentChecklist1"}</label></td>
+		</tr>
+		<tr valign="top">
+			<td width="5%"><input type="checkbox" id="checklist" name="checklist[]" value="1"{if $articleId || $submissionChecklist} checked="checked"{/if} /></td>
+			<td width="95%">{translate key="author.submit.documentChecklist2"}</label></td>
+		</tr>
+		<tr valign="top">
+			<td width="5%"><input type="checkbox" id="checklist" name="checklist[]" value="1"{if $articleId || $submissionChecklist} checked="checked"{/if} /></td>
+			<td width="95%">{translate key="author.submit.documentChecklist3"}</label></td>
+		</tr>
+		<tr valign="top">
+			<td width="5%"><input type="checkbox" id="checklist" name="checklist[]" value="1"{if $articleId || $submissionChecklist} checked="checked"{/if} /></td>
+			<td width="95%">{translate key="author.submit.documentChecklist4"}</label></td>
+		</tr>
+	</table>
+<div class="separator"></div>
+
 
 {/if}{* if count($sectionOptions) <= 1 *}
 
@@ -178,7 +213,6 @@ function checkSubmissionChecklist() {
 <p><input type="submit" value="{translate key="common.saveAndContinue"}" class="button defaultButton" /> <input type="button" value="{translate key="common.cancel"}" class="button" onclick="{if $articleId}confirmAction('{url page="author"}', '{translate|escape:"jsparam" key="author.submit.cancelSubmission"}'){else}document.location.href='{url page="author" escape=false}'{/if}" /></p>
 
 <p><span class="formRequired">{translate key="common.requiredField"}</span></p>
-
 </form>
 
 {/if}{* If not accepting submissions *}

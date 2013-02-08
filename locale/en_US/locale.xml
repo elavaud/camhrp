@@ -30,7 +30,7 @@
 
 	<!-- common -->
 
-	<!-- WPRO-ERC Management -->
+	<!-- Management -->
 
 
 
@@ -54,15 +54,13 @@
 	-->
 
 	<!-- Common Messages -->
-    
-        <!-- Change "Journal Systems" by "WPRO Ethics Review Committee". EL April 4 2012 -->
-        <message key="common.openJournalSystems">WPRO Ethics Review Committee</message>
+        <message key="common.openJournalSystems">The Cambodia Health Research Portal Portal</message>
 	<message key="common.confirmComplete">Are you sure you wish to mark this task as completed? You may not be able to make changes afterwards.</message>
 	<message key="common.payment">Payment</message>
 	<message key="common.payments">Payments</message>
 	<message key="common.pageHeader.altText">Page Header</message>
 	<message key="common.homePageHeader.altText">Homepage Header</message>
-
+    <message key="common.homePageText"><![CDATA[<p>The Cambodia Health Research Portal is an <i>integrated online health research management system</i> that offers substantial benefits for all stakeholders in health research. The Portal aims to improve accountability, efficiency and quality of health research conducted in Cambodia by increasing transparency and streamlining the ethics review process.<br/><br/>The Portal can be used to:<br/><br/><b>Submit research proposals at anytime from anywhere</b> for review by the National Ethics Committee for Health Research. Researchers need to register on the Portal. Once registered, the researcher will have a permanent account and be able to submit research proposal in a paper-less way and to track the review status of their proposals.<br/><br/><b>Search ongoing and completed health research</b> from January 2013 onwards through a publically accessible research registry. No registration or log-in is required to search the ongoing research.<br/><br/><b>Access complete research reports</b> for the research started since January 2013 once the research is completed. [Since the system is launched only January 2013, there are no research reports in the system at present, but will be added as and when a research is completed over time].<br/><br/><b>Access information on all the applicable guidelines, rules, and regulations</b> related to health research in Cambodia (being added…).<br/><br/><b>Access a “Researchers' Directory”</b> containing information on the national and international researchers doing research in Cambodia (will be added soon...).</p>]]></message>
 	<message key="common.journalHomepageImage.altText">Homepage Image</message>
 
 	<!-- Common Form Messages -->
@@ -74,17 +72,17 @@
 	<!-- Common Error Messages -->
 		
 	<!-- Navigation -->
-	<message key="navigation.journalHelp">WHO-WPRO, Health Research Portal Help</message>
+	<message key="navigation.journalHelp">Cambodia Health Research Portal Help</message>
 
 	<message key="navigation.archives">Archives</message>
 	<message key="navigation.current">Current</message>
 	<message key="navigation.otherJournals">Other Sites</message>
 	<message key="navigation.browseByIssue">By Issue</message>
-	<message key="navigation.browseByAuthor">By RTO</message>
-	<message key="navigation.infoForAuthors">For RTOs</message>
+	<message key="navigation.browseByAuthor">By investigator</message>
+	<message key="navigation.infoForAuthors">For investigators</message>
 	<message key="navigation.infoForLibrarians">For Librarians</message>
 	<message key="navigation.competingInterestGuidelines">Competing Interest Guidelines</message>
-	<message key="navigation.infoForAuthors.long">Information For RTOs</message>
+	<message key="navigation.infoForAuthors.long">Information for investigators</message>
 	<message key="navigation.infoForLibrarians.long">Information For Librarians</message>
 	
 	<!-- Article Queues -->
@@ -100,36 +98,45 @@
 	<message key="common.queue.short.active">Active</message>
 	<message key="common.queue.long.completed">Archived Proposals</message>
 	<message key="common.queue.short.completed">Archive</message>
-	
+    <message key="common.queue.short.fullReview">Full Review</message>
+    <message key="common.queue.long.fullReview">Proposals for Full Review</message>
 	<!--
 	 *
 	 * ENTITIES - This section contains terms pertaining to the system's
-	 *            major entities, e.g. Article, WHO-WPRO, Research Registration Portal, Section
+	 *            major entities, e.g. Article, the Cambodia Health Research Portal, Section
 	 *
 	-->
 
 	<!-- Common Section Terms -->
-	<message key="section.section">Section</message>
-	<message key="section.sections">WHO-WPRO, Health Research Portal Sections</message>
+	<message key="section.section">Ethics Committee</message>
+	<message key="section.sections">Cambodia Ethics Review Committees</message>
 
-	<message key="section.title">Section title</message>
+	<message key="section.title">Ethics Committee title</message>
 	<message key="section.abbreviation">Abbreviation</message>
 	<message key="section.abbreviation.example">(For example, Proposals=PRO)</message>
 
 	<!-- Common Article Terms -->
 	<message key="article.article">Proposal</message>
 	<message key="article.articles">Proposals</message>
-	<message key="article.submissionId">Submission ID</message>
+	<message key="article.submissionId">Proposal ID</message>
 	<message key="article.title">Title</message>
-	<message key="article.authors">RTO</message> /*Replaced "Authors" with "RTO"*/
+    <message key="article.scientificTitle">Scientific title</message>
+    <message key="article.proposalType">Proposal Type</message>
+    <message key="article.publicTitle">Public title</message>
+	<message key="article.authors">Investigator</message> /*Replaced "Authors" with "Investigator"*/
+    <message key="article.authorInstruct">Main investigator if the research</message>
 	<message key="article.indexingInformation">Indexing Information</message>
 	<message key="article.metadata">Metadata</message>
-	<message key="article.journalSection">WHO-WPRO, Health Research Portal Section</message>
+	<message key="article.journalSection">Cambodia Ethics Review Committee</message>
 
 	<message key="article.file">File</message>
+    <message key="article.files">Files</message>
 	<message key="article.suppFile">Supplementary File</message>
 	<message key="article.suppFiles">Supplementary File(s)</message>
 	<message key="article.suppFilesAbbrev">Supp. Files</message>
+    <message key="article.reviewFiles">Review Files</message>
+    <message key="article.suppFilesAbbrevInstruct">Supplementary files submitted by the Investigator. Please click on a title (blue link) for downloading the concerned proposal.</message>
+    <message key="article.suppFilesNotAuthorized">You are not authorized to access the final decision.</message>
 	<message key="article.discipline">Academic discipline and sub-disciplines</message>
 	<message key="article.subjectClassification">Subject classification</message>
 	<message key="article.subject">Keywords</message>
@@ -140,14 +147,19 @@
 	<message key="article.type">Type, method or approach</message>
 	<message key="article.language">Language</message>
     
-        <!-- Changed "Secreatary" by "Secretary Administrative Assistant. EL April 4 2012-->
-        <message key="article.sectionEditor">Secretary Administrative Assistant</message> /*replace section editor with Secretary */
+        <!-- Changed "Secreatary" by "IRB Chair Administrative Assistant. EL April 4 2012-->
+        <message key="article.sectionEditor">IRB Chair Administrative Assistant</message> /*replace section editor with IRB Chair */
         
-	<message key="article.commentsToEditor">RTO comments</message> /*replace Author to RTO */
+	<message key="article.commentsToEditor">Investigator comments</message> /*replace Author to Investigator */
+    <message key="article.commentsToEditorInstruct">Here is a comment of the submitter about this research proposal.</message>
 	<message key="article.submission">Submission</message>
 	<message key="article.submissions">Submissions</message>
 	<message key="article.details">Details</message>
 	<message key="article.abstract">Abstract</message>
+    <message key="article.studentInstitution">Student Institution</message>
+    <message key="article.academicDegree">Academic Degree</message>
+    <message key="article.primarySponsor">Primary Sponsor</message>
+    <message key="article.fundsRequired">Funds Required</message>
 	<message key="article.coverPage.altText">Cover Image</message>
 	<message key="article.accessLogoOpen.altText">Open Access</message>
 	<message key="article.accessLogoRestricted.altText">Restricted Access</message>
@@ -163,32 +175,195 @@
              Added by: aim
              Last Edited: April 24, 2011
         -->
+        <message key="proposal.phoneIncludeCountry">Please include the country and area codes.</message>
         <message key="proposal.title">Title</message>
+        <message key="proposal.scientificTitle">Proposal title</message>
+        <message key="proposal.scientificTitleInstruct">Scientific title of the study as it appears in the protocol submitted for funding and ethical review. This title should contain information on population, intervention, comparator and outcome(s).</message>
+        <message key="proposal.engScientificTitle">English title</message>
+        <message key="proposal.camScientificTitle">Khmer title</message>
+        <message key="proposal.publicTitle">Public title</message>
+        <message key="proposal.publicTitleInstruct">Title intended for the lay public in easily understood language.</message>
+        <message key="proposal.engPublicTitle">English public title</message>
+        <message key="proposal.camPublicTitle">Khmer public title</message>
         <message key="proposal.abstract">Abstract</message>
+        <message key="proposal.engAbstract">English abstract</message>
+        <message key="proposal.camAbstract">Khmer abstract</message>
                 <!-- Comment out by EL on APril 13, 2012 -->
                 <!-- Return "Objectives" key by SPF on April 16, 2012 -->
         <message key="proposal.objectives">Objectives</message>
+        <message key="proposal.objectivesInstruct">Key research questions, hypothesis, objectives in bullet points if feasible.</message>
+        <message key="proposal.background">Background</message>
+        <message key="proposal.backgroundInstruct">Key issues under investigation, importance, what is known already, and why this study.</message>
+        <message key="proposal.studyMatters">Study Methods</message>
+        <message key="proposal.studyMattersInstruct">Relevant features of study design (qualitative/quantitative, cross-sectional survey/case-control...), estimated sample size, manner of data collection, etc. [e.g. study involves key informant interviews with policy-makers in Cambodia, involving 6-8 people at national or provincial level...]</message>
+        <message key="proposal.expectedOutcomes">Expected outcomes and use of results</message>
+        <message key="proposal.expectedOutcomesInstruct">Potential outcomes of study such as measurement of prevalence, other indicators being measured, how the results will be used to inform particular policy or program...</message>
         <message key="proposal.keywords">Keywords</message>
+        <message key="proposal.keywordsInstruct">Significant or descriptive words.</message>
+        <message key="proposal.engKeywords">English keywords</message>
+        <message key="proposal.camKeywords">Khmer keywords</message>
         <message key="proposal.startDate">Start Date</message>
+        <message key="proposal.startDateInstruct">Start date of the research.</message>
         <message key="proposal.endDate">End Date</message>
-        <message key="proposal.fundsRequired">Funds Required (in USD)</message>
-        <message key="proposal.withHumanSubjects">Does the research involve human subjects?</message>
-        <message key="proposal.proposalType">Specific Proposal Type (for Proposals with Human Subjects)</message>
-        <message key="proposal.proposalCountry">Country</message>
+        <message key="proposal.endDateInstruct">End date of the research.</message>
+        <message key="proposal.fundsRequired">Estimated Budget</message>
+        <message key="proposal.fundsRequiredInstruct">Please enter a whole number without any comma or other separator.</message>
+        <message key="proposal.fundsRequiredUSD">US Dollar(s)</message>
+        <message key="proposal.fundsRequiredEUR">Euro(s)</message>
+        <message key="proposal.primarySponsor">Primary sponsor</message>
+        <message key="proposal.primarySponsorInstruct">The individual, organization, group or other legal entity which takes responsibility for initiating, managing and/or financing a study. The Primary Sponsor is responsible for ensuring that the research is properly registered. The Primary Sponsor may or may not be the main funder.</message>
+        <message key="proposal.otherPrimarySponsor">Please specify your primary sponsor:</message>
+        <message key="proposal.otherPrimarySponsorInstruct">If your primary sponsor is not included in the above list, please specify it here.</message>
+        <message key="proposal.secondarySponsors">Secondary sponsor(s)</message>
+        <message key="proposal.secondarySponsorsInstruct">Additional individuals, organizations or other legal persons, if any, that have agreed with the primary sponsor to take on responsibilities of sponsorship. A secondary sponsor may have agreed: 
+•	to take on all the responsibilities of sponsorship jointly with the primary sponsor; or 
+•	to form a group with the primary sponsor in which the responsibilities of sponsorship are allocated among the members of the group; or 
+•	to act as the sponsor’s legal representative in relation to some or all of the trial sites; or 
+•	to take responsibility for the accuracy of trial registration information submitted.</message>
+        <message key="proposal.addAnotherSecondarySponsor">Add another secondary sponsor</message>
+        <message key="proposal.multiCountryResearch">Multi-country research</message>
+        <message key="proposal.multiCountryResearchInstruct">Is the research involving patients from different countries?</message>
+        <message key="proposal.addAnotherCountry">Add another country</message>
+        <message key="proposal.multiCountry">Select a country:</message>
+        <message key="proposal.selectedCurrency">Currency :</message>
+        <message key="proposal.withHumanSubjects">Involves human subjects</message>
+        <message key="proposal.studentInitiatedResearch">Student research</message>
+        <message key="proposal.studentInitiatedResearchInstruct">Is the research undertaken as part of academic degree requirements?</message>
+        <message key="proposal.supervisor">Supervisor</message>
+        <message key="proposal.supervisorFullName">Full name and title</message>
+        <message key="proposal.supervisorFullNameInstruct">Full name and title of the student' supervisor.</message>
+        <message key="proposal.supervisorEmailInstruct">Email of the student' supervisor.</message>
+        <message key="proposal.supervisorPhoneInstruct">Phone number, including country and area codes, of the student' supervisor.</message>
+        <message key="proposal.supervisorAffiliationInstruct">Affiliation of the student' supervisor.</message>
+        <message key="proposal.ethicsCommittee">Ethics Committee</message>
+        <message key="proposal.studentInstitution">Institution</message>
+        <message key="proposal.studentInstitutionInstruct">Institution where the student is enrolled.</message>
+        <message key="proposal.academicDegree">Academic degree:</message>
+        <message key="proposal.academicDegreeInstruct">Academic degree in which the student is enrolled.</message>
+        <message key="proposal.undergraduate">Undergraduate</message>
+        <message key="proposal.master">Master</message>
+        <message key="proposal.postDoc">Post-Doc</message>
+        <message key="proposal.phd">Ph.D.</message>
+        <message key="proposal.proposalType">Proposal Type</message>
+        <message key="proposal.proposalCountry">In country site</message>
+        <message key="proposal.proposalCountryInstruct">Geographical area(s) of Cambodia where the research take place.</message>
+        <message key="proposal.nationwide">Nationwide</message>
+        <message key="proposal.nationwideInstruct">Is it a nationwide research?</message>
+        <message key="proposal.addAnotherArea">Add another area</message>
+        <message key="proposal.addAnotherFieldOfResearch">Add another field of research</message>
+        <message key="proposal.addAnotherProposalType">Add another proposal type</message>
+        <message key="proposal.addAnotherAgency">Add another agency</message>
+        <message key="proposal.otherInternationalGrantName">Please specify the agency:</message>
+        <message key="proposal.otherInternationalGrantName">Please specify:</message>
+        <message key="proposal.otherSecondarySponsor">Please specify the secondary sponsor(s):</message>
+        <message key="proposal.otherSecondarySponsorInstruct">If one or more of your secondary sponsor(s) is/are not included in the above list, please sepcify it/them here.</message>
+        <message key="proposal.researchField">Research field(s)</message>
+        <message key="proposal.otherResearchField">Other research field(s)</message>
+        <message key="proposal.otherProposalType">Other proposal type(s)</message>
         <message key="proposal.technicalUnit">Technical Unit</message>
         <message key="proposal.conflictOfInterest">Conflict of Interest?</message>
         <message key="proposal.informedConsentIncluded">Informed Consent Included?</message>
         <message key="proposal.dataCollectionQuestionnairesIncluded">Data Collection Questionnaires Included?</message>
         <message key="proposal.ethicalClearanceEnclosed">Ethical Clearance Enclosed?</message>
-        <message key="proposal.reviewedByOtherErc">Has Proposal Been Reviewed By Other ERC?</message>
+        <message key="proposal.reviewedByOtherErc">Review by other ERC</message>
+        <message key="proposal.reviewedByOtherErcInstruct">Has/Will the proposal been/be reviewed by another Ethics Review Committee?</message>
             <!-- Added by EL on April 17, 2012-->
             <message key="proposal.rtoOffice">Office</message>
-        <message key="proposal.otherErcDecision">If yes, other ERC Decision: </message>
-        <message key="proposal.proofOfRegistration">Proof Of Registration Included?</message>
+        <message key="proposal.otherErcDecision">If yes, other ERC Decision </message>
+        <message key="proposal.otherErcDecisionUnderReview">Under Review</message>
+        <message key="proposal.otherErcDecisionFinalAvailable">Final decision available</message>
+        <message key="proposal.nameOfIndustry">If yes, please specify:</message>
+        <message key="proposal.proofOfRegistration">Proof Of Registration Included? </message>
+        <message key="proposal.dataCollection">Data Collection: </message>
+        <message key="proposal.primaryDataCollection">Primary</message>
+        <message key="proposal.secondaryDataCollection">Secondary</message>
+        <message key="proposal.bothDataCollection">Both</message>
+        <message key="proposal.sourceOfMonetary">Source(s) of Monetary or Material Support</message>
+        <message key="proposal.riskAssessment">Risk Assessment</message>
+        <message key="proposal.researchIncludesHumanSubject">Does the proposed research include research subjects:</message>
+        
+        <!-- Risk Assesment -->
+        <message key="proposal.identityRevealed">Whose identity may be revealed during the research process?</message>
+        <message key="proposal.unableToConsent">Unable to consent?</message>
+        <message key="proposal.under18">Under 18 years old?</message>
+        <message key="proposal.dependentRelationship">In a dependent relationship with any of the research team members?</message>
+        <message key="proposal.dependentRelationshipInstruct">(e.g. a researcher is the treating physician of one of the research participants)</message>
+        <message key="proposal.ethnicMinority">From an ethnic minority group?</message>
+        <message key="proposal.impairment">With intellectual or mental impairment?</message>
+        <message key="proposal.pregnant">Who are pregnant?</message>
+        <message key="proposal.researchIncludes">Does the research include:</message>
+        <message key="proposal.newTreatment">A new treatment, medical procedure or test?</message>
+        <message key="proposal.bioSamples">Collection of biological samples including<![CDATA[<br/>]]> tissue extraction?</message>
+        <message key="proposal.radiation">Use of ionizing radiation?</message>
+        <message key="proposal.distress">Pain or psychological distress?</message><message key="proposal.inducements">Inducements?</message>
+        <message key="proposal.sensitiveInfo">Collection of sensitive information?</message>
+        <message key="proposal.deception">Deception?</message>
+        <message key="proposal.reproTechnology">Assisted reproductive technology?</message>
+        <message key="proposal.genetics">Human genetic or genomic studies?</message>
+        <message key="proposal.stemCell">Stem cell research?</message>
+        <message key="proposal.biosafety">Biosafety issue?</message>
+        <message key="proposal.export">Do you intend to export biological sample(s) outside of Cambodia?</message>
+        <message key="proposal.potentialRisk">Potential risks</message>
+        <message key="proposal.riskLevel">Level of the risk involved in Research:</message>
+        <message key="proposal.riskLevelNoMore">No more than minimal risk</message>
+        <message key="proposal.riskLevelMinore">Minor increase over minimal risk</message>
+        <message key="proposal.riskLevelMore">More than minor increase over minimal risk</message>
+        <message key="proposal.listRisks">Briefly list the risks:</message>
+        <message key="proposal.howRisksMinimized">How are risks minimized / managed?</message>
+        <message key="proposal.riskApplyTo">Risks apply to:</message>
+        <message key="proposal.researchTeam">Research Team</message>
+        <message key="proposal.researchSubjects">Research Subjects</message>
+        <message key="proposal.widerCommunity">Wider Community</message> 
+        <message key="proposal.nobody">Nobody</message>        
+        <message key="proposal.potentialBenefits">Potential Benefits</message>
+        <message key="proposal.directBenefits">Direct benefit to participants</message>
+        <message key="proposal.participantCondition">Generalizable knowledge about participants' condition or disorder</message>
+        <message key="proposal.diseaseOrCondition">Generalizable knowledge about disease or condition under study </message>
+        <message key="proposal.benefitsFromTheProject">Benefits from the research project:</message>
+        <message key="proposal.noBenefits">No benefits</message>
+        <message key="proposal.multiInstitutions">Multi-institution Project: </message>
+        <message key="proposal.conflictOfInterest">Conflict of Interest:</message>
+        <message key="proposal.conflictOfInterestInstruct">Does any member of the research team has any financial or technical conflict of interest in the proposed research (i.e. whether any member of the research team is likely to be affected, positively or negatively, by the outcomes of the research in financial or technical terms)</message>
+        <!-- Risk Assesment Abbreviation -->
+        <message key="proposal.identityRevealedAbb">Identity revealed</message>
+        <message key="proposal.unableToConsentAbb">Unable to consent</message>
+        <message key="proposal.under18Abb">Under 18</message>
+        <message key="proposal.dependentRelationshipAbb">Dependent relationship</message>
+        <message key="proposal.ethnicMinorityAbb">Ethnic minority group</message>
+        <message key="proposal.impairmentAbb">Intellectual or mental impairment</message>
+        <message key="proposal.pregnantAbb">Pregnant</message>
+        <message key="proposal.newTreatmentAbb">New treatment</message>
+        <message key="proposal.bioSamplesAbb">Biological samples</message>
+        <message key="proposal.radiationAbb">Radiation</message>
+        <message key="proposal.distressAbb">Distress</message>
+        <message key="proposal.inducementsAbb">Inducements</message>
+        <message key="proposal.sensitiveInfoAbb">Sensitive information</message>
+        <message key="proposal.deceptionAbb">Deception</message>
+        <message key="proposal.reproTechnologyAbb">Reproductive technology</message>
+        <message key="proposal.geneticsAbb">Human genetic or genomic</message>
+        <message key="proposal.stemCellAbb">Stem cell</message>
+        <message key="proposal.biosafetyAbb">Biosafety</message>
+        <message key="proposal.exportAbb">Sample export</message>
+        <message key="proposal.riskLevelAbb">Risk level</message>
+        <message key="proposal.riskApplyToAbb">Risks apply to</message>
+                
+        <message key="proposal.benefitsFromTheProjectAbb">Benefits</message>
+        <message key="proposal.multiInstitutionsAbb">Multi-institutions</message>
+        <message key="proposal.conflictOfInterestAbb">Conflict of Interest</message>
+        <!-- End abbreviation  -->
+        
+        <message key="proposal.industryGrant">Industry grant</message>
+        <message key="proposal.mohGrant">Cambodia Ministry of Health grant</message>
+        <message key="proposal.internationalGrant">Agency grant</message>
+        <message key="proposal.internationalGrantName">If yes, please specify:</message>
         <message key="proposal.submittedAsPi">Submitting as Primary Investigator?</message>
         <message key="proposal.nationalApprovalEnclosed">National Approval Enclosed?</message>
-        
-
+        <message key="proposal.governmentGrant">Government grant (non MoH)</message>
+        <message key="proposal.governmentGrantName">Please specify</message>
+        <message key="proposal.universityGrant">University research grant</message>
+        <message key="proposal.selfFunding">Self funding</message>
+        <message key="proposal.otherGrant">Other</message>
+        <message key="proposal.specifyOtherGrantField">If yes, please specify:</message>
 
 
 
@@ -199,21 +374,33 @@
 	 * Last Update: 5/3/2011
 	 *
 	************************************* -->
-	<message key="submission.editorDecision">ERC Decision and Review</message>/*Editor decision to ERC decision*/
+	<message key="submission.editorDecision">NECHR Decision and Review</message>/*Editor decision to NECHR decision*/
 	<message key="submission.proposalStatus">Proposal Status</message>
+    <message key="submission.proposalStatusInstruct">Current status of the proposal.</message>
 	<message key="submission.submissionEditing">Submission Editing</message>
 	<message key="submission.changeSection">Change to</message>
 	<message key="submission.sent">Sent</message>
 	<message key="submission.round">Round&amp;nbsp;{$round}</message>
-	<message key="submission.editorReview">Secretary Review</message> /*editor to Secretary*/
-	<message key="submission.notifyAuthor">Notify RTO</message> /*Author to RTO */
-	<message key="submission.notifyEditor">Notify Secretary</message> /*editor to Secretary*/
-	<message key="submission.editorAuthorRecord">Secretary/RTO Email Record</message> /*editor to Secretary and author to RTo*/
+	<message key="submission.editorReview">IRB Chair Review</message> /*editor to IRB Chair*/
+	<message key="submission.notifyAuthor">Notify Investigator</message>
+    <message key="submission.notifyAuthorInstruct">Please click on the mail icon for sending an email to investigator. Please click on the speech bubble icon for opening the chat room between you and the investigator.</message> /*Author to Investigator */
+	<message key="submission.notifyEditor">Notify IRB Chair</message> /*editor to IRB Chair*/
+	<message key="submission.editorAuthorRecord">Email to investigator</message> /*editor to IRB Chair and author to Investigator*/
 	<message key="submission.reviewersVersion">Reviewer's annotated version of file</message>
 	<message key="submission.postReviewVersion">Post-review version of file</message>
-	<message key="submission.editorVersion">Secretary Version</message> /*editor to Secretary*/
-	<message key="submission.authorsRevisedVersion">RTO's revised version of file</message> /*author to RTO*/
-	<message key="submission.authorVersion">RTO Version</message>/*author to RTO*/
+	<message key="submission.editorVersion">IRB Chair Version</message> /*editor to IRB Chair*/
+    <message key="submission.ethicalReview">Ethical Review</message>
+    <message key="submission.organizingMeeting">Ethical Review</message>
+    <message key="submission.backToReview">Back to review page</message>
+    <message key="submission.expeditedReviewUndergoing">Expedited review undergoing</message>
+    <message key="submission.reviseAndResubmit">Proposal should be revised and re-submitted</message>
+    <message key="submission.fullReviewUndergoing">Full review undergoing</message>
+    <message key="submission.notRequired">Not Required</message>
+    <message key="submission.undergoing">Undergoing</message>
+    <message key="submission.archived">Archived</message>
+    <message key="submission.proposalIncomplete">Proposal considered as incomplete</message>
+	<message key="submission.authorsRevisedVersion">Investigator's revised version of file</message> /*author to Investigator*/
+	<message key="submission.authorVersion">Investigator Version</message>/*author to Investigator*/
 	<message key="submission.copyediting">Copyediting</message>
 	<message key="submission.copyedit">Copyedit</message>
 	<message key="submission.proofreading">Proofreading</message>
@@ -232,14 +419,15 @@
 	<message key="submissions.postAuthor">Post-Author</message>
 	<message key="submissions.reviewRound">Review Round</message>
 	<message key="submissions.proof">Proof</message>
-	<message key="submissions.editorDecision">ERC Decision</message> /*Editor decision to ERC Decision*/
-	<message key="submissions.editorRuling">ERC Ruling</message>
+	<message key="submissions.editorDecision">NECHR Decision</message> /*Editor decision to NECHR Decision*/
+	<message key="submissions.editorRuling">NECHR Ruling</message>
 	<message key="submission.eventLog">{$id} Event Log</message>
 
 	<!-- Submission list search engine -->
 	<message key="submissions.copyeditComplete">Copyedited</message>
 	<message key="submissions.layoutComplete">Layout edited</message>
 	<message key="submissions.proofreadingComplete">Proofread</message>
+    <message key="submissions.dateApproved">Approved</message>
 
 	<!-- Submission Notes -->
 	
@@ -259,44 +447,47 @@
 	<message key="user.noRoles.noRolesForJournal">Your account does not currently have any roles for this site. Please choose from the actions below:</message>
 	<message key="user.noRoles.submitArticle">Submit a Proposal</message>
 	<message key="user.noRoles.submitArticleRegClosed">Submit Proposal: Registration is currently disabled.</message>
-	<message key="user.noRoles.regReviewer">Register as a ERC Member</message>
-	<message key="user.noRoles.regReviewerClosed">Register as a ERC Member: ERC Member registration is currently disabled.</message>
+	<message key="user.noRoles.regReviewer">Register as a NECHR Member</message>
+	<message key="user.noRoles.regReviewerClosed">Register as a NECHR Member: NECHR Member registration is currently disabled.</message>
 
 	<!-- Roles -->
-        <!-- Replaced Journal Manager with ERC Admin - spf -->
-        <message key="user.role.manager">ERC Admin</message>
-        <!-- Replaced Editor with Secretary - spf -->
-        <message key="user.role.editor">Secretary</message>
-        <!-- Replaced "Secretary" by "Secretary Administrative Assistants". EL April 4 2012-->
-        <message key="user.role.sectionEditor">Secretary Administrative Assistant</message> /*SectionEditor to Secretary*/
+        <message key="user.role.chair">Chair</message>
+        <message key="user.role.viceChair">Vice-Chair</message>
+        <message key="user.role.manager">Administrator</message>
+        <!-- Replaced Editor with IRB Chair - spf -->
+        <message key="user.role.editor">IRB Chair</message>
+        <message key="user.role.coordinator">Coordinator</message>
+        <!-- Replaced "IRB Chair" by "IRB Chair Administrative Assistants". EL April 4 2012-->
+        <message key="user.role.sectionEditor">IRB Chair</message>
         
-        <!-- Added ERC roles. EL April 10 2012-->
+        <!-- Added NECHR roles. EL April 10 2012-->
         <message key="user.ercrole.chair">Chair</message>
         <message key="user.ercrole.viceChair">Vice-Chair</message>
         <message key="user.ercrole.secretariat">Secretariat</message>
         <message key="user.ercrole.ercMembers">Members</message>
-        <message key="user.ercrole.extReviewers">External Reviewers</message>
+        <message key="user.ercrole.extReviewers">IRB Members</message>
         <message key="user.ercrole.extMembers">External Members (non-affiliated members)</message>
         
         <!-- Added by EL on April 19, 2012 -->
-        <message key="user.ercrole.status">ERC Member Status</message>
+        <message key="user.ercrole.status">NECHR Member Status</message>
         
-	<message key="user.role.reviewer">ERC Member</message> /* Reviewer to ERC Member */
+	<message key="user.role.reviewer">NECHR Member</message> /* Reviewer to NECHR Member */
 	<message key="user.role.layoutEditor">Layout Editor</message>
 	<message key="user.role.copyeditor">Copyeditor</message>
 	<message key="user.role.proofreader">Proofreader</message>
-	<message key="user.role.author">RTO</message> /*Author to RTO */
+	<message key="user.role.author">Investigator</message> /*Author to Investigator */
+    <message key="user.role.coinvestigator">Co-Investigator</message>
+    <message key="user.role.externalReviewer">IRB Member</message>
 	<message key="user.role.subscriptionManager">Subscription Manager</message>
-	<message key="user.role.managers">Administrators</message> /* Replaced Journal Managers with ERC Admins - spf */
-    <message key="user.role.editors">Secretary</message> /*Editor to Secretary*/
-        
-        <!-- Replaced "Secratary" by "Secretary Administrative Assistant". EL April 4 2012-->
-        <message key="user.role.sectionEditors">Secretary Administrative Assitant</message> /* sectionEditor to Secretary*/
+	<message key="user.role.managers">Administrators</message> /* Replaced Journal Managers with NECHR Admins - spf */
+    <message key="user.role.editors">IRB Chairs</message> /*Editor to IRB Chair*/
+    <message key="user.role.coordinators">Coordinators</message>
+        <message key="user.role.sectionEditors">IRB Chairs</message>
         
 	<message key="user.role.layoutEditors">Layout Editors</message>
 	<message key="user.role.copyeditors">Copyeditors</message>
 	<message key="user.role.proofreaders">Proofreaders</message>
-	<message key="user.role.authors">RTOs</message> /* Replaced Authors with RTOs - spf */
+	<message key="user.role.authors">Investigators</message> /* Replaced Authors with Investigators - spf */
 	<message key="user.role.subscriptionManagers">Subscription Managers</message>
 	
 	<!-- Common Issue Terms -->
@@ -356,14 +547,14 @@
 	<message key="submission.event.general.issueAssigned">Submission assigned</message>
 	<message key="submission.event.general.articlePublished">Proposal reviewed</message>
 
-	<message key="submission.event.author.authorRevision">RTO revision submitted</message>
+	<message key="submission.event.author.authorRevision">Investigator revision submitted</message>
 
-	<message key="submission.event.general.authorRevision">RTO revision file updated</message>
+	<message key="submission.event.general.authorRevision">Investigator revision file updated</message>
 	
-	<message key="submission.event.editor.editorAssigned">Secretary assigned to submission</message>
-	<message key="submission.event.editor.editorUnassigned">Secretary unassigned from submission</message>
-	<message key="submission.event.editor.editorDecision">Secretary decision submitted</message>
-	<message key="submission.event.editor.editorFile">ERC file updated</message>
+	<message key="submission.event.editor.editorAssigned">IRB Chair assigned to submission</message>
+	<message key="submission.event.editor.editorUnassigned">IRB Chair unassigned from submission</message>
+	<message key="submission.event.editor.editorDecision">IRB Chair decision submitted</message>
+	<message key="submission.event.editor.editorFile">NECHR file updated</message>
 	<message key="submission.event.editor.submissionArchived">Submission sent to archive</message>
 	<message key="submission.event.editor.submissionRestored">Submission restored from archive</message>
 
@@ -445,7 +636,7 @@ Note that the OAI interface can be disabled for this site by editing the OJS sys
 	<message key="subscriptionManager.institutionalSubscriptions">Institutional Subscriptions</message>
 	<message key="subscriptionManager.subscriptionTypes">Subscription Types</message>
 	
-	<!-- WPRO-ERC Management -->
+	<!-- NECHR Management -->
 
 	<!-- Statistics & Reports -->
 
@@ -486,8 +677,7 @@ Note that the OAI interface can be disabled for this site by editing the OJS sys
 	<!-- Setup Step 2 -->
 
 
-	<message key="manager.setup.reviewProcessEmailDescription">The ERC Secretary sends
-to the ERC Members the request to review with the proposal attached to the email. ERC Members email the Secretary their assent (or regrets), as well as the review and recommendation. The Secretary enters the ERC Member's assent (or regrets), as well as the review and recommendation on the proposal's Review page, to record the review process.</message>
+	<message key="manager.setup.reviewProcessEmailDescription">The NECHR Secretary sends to the NECHR Members the request to review with the proposal attached to the email. NECHR Members email the Secretary their assent (or regrets), as well as the review and recommendation. The Secretary enters the NECHR Member's assent (or regrets), as well as the review and recommendation on the proposal's Review page, to record the review process.</message>
 
 
 	<message key="manager.setup.lockssDescription"><![CDATA[Open Journal Systems supports the <a href="http://lockss.org/" target="_blank">LOCKSS</a> (Lots of Copies Keep Stuff Safe) system to ensure a secure and permanent archive for the journal. LOCKSS is open source software developed at Stanford University Library that enables libraries to preserve selected web journals by regularly polling registered journal websites for newly published content and archiving it. Each archive is continually validated against other library caches, and if content is found to be corrupted or lost, the other caches or the journal is used to restore it.
@@ -616,7 +806,7 @@ Active is how many reviews are currently being considered or underway.]]></messa
 	<message key="sectionEditor.review.createReviewer">Create New Reviewer</message>
 
 	
-	<message key="sectionEditor.review.createExternalReviewer">Create External Reviewer</message>
+	<message key="sectionEditor.review.createExternalReviewer">Create IRB Member</message>
 
 	<!-- Layout Editor -->
 	<message key="layoutEditor.activeEditorialAssignments">Active Editorial Assignments</message>
@@ -661,7 +851,7 @@ Active is how many reviews are currently being considered or underway.]]></messa
 	<message key="reviewer.article.restrictedFileAccess">Submission will be made available, if and when reviewer agrees to undertake review</message>
 	<message key="reviewer.article.submissionEditor">Submission Editor</message>
 	<message key="reviewer.article.reviewerCommentsDescription">Type or paste in review comments here</message>
-	<message key="reviewer.article.editorToEnter">ERC Secretary To Enter</message>
+	<message key="reviewer.article.editorToEnter">IRB Chair to enter</message>
 	<message key="reviewer.article.sendReminder">Send Reminder</message>
 	<message key="reviewer.article.automatic">(Auto)</message>
 	<message key="reviewer.article.recommendation">Recommendation</message>
@@ -670,8 +860,9 @@ Active is how many reviews are currently being considered or underway.]]></messa
 	<message key="reviewer.article.uploadedFile">Uploaded files</message>	
 	<message key="reviewer.article.reviewersAnnotatedVersion">Version uploaded by reviewer</message>
 	<message key="reviewer.article.reviewersAnnotatedVersionDescription">(If you want to annotate the file, for the editor, save on your hard drive and use Browse/Upload.)</message>
-        <message key="reviewer.article.schedule.request">Editor's Request</message>
+        <message key="reviewer.article.schedule.request">IRB Chair's Request</message>
         <message key="reviewer.article.schedule.response">Your Response</message>
+        <message key="reviewer.article.schedule.decision">Your Decision</message>
         <message key="reviewer.article.schedule.submitted">Review Submitted</message>
         <message key="reviewer.article.schedule.due">Review Due</message>
    
@@ -706,14 +897,14 @@ Active is how many reviews are currently being considered or underway.]]></messa
         <message key="reviewer.article.reviewSteps">Review Steps</message>
         <message key="reviewer.article.reviewerGuidelines">Reviewer Guidelines</message>
 	<message key="reviewer.article.reviewGuidelinesDescription"><![CDATA[The Review Guidelines will provide reviewers with criteria for judging a submission's suitability for publication in the journal, and can include any special instructions for preparing an effective and helpful review. In conducting the review, reviewers are presented with with two open text boxes, the first "for author and editor," and the second "for editor." Alternatively, the Journal Manager can create a peer review form under Review Forms. In all cases, editors will have the option of including the reviews in corresponding with the author.]]></message>
-        <message key="reviewer.article.notifyEditorA">Notify the submission's editor</message>
+        <message key="reviewer.article.notifyEditorA">Notify the IRB Chair(ies)</message>
         <message key="reviewer.article.notifyEditorB">as to whether you will undertake the review.</message>
         <message key="reviewer.article.consultGuidelines">If you are going to do the review, consult Reviewer Guidelines below.</message>
-        <message key="reviewer.article.downloadSubmission">Click on file names to download and review (on screen or by printing) the files associated with this submission.</message>
+        <message key="reviewer.article.downloadSubmission">Click on file names to download and review (on screen or by printing) the files associated with this submission. Click on "View Metadata" to access to the metadata of this proposal.</message>
         <message key="reviewer.article.enterCompetingInterests"><![CDATA[Declare whether or not you have competing interests with regard to this research (see <a target="_new" class="action" href="{$competingInterestGuidelinesUrl}">CI&nbsp;Policy</a>).]]></message>
 	<message key="reviewer.competingInterests">Competing Interests</message>
         <message key="reviewer.article.enterReviewA">Click on icon to enter (or paste) your review of this submission.</message>
-        <message key="reviewer.article.uploadFile">In addition, you can upload files for the ERC Secretary and/or RTO to consult.</message>
+        <message key="reviewer.article.uploadFile">In addition, you can upload files for the NECHR and/or Investigator to consult.</message>
         <message key="reviewer.article.selectRecommendation">Select a recommendation and submit the review to complete the process. You must enter a review or upload a file before selecting a recommendation.</message>
 	<message key="reviewer.article.mustSelectDecision">No recommendation was selected. You must choose a recommendation to submit.</message>
 	<message key="reviewer.article.confirmDecision">Once you have recorded a decision you will no longer be able to make changes to this review. Are you sure you wish to continue?</message>
@@ -743,7 +934,7 @@ Active is how many reviews are currently being considered or underway.]]></messa
 <li>On this page, click Browse (or Choose File) which opens a Choose File window for locating the file on the hard drive of your computer.</li>
 <li>Locate the file you wish to submit and highlight it.</li>
 <li>Click Open on the Choose File window, which places the name of the file on this page.</li>
-<li>Click Upload on this page, which uploads the file from the computer to the web site and renames it following the WPRO naming conventions.</li>
+<li>Click Upload on this page, which uploads the file from the computer to the web site and renames it following the Cambodia Health Research Portal naming conventions.</li>
 <li>Once the submission is uploaded, click Save and Continue at the bottom of this page.</li>
 </ol>]]></message>
 
@@ -800,17 +991,17 @@ Active is how many reviews are currently being considered or underway.]]></messa
 	<!-- Submission Email Log -->
 	
 	<!-- Submission Comments -->
-	<message key="submission.comments.editorAuthorCorrespondence">Secretary/RTO Correspondence</message> /*Secretary, RTO*/
+	<message key="submission.comments.editorAuthorCorrespondence">IRB Chair/Investigator Correspondence</message> /*IRB Chair, Investigator*/
 	<message key="submission.comments.copyeditComments">Copyedit Comments</message>
 	<message key="submission.comments.viewableDescription"><![CDATA[These comments can be shared with the author.<br />
 (After saving, further comments can be added.)]]></message>
 	<!-- Edited by ayveemallare 7/19/2011 -->
-	<!-- Changed Editor to ERC, Author to RTO -->
-	<message key="submission.comments.canShareWithAuthor">Can share with RTO</message>
-	<message key="submission.comments.cannotShareWithAuthor">Cannot share with RTO</message>
+	<!-- Changed Editor to NECHR, Author to Investigator -->
+	<message key="submission.comments.canShareWithAuthor">Can share with Investigator</message>
+	<message key="submission.comments.cannotShareWithAuthor">Cannot share with Investigator</message>
 	<message key="submission.comments.blindCcReviewers">After sending, present an editable BCC copy to send to reviewers.</message>
-	<message key="submission.comments.forAuthorEditor">For RTO and STO</message>
-	<message key="submission.comments.forEditor">For STO</message>
+	<message key="submission.comments.forAuthorEditor">For Investigator and IRB Chair</message>
+	<message key="submission.comments.forEditor">For IRB Chair</message>
 	<message key="submission.comments.saveAndEmailAuthor">Save and Email Author</message>
 	<message key="submission.comments.saveAndEmailEditor">Save and Email Editor</message>
 	
@@ -898,9 +1089,18 @@ current password.<br /><br />Enter your email address below to reset your passwo
 </ul>]]></message>
 	
 	<message key="search.summary">Proposal Summary</message>
-	<message key="search.whoid">WHO ID</message>
+	<message key="search.whoid">Proposal ID</message>
+    <message key="search.dataCollection">Data Collection</message>
+    <message key="search.status">Status</message>
+    <message key="search.dateSubmitted">Date submitted to CamHRP</message>
 	<message key="search.responsibleOfficer">Responsible Officer</message>
 	<message key="search.primaryInvestigator">Primary Investigator</message>
+    <message key="search.primarySponsor">Primary Sponsor</message>
+    <message key="search.proposalType">Proposal Type</message>    
+    <message key="search.province">Geographical Area</message>
+    <message key="search.researchField">Research Field</message>
+    <message key="search.startDate">Start Date</message>
+    <message key="search.endDate">End Date</message>
 	<message key="search.email">Email</message>
 	<message key="search.duration">Duration</message>
 	<message key="search.finalDecision">Final Decision and Date</message>
@@ -932,14 +1132,13 @@ current password.<br /><br />Enter your email address below to reset your passwo
 	<message key="archive.browse">Browse through the older issues</message>
 	<message key="archive.issueUnavailable">Issue Unavailable</message>
 	
-	<!-- About The WHO-WPRO Health Research Portal -->
+	<!-- About The the Cambodia Health Research Portal -->
 	<message key="about.statistics">Statistics</message>
-	<message key="about.journalContact">The Ethics Review Committee - Secretariat</message>
-	<message key="about.aboutTheJournal">About the WHO-WPRO Health Research Portal</message>
-	<message key="about.history">WHO-WPRO Health Research Portal History</message>
-	
-        <!-- Changed "Editorial Team" by "WPRO-ERC Membership". EL April 10 2012 -->    
-        <message key="about.editorialTeam">WPRO-ERC Membership</message>
+	<message key="about.journalContact">The Hanoi School of Public Health Institutional Review Board</message>
+	<message key="about.aboutTheJournal">About the Cambodia Health Research Portal</message>
+	<message key="about.history">Cambodia Health Research Portal History</message>
+	  
+        <message key="about.editorialTeam">The College Research Ethics Committee</message>
         
 	<message key="about.editorialTeam.biography">Biography</message>
 	<message key="about.editorialPolicies">Editorial Policies</message>
@@ -982,10 +1181,10 @@ current password.<br /><br />Enter your email address below to reset your passwo
 	<message key="about.subscriptionTypes.cost">Cost</message>
 	<message key="about.availableSubscriptionTypes">Subscription Types</message>
 	<message key="about.memberships">Memberships</message>
-	<message key="about.journalSponsorship">WHO-WPRO Health Research Portal Sponsorship</message>
+	<message key="about.journalSponsorship">The Cambodia Health Research Portal Sponsorship</message>
 	<message key="about.aboutThisPublishingSystem">About this Publishing System</message>
 	<message key="about.aboutThisPublishingSystem.altText">OJS Editorial and Publishing Process</message>
-	<message key="about.aboutOJSJournal"><![CDATA[This WHO-WPRO Health Research Portal uses Open Journal Systems {$ojsVersion}, which is open source journal management and publishing software developed, supported, and freely distributed by the <a href="http://pkp.sfu.ca/">Public Knowledge Project</a> under the GNU General Public License.]]></message>
+	<message key="about.aboutOJSJournal"><![CDATA[This Cambodia Health Research Portal uses Open Journal Systems {$ojsVersion}, which is open source journal management and publishing software developed, supported, and freely distributed by the <a href="http://pkp.sfu.ca/">Public Knowledge Project</a> under the GNU General Public License.]]></message>
 	<message key="about.aboutOJSSite"><![CDATA[This site uses Open Journal Systems {$ojsVersion}, which is open source journal management and publishing software developed, supported, and freely distributed by the <a href="http://pkp.sfu.ca/">Public Knowledge Project</a> under the GNU General Public License.]]></message>
 	
 	<!-- Announcement -->
@@ -1000,6 +1199,7 @@ current password.<br /><br />Enter your email address below to reset your passwo
 	<message key="donations.thankYouMessage">Thank you for making a contribution.  Your contribution is much appreciated.</message>
 	
 	<!-- Payments -->
+    <message key="payment.instruction"><![CDATA[<center>Direct credit to  bank account:<br/><br/><b>National Institute of Public Health, Phnom Penh<br/><i>bank information....</i></center>]]></message>
 	<message key="payment.loginRequired">You must be logged in to make a payment.</message>
 	<message key="payment.loginRequired.forArticle">Subscription or article purchase required to access item. To verify subscription, access previous purchase, or purchase article, log in to journal.</message>
 	<message key="payment.loginRequired.forDonation">You must be logged in to make a donation.</message>
@@ -1010,8 +1210,10 @@ current password.<br /><br />Enter your email address below to reset your passwo
 	<message key="payment.alreadyPaid">Already Paid</message>
 	<message key="payment.alreadyPaidMessage">Select this box if you've already sent your payment to the journal in order to finish the submission process.  The submission will not be reviewed until the payment arrives.  Click PAY NOW above to see the payment instructions.</message>
 	<message key="payment.paymentReceived">Payment Received</message>
-	<message key="payment.paymentSent">Payment has already been sent</message>
-	<message key="payment.authorFees">Author Fees</message>
+	<message key="payment.paymentSent">I will send my payment.</message>
+	<message key="payment.authorFees">Proposal Review Fee</message>
+    <message key="payment.authorFeesAmount">Proposal Review Fee: 1500000.00 (VND)</message>
+    <message key="payment.authorFeesDescription">Investigators are required to pay a Proposal Review Fee as part of the submission process to contribute to review and training costs. Students will be waived of this review fee.</message>
 	<message key="payment.type.submission">Submission Fee</message>
 	<message key="payment.type.publication">Publication Fee</message>
 	<message key="payment.type.fastTrack">Fast Track Review Fee</message>
@@ -1167,15 +1369,15 @@ Your server currently supports mbstring: <strong>{$supportsMBString}</strong>]]>
 	<!-- RT Settings -->
 	<message key="rt.admin.settings">Reading Tool Options</message>
 
-	<message key="rt.admin.settings.description">The reading tools appear in a frame beside published items in the sections of the WHO-WPRO Health Research Portal that have been designated for indexing. The reading tools consist of a set of optional tools related to the published item, listed below, and a set of tools that provide access to related items, organized by field and discipline.</message>
-	<message key="rt.admin.settings.enableReadingTools">Enable Reading Tools for designated sections of WHO-WPRO Health Research Portal.</message>
+	<message key="rt.admin.settings.description">The reading tools appear in a frame beside published items in the sections of the Cambodia Health Research Portal that have been designated for indexing. The reading tools consist of a set of optional tools related to the published item, listed below, and a set of tools that provide access to related items, organized by field and discipline.</message>
+	<message key="rt.admin.settings.enableReadingTools">Enable Reading Tools for designated sections of the Health Research Portal.</message>
 	<message key="rt.admin.settings.relatedItems">Field</message>
 	<message key="rt.admin.settings.relatedItemsLink"><![CDATA[See <a href="{$relatedItemsLink}" class="action">Related Items Sets</a> to view, add, correct, or delete related items for each field.]]></message>
 
-	<message key="rt.admin.options">WHO-WPRO Health Research Portal Item Tools</message>
+	<message key="rt.admin.options">The Cambodia Health Research Portal Item Tools</message>
 	<message key="rt.admin.relatedItems">Related Item Tools</message>
 
-	<message key="rt.admin.settings.addComment">Add comment (enables readers to post comments, with WHO-WPRO Health Research Portal Manager able to delete).</message>
+	<message key="rt.admin.settings.addComment">Add comment (enables readers to post comments, with the Cambodia Health Research Portal Manager able to delete).</message>
 	<message key="rt.admin.settings.addComment.authenticated">Users must be registered and logged in to post, with anonymity not permitted.</message>
 	<message key="rt.admin.settings.addComment.anonymous">Users must be registered and logged in to post, with anonymity permitted.</message>
 	<message key="rt.admin.settings.addComment.unauthenticated">Users do not need to be registered to post, with anonymity permitted.</message>
@@ -1216,20 +1418,21 @@ Validation may fail on search URLs that require posted form data.]]></message>
 	
 	
 	<!-- Notification Types -->
-	<message key="notification.mailListDescription">Enter your email address to receive immediate notifications of important new content added to the WHO-WPRO Health Research Portal.</message>
+	<message key="notification.mailListDescription">Enter your email address to receive immediate notifications of important new content added to the Health Research Portal.</message>
 	<message key="notification.notificationsPublicDescription">This page shows important updates associated with this Health Research Portal such as new issues or announcements.  You may subscribe to these notifications through RSS feeds (by clicking on the images to the right), or <![CDATA[  <a href="{$emailUrl}">through email.</a>]]></message>
 
 	<message key="notification.type.articleSubmitted">A new proposal, "{$param}", has been submitted.</message>
+    <message key="notification.type.articleReSubmitted">The proposal, "{$param}", has been re-submitted.</message>
 	<message key="notification.type.copyeditComment">A copyeditor has left a comment on "{$param}".</message>
 	<message key="notification.type.editing">Editing Events</message>
-	<message key="notification.type.editorDecisionComment">A comment has been left on the decision for "{$param}".</message>
+	<message key="notification.type.editorDecisionComment">Proposal {$param} left a comment.</message>
 	<message key="notification.type.galleyModified">A galley has been modified for "{$param}".</message>
 	<message key="notification.type.issuePublished">An issue has been published.</message>
 	<message key="notification.type.layoutComment">A comment has been left about "{$param}'s" layout.</message>
 	<message key="notification.type.metadataModified">"{$param}'s" metadata has been modified.</message>
 	<message key="notification.type.newAnnouncement">A new announcement has been created.</message>	
 	<message key="notification.type.proofreadComment">A comment has been left by a proofreader on "{$param}".</message>
-	<message key="notification.type.reviewerComment">A reviewer has commented on "{$param}".</message>
+		<message key="notification.type.reviewerComment">Proposal {$param}.</message>
 	<message key="notification.type.reviewerFormComment">A review form review has been submitted for "{$param}".</message>
 	<message key="notification.type.reviewing">Reviewing Events</message>
 	<message key="notification.type.site">Site Events</message>
@@ -1237,8 +1440,35 @@ Validation may fail on search URLs that require posted form data.]]></message>
 	<message key="notification.type.submissions">Submission Events</message>
 	<message key="notification.type.suppFileModified">"{$param}'s" supplementary file(s) has been modified.</message>
 	<message key="notification.type.userComment">A reader has made a comment on "{$param}"</message>
+    
+    <message key="notification.type.submissionComplete">Your proposal, "{$param}", has been considered as "Complete".</message>
+    <message key="notification.type.submissionIncomplete">Your proposal, "{$param}", has been considered as "Incomplete". You may resubmit it.</message>
+    <message key="notification.type.reviseAndResubmit">Your proposal, "{$param}", doesn't fit all the committee's requirements. You should revise and re-submit it.</message>
+    <message key="notification.type.submissionExpedited">Your proposal, "{$param}", will be subject to an "Expedited review".</message>
+    <message key="notification.type.submissionAssigned">Your proposal, "{$param}", will be subject to a "Full review".</message>
+    <message key="notification.type.submissionExempted">Your proposal, "{$param}", has been considered as "Exempt from review".</message>
+    <message key="notification.type.submissionDecline">Your proposal, "{$param}", has been declined.</message>
+    <message key="notification.type.submissionAccept">Your proposal, "{$param}", has been accepted.</message>
+    <message key="notification.type.submissionDone">Your proposal, "{$param}", is done.</message>
+    
+    <message key="notification.type.rawDataSubmitted">Some raw data have been submitted for the proposal "{$param}"</message>
+    <message key="notification.type.otherSuppResearchOutput">Some other supplementary research output have been submitted for the proposal "{$param}"</message>
+    <message key="notification.type.progressReport">A progress report has been submitted for the proposal "{$param}"</message>
+    <message key="notification.type.completionReport">A completion report has been submitted for the proposal "{$param}"</message>
+    <message key="notification.type.suppFile">A new supplementary file has been added to the proposal "{$param}"</message>
+    <message key="notification.type.extensionRequest">An extension request has been submitted for the proposal "{$param}"</message>
+    <message key="notification.type.reviewAssignment">You have been assigned to review the proposal: "{$param}".</message>
+    <message key="notification.type.reviewerFile">Proposal {$param} uploaded a file concerning his/her review.</message>
+    <message key="notification.type.reviewerFileDeleted">Proposal {$param} deleted a file concerning his/her review.</message>
+    <message key="notification.type.makeReviewerFileAvailable">Proposal {$param} uploaded a file concerning his/her review.</message>
+    <message key="notification.type.makeReviewerFileNotAvailable">Proposal {$param} deleted a file concerning his/her review.</message>
+    
+	<message key="notification.type.reviewAssignmentCanceled">Your review assignment for the proposal: "{$param}", has been canceled.</message>
+    <message key="notification.type.reviewAssignmentConfirmed">Proposal {$param} his/her review assignment.</message>
+    <message key="notification.type.reviewConfirmedBySecretary">Proposal {$param} to review the proposal.</message>
+    <message key="notification.type.proposalWithdrawn">Proposal {$param} withdrew his/her proposal.</message>
 
-	<!--
+    <!--
 	 *
 	 * MISC - Entries that do not belong in the other sections.
 	 *

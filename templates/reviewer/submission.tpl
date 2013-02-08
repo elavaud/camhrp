@@ -39,27 +39,24 @@ $(document).ready(function() {
 </script>
 <div id="submissionToBeReviewed">
 <h3>{translate key="reviewer.article.submissionToBeReviewed"}</h3>
-
 <table width="100%" class="data">
 <tr valign="top">
-	<td width="20%" class="label">WHO ID</td>
+	<td width="20%" class="label">{translate key="common.id"}</td>
 	<td width="80%" class="value">{$submission->getLocalizedWhoId()|strip_unsafe_html}</td>
 </tr>
 <tr valign="top">
 	<td width="20%" class="label">{translate key="article.title"}</td>
 	<td width="80%" class="value">{$submission->getLocalizedTitle()|strip_unsafe_html}</td>
 </tr>
-<!-- {*
+<!--
 <tr valign="top">
 	<td class="label">{translate key="article.journalSection"}</td>
 	<td class="value">{$submission->getSectionTitle()|escape}</td>
 </tr>
-*} -->
 <tr valign="top">
 	<td class="label">{translate key="article.abstract"}</td>
 	<td class="value">{$submission->getLocalizedAbstract()|strip_unsafe_html|nl2br}</td>
 </tr>
-<!-- {*
 {assign var=editAssignments value=$submission->getEditAssignments()}
 {foreach from=$editAssignments item=editAssignment}
 	{if !$notFirstEditAssignment}
@@ -85,15 +82,63 @@ $(document).ready(function() {
 	</tr>
 {/if}
 
-*} -->
+
 	<tr valign="top">
 	       <td class="label">{translate key="submission.metadata"}</td>
 	       <td class="value">
 		       <a href="{url op="viewMetadata" path=$reviewId|to_array:$articleId}" class="action" target="_new">{translate key="submission.viewMetadata"}</a>
 	       </td>
 	</tr>
+-->
 </table>
 </div>
+<!--
+<div class="separator"></div>
+
+<div id="files">
+<h3>Files</h3>
+	<table width="100%" class="data">
+	{if ($confirmedStatus and not $declined) or not $journal->getSetting('restrictReviewerFileAccess')}
+		<tr valign="top">
+			<td width="20%" class="label">
+				{translate key="submission.submissionManuscript"}
+			</td>
+			<td class="value" width="80%">
+				{if $reviewFile}
+				{if $submission->getDateConfirmed() or not $journal->getSetting('restrictReviewerAccessToFile')}
+					<a href="{url op="downloadFile" path=$reviewId|to_array:$articleId:$reviewFile->getFileId():$reviewFile->getRevision()}" class="file">{$reviewFile->getFileName()|escape}</a>
+				{else}{$reviewFile->getFileName()|escape}{/if}
+				&nbsp;&nbsp;{$reviewFile->getDateModified()|date_format:$dateFormatShort}
+				{else}
+				{translate key="common.none"}
+				{/if}
+			</td>
+		</tr>
+		<tr valign="top">
+			<td class="label">
+				{translate key="article.suppFiles"}
+			</td>
+			<td class="value">
+				{assign var=sawSuppFile value=0}
+				{foreach from=$suppFiles item=suppFile}
+					{if $suppFile->getShowReviewers() }
+						{assign var=sawSuppFile value=1}
+						<a href="{url op="downloadFile" path=$reviewId|to_array:$articleId:$suppFile->getFileId()}" class="file">{$suppFile->getFileName()|escape}</a><cite>&nbsp;&nbsp;({$suppFile->getType()})</cite><br />
+					{/if}
+				{/foreach}
+				{if !$sawSuppFile}
+					{translate key="common.none"}
+				{/if}
+			</td>
+		</tr>
+		{else}
+		<tr><td class="nodata">{translate key="reviewer.article.restrictedFileAccess"}</td></tr>
+		{/if}
+	</table>
+</div>
+-->
+{if $submission->getDateDue()}
+
 <div class="separator"></div>
 
 <div id="reviewSchedule">
@@ -104,10 +149,12 @@ $(document).ready(function() {
 	<td class="label" width="20%">{translate key="reviewer.article.schedule.request"}</td>
 	<td class="value" width="80%">{if $submission->getDateNotified()}{$submission->getDateNotified()|date_format:$dateFormatShort}{else}&mdash;{/if}</td>
 </tr>
+<!--
 <tr valign="top">
 	<td class="label">{translate key="reviewer.article.schedule.response"}</td>
 	<td class="value">{if $submission->getDateConfirmed()}{$submission->getDateConfirmed()|date_format:$dateFormatShort}{else}&mdash;{/if}</td>
 </tr>
+-->
 <tr valign="top">
 	<td class="label">{translate key="reviewer.article.schedule.submitted"}</td>
 	<td class="value">{if $submission->getDateCompleted()}{$submission->getDateCompleted()|date_format:$dateFormatShort}{else}&mdash;{/if}</td>
@@ -116,6 +163,25 @@ $(document).ready(function() {
 	<td class="label">{translate key="reviewer.article.schedule.due"}</td>
 	<td class="value">{if $submission->getDateDue()}{$submission->getDateDue()|date_format:$dateFormatShort}{else}&mdash;{/if}</td>
 </tr>
+{if $reviewAssignment->getDateCompleted() || $reviewAssignment->getDeclined() == 1 || $reviewAssignment->getCancelled() == 1}
+<tr valign="top">
+	<td class="label">{translate key="reviewer.article.schedule.decision"}</td>
+	<td class="value">
+		{if $submission->getCancelled()}
+			Canceled
+		{elseif $submission->getDeclined()}
+			Declined
+		{else}
+			{assign var=recommendation value=$submission->getRecommendation()}
+			{if $recommendation === '' || $recommendation === null}
+				&mdash;
+			{else}
+				{translate key=$reviewerRecommendationOptions.$recommendation}
+			{/if}
+		{/if}
+	</td>
+</tr>
+{/if}
 {**<tr valign="top">
 	<td class="label">{translate key="reviewer.article.schedule.dateOfMeeting"}</td>
 	<td class="value">{if $submission->getDateOfMeeting()}{$submission->getDateOfMeeting()|date_format:$datetimeFormatLong}{else}&mdash;{/if}</td>
@@ -145,6 +211,7 @@ $(document).ready(function() {
 </form>
 </div>
 
+{if !$reviewAssignment->getDateCompleted() &&  ($reviewAssignment->getDeclined() != 1) && (!$reviewAssignment->getCancelled() || ($reviewAssignment->getCancelled() == 0)) && (($submission->getMostRecentDecision() == 7) || ($submission->getMostRecentDecision() == 8))}
 
 <div class="separator"></div>
 
@@ -153,9 +220,10 @@ $(document).ready(function() {
 
 {include file="common/formErrors.tpl"}
 
-{assign var="currentStep" value=1}
+
 
 <table width="100%" class="data">
+<!--{*
 <tr valign="top">
 	{assign var=editAssignments value=$submission->getEditAssignments}
 	{* FIXME: Should be able to assign primary editorial contact *}
@@ -199,10 +267,13 @@ $(document).ready(function() {
 	<td colspan="2">&nbsp;</td>
 </tr>
 {/if}
+*}-->
+{assign var="currentStep" value=1}
 <tr valign="top">
 	<td>{$currentStep|escape}.{assign var="currentStep" value=$currentStep+1}</td>
 	<td><span class="instruct">{translate key="reviewer.article.downloadSubmission"}</span></td>
 </tr>
+
 <tr valign="top">
 	<td>&nbsp;</td>
 	<td>
@@ -244,9 +315,16 @@ $(document).ready(function() {
 			{else}
 			<tr><td class="nodata">{translate key="reviewer.article.restrictedFileAccess"}</td></tr>
 			{/if}
+			<tr valign="top">
+    			<td class="label">{translate key="submission.metadata"}</td>
+				<td class="value">
+    				<a href="{url op="viewMetadata" path=$reviewId|to_array:$articleId}" class="action" target="_new">{translate key="submission.viewMetadata"}</a>
+				</td>
+			</tr>
 		</table>
 	</td>
 </tr>
+
 <tr>
 	<td colspan="2">&nbsp;</td>
 </tr>
@@ -269,10 +347,10 @@ $(document).ready(function() {
 		<td colspan="2">&nbsp;</td>
 	</tr>
 {/if}{* $currentJournal->getSetting('requireReviewerCompetingInterests') *}
-
+<!--
 {if $reviewAssignment->getReviewFormId()}
 	<tr valign="top">
-		<td>{$currentStep|escape}.{assign var="currentStep" value=$currentStep+1}</td>
+		<td>{$currentStep|escape}.{*assign var="currentStep" value=$currentStep+1*}</td>
 		<td><span class="instruct">{translate key="reviewer.article.enterReviewForm"}</span></td>
 	</tr>
 	<tr valign="top">
@@ -291,7 +369,7 @@ $(document).ready(function() {
 	</tr>
 {else}{* $reviewAssignment->getReviewFormId() *}
 	<tr valign="top">
-		<td>{$currentStep|escape}.{assign var="currentStep" value=$currentStep+1}</td>
+		<td>{$currentStep|escape}.{*assign var="currentStep" value=$currentStep+1*}</td>
 		<td><span class="instruct">{translate key="reviewer.article.enterReviewA"}</span></td>
 	</tr>
 	<tr valign="top">
@@ -309,6 +387,7 @@ $(document).ready(function() {
 		<td colspan="2">&nbsp;</td>
 	</tr>
 {/if}{* $reviewAssignment->getReviewFormId() *}
+-->
 <tr valign="top">
 	<td>{$currentStep|escape}.{assign var="currentStep" value=$currentStep+1}</td>
 	<td><span class="instruct">{translate key="reviewer.article.uploadFile"}</span></td>
@@ -393,6 +472,10 @@ $(document).ready(function() {
 </tr>
 </table>
 </div>
+{/if}
+<div class="separator"></div>
+
+{/if}
 {if $journal->getLocalizedSetting('reviewGuidelines') != ''}
 <div class="separator"></div>
 <div id="reviewerGuidelines">

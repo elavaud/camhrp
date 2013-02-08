@@ -296,7 +296,7 @@ class PKPApplication {
 	function getDAOMap() {
 		return array(
 			'AccessKeyDAO' => 'lib.pkp.classes.security.AccessKeyDAO',
-                        'AsiaPacificCountryDAO' => 'lib.pkp.classes.who.AsiaPacificCountryDAO', //Added by: Anne Ivy Mirasol, May 3, 2011
+            'ProvincesOfCambodiaDAO' => 'lib.pkp.classes.who.ProvincesOfCambodiaDAO',
 			'AuthSourceDAO' => 'lib.pkp.classes.security.AuthSourceDAO',
 			'CaptchaDAO' => 'lib.pkp.classes.captcha.CaptchaDAO',
 			'ControlledVocabDAO' => 'lib.pkp.classes.controlledVocab.ControlledVocabDAO',

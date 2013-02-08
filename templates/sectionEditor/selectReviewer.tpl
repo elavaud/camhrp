@@ -28,37 +28,42 @@ function sortSearch(heading, direction) {
 <div id="selectReviewer">
 <h3>{translate key="editor.article.selectReviewer"}</h3>
 <table class="listing">
-	<tr><td colspan="3">&nbsp;</td></tr>
-	<tr class="heading" colspan="3">			
-		<td colspan="3"><a href="{url op="createExternalReviewer" path=$articleId}" class="action">Create External Reviewer</a></td>		
+	<tr><td colspan="2">&nbsp;</td></tr>
+	<tr colspan="2">			
+		<td colspan="3"><a href="{url op="createExternalReviewer" path=$articleId}" class="action">Create IRB Member</a></td>		
 	</tr>
+	<tr><td colspan="3">&nbsp;</td></tr>
 	<tr><td colspan="3" class="headseparator">&nbsp;</td></tr>
 	<tr>
-		<td width="20%" class="heading">Role</td>
-		<td width="40%" class="heading" align="left">{translate key="user.name" sort="reviewerName"}</td>	
-		<td width="40%" class="heading" align="left">{translate key="common.action"}</td>
+		<!--<td width="20%" class="heading">Role</td>-->
+		<td width="30%" class="heading" align="left">{translate key="user.name" sort="reviewerName"}</td>	
+		<td width="50%" class="heading" align="left">Reviewing interest(s)</td>
+		<td width="20%" class="heading" align="left">{translate key="common.action"}</td>
 	</tr>	
 	<tr><td colspan="3" class="headseparator">&nbsp;</td></tr>
 	{assign var="count" value=0}
-	{foreach from=$unassignedReviewers item=ercMember}		
-		{assign var="count" value=$count+1}
-		{assign var="reviewerId" value=$ercMember->getId()}
-		<tr>
-			<td width="20%" class="heading">
-				{if $ercMember->isLocalizedExternalReviewer()==null || $ercMember->isLocalizedExternalReviewer()!="Yes"}
-					ERC Member
-				{else}
-					External Reviewer
-				{/if}
-			</td>
-			<td width="40%" class="heading">{$ercMember->getFullname()|escape}</td>	
-			<td width="40%" class="heading" align="left"><a href="{url op="selectReviewer" path=$articleId|to_array:$reviewerId}" class="action">Add and Notify as Primary Reviewer</a></td>
-		</tr>			
-		<tr><td colspan="3" class="separator">&nbsp;</td></tr>
+	{foreach from=$unassignedReviewers item=ercMember}
+		{if $ercMember->isLocalizedExternalReviewer() == "Yes"}
+			{assign var="count" value=$count+1}
+			{assign var="reviewerId" value=$ercMember->getId()}
+			<tr>
+				<!--<td width="20%" class="heading">
+					{if $ercMember->isLocalizedExternalReviewer()==null || $ercMember->isLocalizedExternalReviewer()!="Yes"}
+						NECHR Member
+					{else}
+						IRB Member
+					{/if}
+				</td>-->
+				<td width="30%">{$ercMember->getFullname()|escape}</td>	
+				<td width="50%">{$ercMember->getInterests()|escape}</td>	
+				<td width="20%"><a href="{url op="selectReviewer" path=$articleId|to_array:$reviewerId}" class="action">Add and Notify</a></td>
+			</tr>			
+			<tr><td colspan="3" class="separator">&nbsp;</td></tr>
+		{/if}
 	{/foreach}
 	{if $count==0}
 		<tr>
-			<td colspan="3" class="nodata">No unassigned reviewers</td>
+			<td colspan="3" class="nodata">No unassigned IRB Members</td>
 		</tr>
 		<tr>
 			<td colspan="3" class="endseparator">&nbsp;</td>
@@ -68,12 +73,12 @@ function sortSearch(heading, direction) {
 			<td colspan="3" class="endseparator">&nbsp;</td>
 		</tr>
 		<tr>
-			<td colspan="3" align="left">{$count} unassigned reviewer(s)</td>
+			<td colspan="3" align="left">{$count} unassigned IRB Member(s)</td>
 		</tr>
 	{/if}
 </table>
 
-
+<p><a class="action" href="{url op="submissionReview" path=$articleId} class="action">{translate key="editor.article.backToReview"}</a></p>
 
 
 {***************************************************************************

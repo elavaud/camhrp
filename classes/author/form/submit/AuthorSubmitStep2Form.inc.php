@@ -3,9 +3,6 @@
 /**
  * @file classes/author/form/submit/AuthorSubmitStep2Form.inc.php
  *
- * Copyright (c) 2003-2011 John Willinsky
- * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
- *
  * @class AuthorSubmitStep2Form
  * @ingroup author_form_submit
  *
@@ -22,126 +19,284 @@ class AuthorSubmitStep2Form extends AuthorSubmitForm {
 	 */
 	function AuthorSubmitStep2Form(&$article, &$journal) {
 		parent::AuthorSubmitForm($article, 2, $journal);
-
 		// Validation checks for this form
 		$this->addCheck(new FormValidatorCustom($this, 'authors', 'required', 'author.submit.form.authorRequired', create_function('$authors', 'return count($authors) > 0;')));
 		$this->addCheck(new FormValidatorArray($this, 'authors', 'required', 'author.submit.form.authorRequiredFields', array('firstName', 'lastName')));
-		
-		//Comment out by EL on April 24, 2012
-		//$this->addCheck(new FormValidatorArrayCustom($this, 'authors', 'required', 'author.submit.form.authorRequiredFields', create_function('$email, $regExp', 'return String::regexp_match($regExp, $email);'), array(ValidatorEmail::getRegexp()), false, array('email')));
 		$this->addCheck(new FormValidatorArrayCustom($this, 'authors', 'required', 'user.profile.form.urlInvalid', create_function('$url, $regExp', 'return empty($url) ? true : String::regexp_match($regExp, $url);'), array(ValidatorUrl::getRegexp()), false, array('url')));
-		$this->addCheck(new FormValidatorLocale($this, 'title', 'required', 'author.submit.form.titleRequired', $this->getRequiredLocale()));
-
+		$this->addCheck(new FormValidatorLocale($this, 'authorPhoneNumber', 'required', 'author.submit.form.authorPhoneNumber', 'en_US'));
+		$this->addCheck(new FormValidatorLocale($this, 'scientificTitle', 'required', 'author.submit.form.engScientificTitleRequired', 'en_US'));
+		$this->addCheck(new FormValidatorLocale($this, 'scientificTitle', 'required', 'author.submit.form.camScientificTitleRequired', 'kh_CA'));
+		//$this->addCheck(new FormValidatorLocale($this, 'publicTitle', 'required', 'author.submit.form.engPublicTitleRequired', 'en_US'));
+		//$this->addCheck(new FormValidatorLocale($this, 'publicTitle', 'required', 'author.submit.form.camPublicTitleRequired', 'kh_CA'));
+		$this->addCheck(new FormValidatorLocale($this, 'studentInitiatedResearch', 'required', 'author.submit.form.studentInitiatedResearch', 'en_US'));
+		$this->addCheck(new FormValidatorLocale($this, 'studentInstitution', 'required', 'author.submit.form.studentInstitution', 'en_US'));
+		$this->addCheck(new FormValidatorLocale($this, 'supervisorFullName', 'required', 'author.submit.form.supervisorFullNameRequired', 'en_US'));
+		$this->addCheck(new FormValidatorLocale($this, 'supervisorEmail', 'required', 'author.submit.form.supervisorEmailRequired', 'en_US'));
+		$this->addCheck(new FormValidatorLocale($this, 'supervisorPhone', 'required', 'author.submit.form.supervisorPhoneRequired', 'en_US'));
+		$this->addCheck(new FormValidatorLocale($this, 'supervisorAffiliation', 'required', 'author.submit.form.supervisorAffiliationRequired', 'en_US'));		
+		$this->addCheck(new FormValidatorLocale($this, 'academicDegree', 'required', 'author.submit.form.academicDegree', 'en_US'));
+		
 		$sectionDao =& DAORegistry::getDAO('SectionDAO');
 		$section = $sectionDao->getSection($article->getSectionId());
 		$abstractWordCount = $section->getAbstractWordCount();
+		
 		if (isset($abstractWordCount) && $abstractWordCount > 0) {
 			$this->addCheck(new FormValidatorCustom($this, 'abstract', 'required', 'author.submit.form.wordCountAlert', create_function('$abstract, $wordCount', 'foreach ($abstract as $localizedAbstract) {return count(explode(" ",$localizedAbstract)) < $wordCount; }'), array($abstractWordCount)));
 		}
-
-                /************************************************************************************************************/
-                /*  Validation code for additional proposal metadata (keys found in author.xml)
-                 *  Added by:  Anne Ivy Mirasol
-                 *  Last Update: May 3, 2011
-                 ************************************************************************************************************/
-                //Comment out by EL on april 13 2012
-
-                //Returned by SPF on April 17, 2012
-		$this->addCheck(new FormValidatorLocale($this, 'objectives', 'required', 'author.submit.form.objectivesRequired', $this->getRequiredLocale()));
-   				$this->addCheck(new FormValidatorLocale($this, 'rtoOffice', 'required', 'author.submit.form.rtoOfficeRequired', $this->getRequiredLocale()));		
-                $this->addCheck(new FormValidatorLocale($this, 'keywords', 'required', 'author.submit.form.keywordsRequired', $this->getRequiredLocale()));
-                $this->addCheck(new FormValidatorLocale($this, 'startDate', 'required', 'author.submit.form.startDateRequired', $this->getRequiredLocale()));
-                $this->addCheck(new FormValidatorLocale($this, 'endDate', 'required', 'author.submit.form.endDateRequired', $this->getRequiredLocale()));
-                $this->addCheck(new FormValidatorLocale($this, 'fundsRequired', 'required', 'author.submit.form.fundsRequiredRequired', $this->getRequiredLocale()));
-                $this->addCheck(new FormValidatorLocale($this, 'proposalCountry', 'required', 'author.submit.form.proposalCountryRequired', $this->getRequiredLocale()));
-                $this->addCheck(new FormValidatorLocale($this, 'technicalUnit', 'required', 'author.submit.form.technicalUnitRequired', $this->getRequiredLocale()));
-                $this->addCheck(new FormValidatorLocale($this, 'withHumanSubjects', 'required', 'author.submit.form.withHumanSubjectsRequired', $this->getRequiredLocale()));	        
-                $this->addCheck(new FormValidatorLocale($this, 'proposalType', 'required', 'author.submit.form.proposalTypeRequired', $this->getRequiredLocale()));
-                
-                $this->addCheck(new FormValidatorLocale($this, 'submittedAsPi', 'required', 'author.submit.form.submittedAsPiRequired', $this->getRequiredLocale()));
-                $this->addCheck(new FormValidatorLocale($this, 'conflictOfInterest', 'required', 'author.submit.form.conflictOfInterestRequired', $this->getRequiredLocale()));
-                $this->addCheck(new FormValidatorLocale($this, 'reviewedByOtherErc', 'required', 'author.submit.form.reviewedByOtherErcRequired', $this->getRequiredLocale()));
-                $this->addCheck(new FormValidatorLocale($this, 'otherErcDecision', 'required', 'author.submit.form.otherErcDecisionRequired', $this->getRequiredLocale()));
-
+			
+        $this->addCheck(new FormValidatorLocale($this, 'keywords', 'required', 'author.submit.form.engKeywordsRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'keywords', 'required', 'author.submit.form.camKeywordsRequired', 'kh_CA'));
+        $this->addCheck(new FormValidatorLocale($this, 'startDate', 'required', 'author.submit.form.startDateRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'endDate', 'required', 'author.submit.form.endDateRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'fundsRequired', 'required', 'author.submit.form.fundsRequiredRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'selectedCurrency', 'required', 'author.submit.form.selectedCurrency', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'primarySponsor', 'required', 'author.submit.form.primarySponsor', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'otherPrimarySponsor', 'required', 'author.submit.form.otherPrimarySponsor', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'otherSecondarySponsor', 'required', 'author.submit.form.otherSecondarySponsor', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'multiCountryResearch', 'required', 'author.submit.form.multiCountry', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'multiCountry', 'required', 'author.submit.form.country', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'nationwide', 'required', 'author.submit.form.nationwideRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'proposalCountry', 'required', 'author.submit.form.proposalCountryRequired', 'en_US'));
+        
+        $this->addCheck(new FormValidatorLocale($this, 'researchField', 'required', 'author.submit.form.researchField', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'otherResearchField', 'required', 'author.submit.form.otherResearchField', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'withHumanSubjects', 'required', 'author.submit.form.withHumanSubjectsRequired', 'en_US'));	        
+        $this->addCheck(new FormValidatorLocale($this, 'proposalType', 'required', 'author.submit.form.proposalTypeRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'otherProposalType', 'required', 'author.submit.form.otherProposalTypeRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'dataCollection', 'required', 'author.submit.form.dataCollection', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'reviewedByOtherErc', 'required', 'author.submit.form.reviewedByOtherErcRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'otherErcDecision', 'required', 'author.submit.form.otherErcDecisionRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'industryGrant', 'required', 'author.submit.form.industryGrant', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'nameOfIndustry', 'required', 'author.submit.form.nameOfIndustry', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'internationalGrant', 'required', 'author.submit.form.internationalGrant', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'internationalGrantName', 'required', 'author.submit.form.internationalGrantName', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'otherInternationalGrantName', 'required', 'author.submit.form.otherInternationalGrantName', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'mohGrant', 'required', 'author.submit.form.mohGrant', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'governmentGrant', 'required', 'author.submit.form.governmentGrant', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'governmentGrantName', 'required', 'author.submit.form.governmentGrantName', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'universityGrant', 'required', 'author.submit.form.universityGrant', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'selfFunding', 'required', 'author.submit.form.selfFunding', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'otherGrant', 'required', 'author.submit.form.otherGrant', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'specifyOtherGrant', 'required', 'author.submit.form.specifyOtherGrantField', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'identityRevealed', 'required', 'author.submit.form.identityRevealedRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'unableToConsent', 'required', 'author.submit.form.unableToConsentRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'under18', 'required', 'author.submit.form.under18Required', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'dependentRelationship', 'required', 'author.submit.form.dependentRelationshipRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'ethnicMinority', 'required', 'author.submit.form.ethnicMinorityRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'impairment', 'required', 'author.submit.form.impairmentRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'pregnant', 'required', 'author.submit.form.pregnantRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'newTreatment', 'required', 'author.submit.form.newTreatmentRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'bioSamples', 'required', 'author.submit.form.bioSamplesRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'radiation', 'required', 'author.submit.form.radiationRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'distress', 'required', 'author.submit.form.distressRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'inducements', 'required', 'author.submit.form.inducementsRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'sensitiveInfo', 'required', 'author.submit.form.sensitiveInfoRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'deception', 'required', 'author.submit.form.deceptionRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'reproTechnology', 'required', 'author.submit.form.reproTechnologyRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'genetics', 'required', 'author.submit.form.geneticsRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'stemCell', 'required', 'author.submit.form.stemCellRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'biosafety', 'required', 'author.submit.form.biosafetyRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'export', 'required', 'author.submit.form.exportRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'riskLevel', 'required', 'author.submit.form.riskLevelRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'listRisks', 'required', 'author.submit.form.listRisksRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'howRisksMinimized', 'required', 'author.submit.form.howRisksMinimizedRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'multiInstitutions', 'required', 'author.submit.form.multiInstitutionsRequired', 'en_US'));
+        $this->addCheck(new FormValidatorLocale($this, 'conflictOfInterest', 'required', 'author.submit.form.conflictOfInterestRequired', 'en_US'));
 	}
 
 	/**
 	 * Initialize form data from current article.
 	 */
 	function initData() {
-
 		$sectionDao =& DAORegistry::getDAO('SectionDAO');
 
 		if (isset($this->article)) {
 			$article =& $this->article;
 
-                        //Added by AIM, 01.30.2012
-                        $proposalCountryArray = $article->getProposalCountry(null);
-                        $proposalCountry[$this->getFormLocale()] = explode(",", $proposalCountryArray[$this->getFormLocale()]);
+            $proposalCountryArray = $article->getProposalCountry(null);
+            $proposalCountry['en_US'] = explode(",", $proposalCountryArray['en_US']);
+						
+			$multiCountryArray = $article->getMultiCountry(null);
+			$multiCountry['en_US'] = explode(",", $multiCountryArray['en_US']);
+            
+            $researchFieldArray = $article->getResearchField(null);
+            $researchField['en_US'] = explode("+", $researchFieldArray['en_US']);
+			$i = 0;
+            foreach ($researchField['en_US'] as $field){
+            	if (preg_match('#^Other\s\(.+\)$#', $field)){
+                	$tempField = $field;
+                    $field = preg_replace('#^Other\s\(.+\)$#','OTHER', $field);
+                    $tempField = preg_replace('#^Other\s\(#','', $tempField);
+                    $tempField = preg_replace('#\)$#','', $tempField);
+                    $article->setOtherResearchField($tempField, 'en_US');
+                }
+                $test = array($i => $field);
+                foreach ($test as $key => $value) {
+                	$researchField['en_US'][$key] = $value;
+                }
+                $i++;
+                unset ($field);
+            }
+            
+            $proposalTypeArray = $article->getProposalType(null);
+            $proposalType['en_US'] = explode("+", $proposalTypeArray['en_US']);
+			$f = 0;
+            foreach ($proposalType['en_US'] as $type){
+            	if (preg_match('#^Other\s\(.+\)$#', $type)){
+                	$tempType = $type;
+                    $type = preg_replace('#^Other\s\(.+\)$#','OTHER', $type);
+                    $tempType = preg_replace('#^Other\s\(#','', $tempType);
+                    $tempType = preg_replace('#\)$#','', $tempType);
+                    $article->setOtherProposalType($tempType, 'en_US');
+                }
+                $test2 = array($f => $type);
+                foreach ($test2 as $key => $value) {
+                	$proposalType['en_US'][$key] = $value;
+                }
+                $f++;
+                unset ($type);
+            }
 
-                        $proposalTypeArray = $article->getProposalType(null);
-                        $proposalType[$this->getFormLocale()] = explode("+", $proposalTypeArray[$this->getFormLocale()]);
-                        $otherProposalType = "";
-
-                        //Added by AIM 02.16.2012
-                        $articleDao =& DAORegistry::getDAO('ArticleDAO');
-                        $proposalTypes = $articleDao->getProposalTypes();
-                        $proposalTypeCodes = array();
-                        foreach ($proposalTypes as $i => $type) {
-                            array_push($proposalTypeCodes, $type['code']);
-                        }
-                        
-
-                        foreach($proposalType[$this->getFormLocale()] as $i => $type) {
-                            if(!in_array($type, $proposalTypeCodes) && $type != "") {
-                                preg_match('/\((.*)\)/', $type, $matches);
-                                $otherProposalType = $matches[1];
-                                $proposalType[$this->getFormLocale()][$i] = "OTHER";
-                            }
-                        }
-                        
+            $internationalGrantNameArray = $article->getInternationalGrantName(null);
+            $internationalGrantName['en_US'] = explode("+", $internationalGrantNameArray['en_US']);
+			$g = 0;
+            foreach ($internationalGrantName['en_US'] as $grant){
+            	if (preg_match('#^Other\s\(.+\)$#', $grant)){
+                	$tempGrant = $grant;
+                    $grant = preg_replace('#^Other\s\(.+\)$#','OTHER', $grant);
+                    $tempGrant = preg_replace('#^Other\s\(#','', $tempGrant);
+                    $tempGrant = preg_replace('#\)$#','', $tempGrant);
+                    $article->setOtherInternationalGrantName($tempGrant, 'en_US');
+                }
+                $test3 = array($g => $grant);
+                foreach ($test3 as $key => $value) {
+                	$internationalGrantName['en_US'][$key] = $value;
+                }
+                $g++;
+                unset ($grant);
+            }
+            
+            $secondarySponsorArray = $article->getSecondarySponsors(null);
+            $secondarySponsors['en_US'] = explode("+", $secondarySponsorArray['en_US']);
+			$h = 0;
+            foreach ($secondarySponsors['en_US'] as $sponsor){
+            	if (preg_match('#^Other\s\(.+\)$#', $sponsor)){
+                	$tempSponsor = $sponsor;
+                    $sponsor = preg_replace('#^Other\s\(.+\)$#','OTHER', $sponsor);
+                    $tempSponsor = preg_replace('#^Other\s\(#','', $tempSponsor);
+                    $tempSponsor = preg_replace('#\)$#','', $tempSponsor);
+                    $article->setOtherSecondarySponsor($tempSponsor, 'en_US');
+                }
+                $test4 = array($h => $sponsor);
+                foreach ($test4 as $key => $value) {
+                	$secondarySponsors['en_US'][$key] = $value;
+                }
+                $h++;
+                unset ($sponsor);
+            }
+            
+            $primarySponsorArray = $article->getPrimarySponsor(null);
+            $primarySponsor['en_US'] = explode("+", $primarySponsorArray['en_US']);
+			$j = 0;
+            foreach ($primarySponsor['en_US'] as $sponsor){
+            	if (preg_match('#^Other\s\(.+\)$#', $sponsor)){
+                	$tempSponsor = $sponsor;
+                    $sponsor = preg_replace('#^Other\s\(.+\)$#','OTHER', $sponsor);
+                    $tempSponsor = preg_replace('#^Other\s\(#','', $tempSponsor);
+                    $tempSponsor = preg_replace('#\)$#','', $tempSponsor);
+                    $article->setOtherPrimarySponsor($tempSponsor, 'en_US');
+                }
+                $test5 = array($j => $sponsor);
+                foreach ($test5 as $key => $value) {
+                	$primarySponsor['en_US'][$key] = $value;
+                }
+                $j++;
+                unset ($sponsor);
+            }
+                                    
+            $articleDao =& DAORegistry::getDAO('ArticleDAO');
+						
 			$this->_data = array(
 				'authors' => array(),
-				'title' => $article->getTitle(null), // Localized
-				'abstract' => $article->getAbstract(null), // Localized
-				'discipline' => $article->getDiscipline(null), // Localized
-				'subjectClass' => $article->getSubjectClass(null), // Localized
-				'subject' => $article->getSubject(null), // Localized
-				'coverageGeo' => $article->getCoverageGeo(null), // Localized
-				'coverageChron' => $article->getCoverageChron(null), // Localized
-				'coverageSample' => $article->getCoverageSample(null), // Localized
-				'type' => $article->getType(null), // Localized
-				'language' => $article->getLanguage(),
-				'sponsor' => $article->getSponsor(null), // Localized
-				'section' => $sectionDao->getSection($article->getSectionId()),
-				'citations' => $article->getCitations(),
-                                /***********************************************************
-                                 *  Init code for additional proposal metadata
-                                 *  Added by: Anne Ivy Mirasol
-                                 *  Last Edited: Dec. 24, 2011
-                                 ***********************************************************/
-                                 
-                                 //Comment out by EL on April 12 2012
-
-                                 //Returned getObjectives spf April 17, 2012
-				 'objectives' => $article->getObjectives(null),
-                                 
-                                 'keywords' => $article->getKeywords(null),
-                                 'startDate' => $article->getStartDate(null),
-                                 'endDate' => $article->getEndDate(null),
-                                 'fundsRequired' => $article->getFundsRequired(null),
-                                 'proposalCountry' => $proposalCountry,
-                                 'technicalUnit' => $article->getTechnicalUnit(null),
-                                 'withHumanSubjects' => $article->getWithHumanSubjects(null),
-                                 'proposalType' => $proposalType,
-                                 'otherProposalType' => $otherProposalType,
-                                 'submittedAsPi' => $article->getSubmittedAsPi(null),
-                                 'conflictOfInterest' => $article->getConflictOfInterest(null),
-                                 'reviewedByOtherErc' => $article->getReviewedByOtherErc(null),
-                                 'otherErcDecision' => $article->getOtherErcDecision(null),
-                                 'rtoOffice' => $article->getRtoOffice(null)
+				'authorPhoneNumber' => $article->getAuthorPhoneNumber(null),
+				'scientificTitle' => $article->getScientificTitle(null), // Localized
+				'publicTitle' => $article->getPublicTitle(null), // Localized
+				'studentInitiatedResearch' => $article->getStudentInitiatedResearch(null),
+				'studentInstitution' => $article->getStudentInstitution(null),
+				'supervisorFullName' => $article->getSupervisorFullName(null),
+				'supervisorEmail' => $article->getSupervisorEmail(null),
+				'supervisorPhone' => $article->getSupervisorPhone(null),
+				'supervisorAffiliation' => $article->getSupervisorAffiliation(null),
+				'academicDegree' => $article->getAcademicDegree(null),
+				'background' => $article->getBackground(null), 
+				'objectives' => $article->getObjectives(null), 
+				'studyMatters' => $article->getStudyMatters(null), 
+				'expectedOutcomes' => $article->getExpectedOutcomes(null),				
+				'section' => $sectionDao->getSection($article->getSectionId()),                                 
+                'keywords' => $article->getKeywords(null),
+                'startDate' => $article->getStartDate(null),
+                'endDate' => $article->getEndDate(null),
+                'fundsRequired' => $article->getFundsRequired(null),
+                'selectedCurrency' => $article->getSelectedCurrency(null),
+                'primarySponsor' => $primarySponsor,
+                'otherPrimarySponsor' => $article->getOtherPrimarySponsor(null),
+                'secondarySponsors' => $secondarySponsors,
+                'otherSecondarySponsor' => $article->getOtherSecondarySponsor(null),
+                'multiCountryResearch' => $article->getMultiCountryResearch(null),
+                'multiCountry' => $multiCountry,
+                'nationwide' => $article->getNationwide(null),
+                'proposalCountry' => $proposalCountry,
+                'researchField' => $researchField,
+                'otherResearchField' => $article->getOtherResearchField(null),
+                'technicalUnit' => $article->getTechnicalUnit(null),
+                'withHumanSubjects' => $article->getWithHumanSubjects(null),
+                'proposalType' => $proposalType,
+                'otherProposalType' => $article->getOtherProposalType(null),
+                'dataCollection' => $article->getDataCollection(null),
+                'submittedAsPi' => $article->getSubmittedAsPi(null),
+                'conflictOfInterest' => $article->getConflictOfInterest(null),
+                'reviewedByOtherErc' => $article->getReviewedByOtherErc(null),
+                'otherErcDecision' => $article->getOtherErcDecision(null),
+                'rtoOffice' => $article->getRtoOffice(null),
+                'industryGrant' => $article->getIndustryGrant(null),
+                'nameOfIndustry' => $article->getNameOfIndustry(null),
+                'internationalGrant' => $article->getInternationalGrant(null),
+                'internationalGrantName' => $internationalGrantName,
+                'otherInternationalGrantName' =>$article->getOtherInternationalGrantName(null),
+                'mohGrant' => $article->getMohGrant(null),
+                'governmentGrant' => $article->getGovernmentGrant(null),
+                'governmentGrantName' => $article->getGovernmentGrantName(null),
+                'universityGrant' => $article->getUniversityGrant(null),
+                'selfFunding' => $article->getSelfFunding(null),
+                'otherGrant' => $article->getOtherGrant(null),
+                'specifyOtherGrant' => $article->getSpecifyOtherGrant(null),
+                'identityRevealed' => $article->getIdentityRevealed(null),
+                'unableToConsent' => $article->getUnableToConsent(null),
+                'under18' => $article->getUnder18(null),
+                'dependentRelationship' => $article->getDependentRelationship(null),
+                'ethnicMinority' => $article->getEthnicMinority(null),
+                'impairment' => $article->getImpairment(null),
+                'pregnant' => $article->getPregnant(null),
+                'newTreatment' => $article->getNewTreatment(null),
+                'bioSamples' => $article->getBioSamples(null),
+                'radiation' => $article->getRadiation(null),
+                'distress' => $article->getDistress(null),
+                'inducements' => $article->getInducements(null),
+                'sensitiveInfo' => $article->getSensitiveInfo(null),
+                'deception' => $article->getDeception(null),
+                'reproTechnology' => $article->getReproTechnology(null),
+                'genetics' => $article->getGenetics(null),
+                'stemCell' => $article->getStemCell(null),
+                'biosafety' => $article->getBiosafety(null),
+                'export' => $article->getExport(null),
+                'riskLevel' => $article->getRiskLevel(null),
+                'listRisks' => $article->getListRisks(null),
+                'howRisksMinimized' => $article->getHowRisksMinimized(null),
+                'riskApplyTo' => $article->getRiskApplyTo(null),
+                'benefitsFromTheProject' => $article->getBenefitsFromTheProject(null),
+                'multiInstitutions' => $article->getMultiInstitutions(null)
 			);
-                        
+                       
 			$authors =& $article->getAuthors();
 			for ($i=0, $count=count($authors); $i < $count; $i++) {
 				array_push(
@@ -163,11 +318,6 @@ class AuthorSubmitStep2Form extends AuthorSubmitForm {
 					$this->setData('primaryContact', $i);
 				}
 			}
-                        //Added by AIM, Feb 16 2012
-                        //Add another author -- at least one PI
-                        if($count <= 1) {
-                            array_push($this->_data['authors'], array());
-                        }
 		}
 		return parent::initData();
 	}
@@ -181,42 +331,84 @@ class AuthorSubmitStep2Form extends AuthorSubmitForm {
 				'authors',
 				'deletedAuthors',
 				'primaryContact',
-				'title',
-				'abstract',
-				'discipline',
-				'subjectClass',
-				'subject',
-				'coverageGeo',
-				'coverageChron',
-				'coverageSample',
-				'type',
+				'authorPhoneNumber',
+				'scientificTitle',
+				'publicTitle',
+				'studentInitiatedResearch',
+				'hsph',
+				'studentInstitution',
+				'supervisorFullName',
+				'supervisorEmail',
+				'supervisorPhone',
+				'supervisorAffiliation',
+				'academicDegree',
+				'background', 
+				'objectives', 
+				'studyMatters', 
+				'expectedOutcomes',
 				'language',
-				'sponsor',
-				'citations',
-                                /*********************************************************
-                                 *  Read input code for additional proposal metadata
-                                 *  Added by: Anne Ivy Mirasol
-                                 *  Last Edited: May 3, 2011
-                                 *********************************************************/
-                                 
-                                 //Comment out by EL on April 12 2012
-
-                                 //Returned by SPF on April 17, 2012
-				 'objectives',
-                                 
-                                 'keywords',
-                                 'startDate',
-                                 'endDate',
-                                 'fundsRequired',
-                                 'proposalCountry',
-                                 'technicalUnit',
-                                 'withHumanSubjects',
-                                 'proposalType',
-                                 'submittedAsPi',
-                                 'conflictOfInterest',
-                                 'reviewedByOtherErc',
-                                 'otherErcDecision',
-                                 'rtoOffice'
+                'keywords',
+                'startDate',
+                'endDate',
+                'fundsRequired',
+                'selectedCurrency',
+                'primarySponsor',
+                'otherPrimarySponsor',
+                'secondarySponsors',
+                'otherSecondarySponsor',
+                'multiCountryResearch',
+                'multiCountry',
+                'nationwide',
+                'proposalCountry',
+                'researchField',
+                'otherResearchField',
+                'technicalUnit',
+                'withHumanSubjects',
+                'proposalType',
+                'otherProposalType',
+                'dataCollection',
+                'submittedAsPi',
+                'conflictOfInterest',
+                'reviewedByOtherErc',
+                'otherErcDecision',
+                'rtoOffice',
+                'industryGrant',
+                'nameOfIndustry',
+                'internationalGrant',
+                'internationalGrantName',
+                'otherInternationalGrantName',
+                'mohGrant',
+                'governmentGrant',
+                'governmentGrantName',
+                'universityGrant',
+                'selfFunding',
+                'otherGrant',
+                'specifyOtherGrant',
+                'identityRevealed', 
+                'unableToConsent', 
+                'under18', 
+                'dependentRelationship', 
+                'ethnicMinority', 
+                'impairment', 
+                'pregnant', 
+                'newTreatment', 
+                'bioSamples', 
+                'radiation', 
+                'distress', 
+                'inducements', 
+                'sensitiveInfo', 
+                'deception', 
+                'reproTechnology', 
+                'genetics', 
+                'stemCell', 
+                'biosafety',
+                'export', 
+                'riskLevel', 
+                'listRisks', 
+                'howRisksMinimized', 
+                'riskApplyTo', 
+                'benefitsFromTheProject', 
+                'multiInstitutions'
 			)
 		);
 
@@ -226,9 +418,15 @@ class AuthorSubmitStep2Form extends AuthorSubmitForm {
 		$this->_data['section'] =& $sectionDao->getSection($this->article->getSectionId());
 
 		if ($this->_data['section']->getAbstractsNotRequired() == 0) {
-			$this->addCheck(new FormValidatorLocale($this, 'abstract', 'required', 'author.submit.form.abstractRequired', $this->getRequiredLocale()));
+			$this->addCheck(new FormValidatorLocale($this, 'background', 'required', 'author.submit.form.engBackgroundRequired', 'en_US'));
+			$this->addCheck(new FormValidatorLocale($this, 'background', 'required', 'author.submit.form.camBackgroundRequired', 'kh_CA'));
+			$this->addCheck(new FormValidatorLocale($this, 'objectives', 'required', 'author.submit.form.engObjectivesRequired', 'en_US'));
+			$this->addCheck(new FormValidatorLocale($this, 'objectives', 'required', 'author.submit.form.camObjectivesRequired', 'kh_CA'));
+			$this->addCheck(new FormValidatorLocale($this, 'studyMatters', 'required', 'author.submit.form.engStudyMattersRequired', 'en_US'));
+			$this->addCheck(new FormValidatorLocale($this, 'studyMatters', 'required', 'author.submit.form.camStudyMattersRequired', 'kh_CA'));
+			$this->addCheck(new FormValidatorLocale($this, 'expectedOutcomes', 'required', 'author.submit.form.engExpectedOutcomesRequired', 'en_US'));
+			$this->addCheck(new FormValidatorLocale($this, 'expectedOutcomes', 'required', 'author.submit.form.camExpectedOutcomesRequired', 'kh_CA'));
 		}
-
 	}
 
 	/**
@@ -236,12 +434,7 @@ class AuthorSubmitStep2Form extends AuthorSubmitForm {
 	 * @return array
 	 */
 	function getLocaleFieldNames() {
-                /*******************************************************************
-                 * Edited by Anne Ivy Mirasol -- Addition of fields
-                 * Last Updated: May 3, 2011
-                 *******************************************************************/
-		return array('title', 'abstract', 'subjectClass', 'subject', 'coverageGeo', 'coverageChron', 'coverageSample', 'type', 'sponsor', 'objectives', 'keywords', 'startDate', 'endDate', 'fundsRequired', 'proposalCountry', 'technicalUnit', 'withHumanSubjects','proposalType', 'submittedAsPi', 'conflictOfInterest', 'reviewedByOtherErc', 'otherErcDecision', 'rtoOffice');
-
+		return array('authorPhoneNumber', 'scientificTitle', 'publicTitle', 'studentInitiatedResearch', 'hsph', 'studentInstitution', 'supervisorFullName', 'supervisorEmail', 'supervisorPhone', 'supervisorAffiliation', 'academicDegree','background', 'objectives', 'studyMatters', 'expectedOutcomes', 'keywords', 'startDate', 'endDate', 'fundsRequired', 'selectedCurrency', 'primarySponsor', 'otherPrimarySponsor', 'secondarySponsors', 'otherSecondarySponsor', 'multiCountryResearch', 'multiCountry', 'nationwide', 'proposalCountry', 'researchField', 'otherResearchField', 'withHumanSubjects','proposalType', 'otherProposalType', 'dataCollection', 'submittedAsPi', 'conflictOfInterest', 'reviewedByOtherErc', 'otherErcDecision', 'rtoOffice', 'industryGrant', 'nameOfIndustry', 'internationalGrant', 'internationalGrantName', 'otherInternationalGrantName', 'mohGrant', 'governmentGrant', 'governmentGrantName', 'universityGrant', 'selfFunding', 'otherGrant', 'specifyOtherGrant', 'identityRevealed', 'unableToConsent', 'under18', 'dependentRelationship', 'ethnicMinority', 'impairment', 'pregnant', 'newTreatment', 'bioSamples', 'radiation', 'distress', 'inducements', 'sensitiveInfo', 'deception', 'reproTechnology', 'genetics', 'stemCell', 'biosafety', 'export', 'riskLevel', 'listRisks', 'howRisksMinimized', 'riskApplyTo', 'benefitsFromTheProject', 'multiInstitutions');
 	}
 
 	/**
@@ -258,37 +451,27 @@ class AuthorSubmitStep2Form extends AuthorSubmitForm {
 			$templateMgr->assign('scrollToAuthor', true);
 		}
 
-                /*********************************************************************
-                 *  Get proposal types from database
-                 *  Added by:  Anne Ivy Mirasol
-                 *  Last Updated: April 25, 2011
-                 *********************************************************************/
-                $articleDao =& DAORegistry::getDAO('ArticleDAO');
-                $proposalTypes = $articleDao->getProposalTypes();
-                $templateMgr->assign('proposalTypes', $proposalTypes);
+        $articleDao =& DAORegistry::getDAO('ArticleDAO');
 
-                /*********************************************************************
-                 *  Get list of WPRO countries from the XML file
-                 *  Added by:  Anne Ivy Mirasol
-                 *  Last Updated: May 3, 2011
-                 *********************************************************************/
+        // Get proposal types
+        $proposalTypes = $articleDao->getProposalTypes();
+        $templateMgr->assign('proposalTypes', $proposalTypes);
 
-                $countryDAO =& DAORegistry::getDAO('AsiaPacificCountryDAO');
-                $proposalCountries =& $countryDAO->getAsiaPacificCountries();
-                $templateMgr->assign_by_ref('proposalCountries', $proposalCountries);
+		//Get research fields
+        $researchFields = $articleDao->getResearchFields();
+        $templateMgr->assign('researchFields', $researchFields);
+        
+       	//Get list of agencies
+        $agencies = $articleDao->getAgencies();
+        $templateMgr->assign('agencies', $agencies);
 
+		//Get list of divisions of Cambodia
+        $provinceDAO =& DAORegistry::getDAO('ProvincesOfCambodiaDAO');
+        $proposalCountries =& $provinceDAO->getProvincesOfCambodia();
+        ksort($proposalCountries);
+        $templateMgr->assign_by_ref('proposalCountries', $proposalCountries);
 
-                /*********************************************************************
-                 *  Get list of WPRO technical units from the XML file
-                 *  Added by:  Anne Ivy Mirasol
-                 *  Last Updated: May 3, 2011
-                 *********************************************************************/
-
-                $technicalUnitDAO =& DAORegistry::getDAO('TechnicalUnitDAO');
-                $technicalUnits =& $technicalUnitDAO->getTechnicalUnits();
-                $templateMgr->assign_by_ref('technicalUnits', $technicalUnits);
-
-                parent::display();
+        parent::display();
 	}
 
 	/**
@@ -297,61 +480,127 @@ class AuthorSubmitStep2Form extends AuthorSubmitForm {
 	 * @return int the article ID
 	 */
 	function execute(&$request) {
+		
 		$articleDao =& DAORegistry::getDAO('ArticleDAO');
 		$authorDao =& DAORegistry::getDAO('AuthorDAO');
 		$article =& $this->article;
-
 		// Retrieve the previous citation list for comparison.
 		$previousRawCitationList = $article->getCitations();
-
+		
 		// Update article
-		$article->setTitle($this->getData('title'), null); // Localized
-		$article->setAbstract($this->getData('abstract'), null); // Localized
-		$article->setDiscipline($this->getData('discipline'), null); // Localized
-		$article->setSubjectClass($this->getData('subjectClass'), null); // Localized
-		$article->setSubject($this->getData('subject'), null); // Localized
-		$article->setCoverageGeo($this->getData('coverageGeo'), null); // Localized
-		$article->setCoverageChron($this->getData('coverageChron'), null); // Localized
-		$article->setCoverageSample($this->getData('coverageSample'), null); // Localized
-		$article->setType($this->getData('type'), null); // Localized
+		$article->setAuthorPhoneNumber($this->getData('authorPhoneNumber'), null);
+		$article->setScientificTitle($this->getData('scientificTitle'), null); // Localized
+		$article->setPublicTitle($this->getData('publicTitle'), null);// Localized
+		//$studentResearchArray = $this->getData('studentInitiatedResearch');
+		$article->setStudentInitiatedResearch($this->getData('studentInitiatedResearch'), null);
+		
+		//print_r($this->getData('studentInstitution'));
+		$hsph = $this->getData('hsph');
+		if ($hsph['en_US'] == "Yes") $article->setStudentInstitution(array('en_US' => 'Hanoi School of Public Health'), null);
+		else $article->setStudentInstitution($this->getData('studentInstitution'), null);
+		$article->setSupervisorFullName($this->getData('supervisorFullName'), null);
+		$article->setSupervisorEmail($this->getData('supervisorEmail'), null);
+		$article->setSupervisorPhone($this->getData('supervisorPhone'), null);
+		$article->setSupervisorAffiliation($this->getData('supervisorAffiliation'), null);
+		$article->setAcademicDegree($this->getData('academicDegree'), null);
+		$article->setObjectives($this->getData('objectives'), null);
+		$article->setBackground($this->getData('background'), null);
+		$article->setStudyMatters($this->getData('studyMatters'), null);
+		$article->setExpectedOutcomes($this->getData('expectedOutcomes'), null); // Localized
 		$article->setLanguage($this->getData('language'));
-		$article->setSponsor($this->getData('sponsor'), null); // Localized
-		$article->setCitations($this->getData('citations'));
 		if ($article->getSubmissionProgress() <= $this->step) {
 			$article->stampStatusModified();
 			$article->setSubmissionProgress($this->step + 1);
-		}
-
-        /***********************************************************
-         *  Edited by: AIM
-         *  Last Updated: Jan 30, 2012
-         ***********************************************************/
-                 
-        //Comment out by EL on April 13 2012  
-        //Returned setObjectives by SPF April 17, 2012
-	$article->setObjectives($this->getData('objectives'), null); // Localized
-                
+		}                
         $article->setKeywords($this->getData('keywords'), null); // Localized
         $article->setStartDate($this->getData('startDate'), null); // Localized
         $article->setEndDate($this->getData('endDate'), null); // Localized
         $article->setFundsRequired($this->getData('fundsRequired'), null); // Localized
-
-        //Convert multiple countries to CSV string
+        $article->setSelectedCurrency($this->getData('selectedCurrency'), null);
+        $article->setMultiCountryResearch($this->getData('multiCountryResearch'), null);
+		$article->setNationwide($this->getData('nationwide'), null);
+		
+        //Convert multiple provinces to CSV string
         $proposalCountryArray = $this->getData('proposalCountry');
-        $proposalCountry[$this->getFormLocale()] = implode(",", $proposalCountryArray[$this->getFormLocale()]);
+        $proposalCountry['en_US'] = implode(",", $proposalCountryArray['en_US']);
         $article->setProposalCountry($proposalCountry, null); // Localized
-
         //Convert multiple proposal types to CSV string, Jan 30 2012
         $proposalTypeArray = $this->getData('proposalType');
-        foreach($proposalTypeArray[$this->getFormLocale()] as $i => $type) {
+        foreach($proposalTypeArray['en_US'] as $i => $type) {
         	if($type == "OTHER") {
-        		$otherType = trim(str_replace("+", ",", $request->getUserVar('otherProposalType')));
-            	if($otherType != "") $proposalTypeArray[$this->getFormLocale()][$i] = "OTHER (". $otherType .")";
+        		$otherType = $this->getData('otherProposalType');
+            	if($otherType != "") {
+            		$proposalTypeArray['en_US'][$i] = "Other (". $otherType['en_US'] .")";
+            	}
         	}
         }
-        $proposalType[$this->getFormLocale()] = implode("+", $proposalTypeArray[$this->getFormLocale()]);
-                
+        
+        $proposalType['en_US'] = implode("+", $proposalTypeArray['en_US']);
         $article->setProposalType($proposalType, null); // Localized
+        
+        //Convert multiple international grants to CSV string
+        $article->setInternationalGrant($this->getData('internationalGrant'), null); 
+        $internationalGrantNameArray = $this->getData('internationalGrantName');
+        foreach($internationalGrantNameArray['en_US'] as $i => $grant) {
+        	if($grant == "OTHER") {
+        		$otherGrant = $this->getData('otherInternationalGrantName');
+            	if($otherGrant != "") {
+            		$internationalGrantNameArray['en_US'][$i] = "Other (". $otherGrant['en_US'] .")";
+            	}
+        	}
+        }
+        
+        $internationalGrantName['en_US'] = implode("+", $internationalGrantNameArray['en_US']);
+        $article->setInternationalGrantName($internationalGrantName, null); // Localized
+        //Convert multiple secondary sponsor to CSV string
+        $secondarySponsorArray = $this->getData('secondarySponsors');
+        foreach($secondarySponsorArray['en_US'] as $i => $sponsor) {
+        	if($sponsor == "OTHER") {
+        		$otherSponsor = $this->getData('otherSecondarySponsor');
+            	if($otherSponsor != "") {
+            		$secondarySponsorArray['en_US'][$i] = "Other (". $otherSponsor['en_US'] .")";
+            	}
+        	}
+        }
+        
+        $secondarySponsors['en_US'] = implode("+", $secondarySponsorArray['en_US']);
+        $article->setSecondarySponsors($secondarySponsors, null); // Localized
+        
+        //Convert multiple primary sponsor to CSV string
+        $primarySponsorArray = $this->getData('primarySponsor');
+        foreach($primarySponsorArray['en_US'] as $i => $sponsor) {
+        	if($sponsor == "OTHER") {
+        		$otherSponsor = $this->getData('otherPrimarySponsor');
+            	if($otherSponsor != "") {
+            		$primarySponsorArray['en_US'][$i] = "Other (". $otherSponsor['en_US'] .")";
+            	}
+        	}
+        }
+        
+        $primarySponsor['en_US'] = implode("+", $primarySponsorArray['en_US']);
+        $article->setPrimarySponsor($primarySponsor, null); // Localized
+                        
+        //Convert multiple research fields to CSV
+        $researchFieldArray = $this->getData('researchField');
+        foreach($researchFieldArray['en_US'] as $i => $field) {
+        	if($field == "OTHER") {
+        		$otherField = $this->getData('otherResearchField');
+            	if($otherField != "") {
+            		$researchFieldArray['en_US'][$i] = "Other (". $otherField['en_US'] .")";
+            	}
+        	}
+        }   
+        
+        $researchField['en_US'] = implode("+", $researchFieldArray['en_US']);
+        $article->setResearchField($researchField, null);
+        //$article->setOtherResearchField($this->getData('otherResearchField'), null);
+        
+        //Convert multiple countries to CSV
+        $multiCountryArray = $this->getData('multiCountry');
+        $multiCountry['en_US'] = implode(",", $multiCountryArray['en_US']);
+        $article->setMultiCountry($multiCountry, null);
+        
+        $article->setDataCollection($this->getData('dataCollection'), null);
         $article->setTechnicalUnit($this->getData('technicalUnit'), null); // Localized
         $article->setWithHumanSubjects($this->getData('withHumanSubjects'),null); // Localized
 	    $article->setSubmittedAsPi($this->getData('submittedAsPi'), null); // Localized
@@ -359,9 +608,44 @@ class AuthorSubmitStep2Form extends AuthorSubmitForm {
         $article->setReviewedByOtherErc($this->getData('reviewedByOtherErc'), null); // Localized
         $article->setOtherErcDecision($this->getData('otherErcDecision'), null); // Localized
         $article->setRtoOffice($this->getData('rtoOffice'), null);//Localized
-                
+        
+        $article->setIndustryGrant($this->getData('industryGrant'), null);
+        $article->setNameOfIndustry($this->getData('nameOfIndustry'), null); 
+        $article->setMohGrant($this->getData('mohGrant'), null);
+        $article->setGovernmentGrant($this->getData('governmentGrant'), null);
+        $article->setGovernmentGrantName($this->getData('governmentGrantName'), null); 
+        $article->setUniversityGrant($this->getData('universityGrant'), null); 
+        $article->setSelfFunding($this->getData('selfFunding'), null); 
+        $article->setOtherGrant($this->getData('otherGrant'), null); 
+        $article->setSpecifyOtherGrant($this->getData('specifyOtherGrant'), null);
+        
+        $article->setIdentityRevealed($this->getData('identityRevealed'), null);
+        $article->setUnableToConsent($this->getData('unableToConsent'), null);
+        $article->setUnder18($this->getData('under18'), null);
+        $article->setDependentRelationship($this->getData('dependentRelationship'), null);
+        $article->setEthnicMinority($this->getData('ethnicMinority'), null);
+        $article->setImpairment($this->getData('impairment'), null);
+        $article->setPregnant($this->getData('pregnant'), null);
+        $article->setNewTreatment($this->getData('newTreatment'), null);
+        $article->setBioSamples($this->getData('bioSamples'), null);
+        $article->setRadiation($this->getData('radiation'), null);
+        $article->setDistress($this->getData('distress'), null);
+        $article->setInducements($this->getData('inducements'), null);
+        $article->setSensitiveInfo($this->getData('sensitiveInfo'), null);
+        $article->setDeception($this->getData('deception'), null);
+        $article->setReproTechnology($this->getData('reproTechnology'), null);
+        $article->setGenetics($this->getData('genetics'), null);
+        $article->setStemCell($this->getData('stemCell'), null);
+        $article->setBiosafety($this->getData('biosafety'), null);
+        $article->setExport($this->getData('export'), null);
+        $article->setRiskLevel($this->getData('riskLevel'), null);
+        $article->setListRisks($this->getData('listRisks'), null);
+        $article->setHowRisksMinimized($this->getData('howRisksMinimized'), null);
+        $article->setRiskApplyTo($this->getData('riskApplyTo'), null);               
+        $article->setBenefitsFromTheProject($this->getData('benefitsFromTheProject'), null);
+        
+        $article->setMultiInstitutions($this->getData('multiInstitutions'), null);
         /***************** END OF EDIT *****************************/
-
         //
         // Update authors
 		$authors = $this->getData('authors');
@@ -378,13 +662,13 @@ class AuthorSubmitStep2Form extends AuthorSubmitForm {
 
 			if ($author != null) {
 				$author->setSubmissionId($article->getId());
-				$author->setFirstName($authors[$i]['firstName']);
-				$author->setMiddleName($authors[$i]['middleName']);
-				$author->setLastName($authors[$i]['lastName']);
-				$author->setAffiliation($authors[$i]['affiliation'], null);
-				$author->setCountry($authors[$i]['country']);
-				$author->setEmail($authors[$i]['email']);
-				$author->setUrl($authors[$i]['url']);
+				if (isset($authors[$i]['firstName'])) $author->setFirstName($authors[$i]['firstName']);
+				if (isset($authors[$i]['middleName'])) $author->setMiddleName($authors[$i]['middleName']);
+				if (isset($authors[$i]['lastName'])) $author->setLastName($authors[$i]['lastName']);
+				if (isset($authors[$i]['affiliation'])) $author->setAffiliation($authors[$i]['affiliation'], null);
+				if (isset($authors[$i]['country'])) $author->setCountry($authors[$i]['country']);
+				if (isset($authors[$i]['email'])) $author->setEmail($authors[$i]['email']);
+				if (isset($authors[$i]['url'])) $author->setUrl($authors[$i]['url']);
 				if (array_key_exists('competingInterests', $authors[$i])) {
 					$author->setCompetingInterests($authors[$i]['competingInterests'], null);
 				}
@@ -406,7 +690,6 @@ class AuthorSubmitStep2Form extends AuthorSubmitForm {
 		}
 
 		parent::execute();
-
 		// Save the article
 		$articleDao->updateArticle($article);
 

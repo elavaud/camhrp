@@ -28,6 +28,7 @@
 	<locale key="hr_HR" complete="false" name="Hrvatski" iso639-2b="hrv" />
 	<locale key="it_IT" name="Italiano" iso639-2b="ita" />
 	<locale key="ja_JP" name="日本語" iso639-2b="jpn" />
+    <locale key="kh_CA" name="ខេមរភាសា" iso639-2b="khm" />
 	<locale key="nl_NL" name="Nederlands" iso639-2b="dut" />
 	<locale key="no_NO" complete="false" name="Norwegian" iso639-2b="nor" />
 	<locale key="pt_BR" name="Português (Brasil)" iso639-2b="por" />

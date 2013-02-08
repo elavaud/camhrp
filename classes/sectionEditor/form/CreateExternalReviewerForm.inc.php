@@ -41,6 +41,10 @@ class CreateExternalReviewerForm extends Form {
 		$this->addCheck(new FormValidatorAlphaNum($this, 'username', 'required', 'user.register.form.usernameAlphaNumeric'));
 		$this->addCheck(new FormValidator($this, 'firstName', 'required', 'user.profile.form.firstNameRequired'));
 		$this->addCheck(new FormValidator($this, 'lastName', 'required', 'user.profile.form.lastNameRequired'));
+		$this->addCheck(new FormValidatorLocale($this, 'affiliation', 'required', 'user.profile.form.affiliationRequired'));
+		$this->addCheck(new FormValidator($this, 'phone', 'required', 'user.profile.form.phoneRequired'));
+		$this->addCheck(new FormValidator($this, 'mailingAddress', 'required', 'user.profile.form.mailingAddressRequired'));
+		$this->addCheck(new FormValidator($this, 'country', 'required', 'user.profile.form.countryRequired'));
 		$this->addCheck(new FormValidatorUrl($this, 'userUrl', 'optional', 'user.profile.form.urlInvalid'));
 		$this->addCheck(new FormValidatorEmail($this, 'email', 'required', 'user.profile.form.emailRequired'));
 		$this->addCheck(new FormValidatorCustom($this, 'email', 'required', 'user.register.form.emailExists', array(DAORegistry::getDAO('UserDAO'), 'userExistsByEmail'), array(null, true), true));
@@ -52,6 +56,9 @@ class CreateExternalReviewerForm extends Form {
 		$reviewerAccessKeysEnabled = $journal->getSetting('reviewerAccessKeysEnabled');
 		$isEmailBasedReview = $journal->getSetting('mailSubmissionsToReviewers')==1?true:false;
 		$this->setData('sendNotify', ($reviewerAccessKeysEnabled || $isEmailBasedReview)?false:true);
+		$locale = Locale::getLocale();
+		$interests = array($locale => array('0'=>''));
+		$this->setData('reviewingInterest', $interests);
 	}
 
 	function getLocaleFieldNames() {
@@ -69,6 +76,7 @@ class CreateExternalReviewerForm extends Form {
 		$site =& Request::getSite();
 		$templateMgr->assign('availableLocales', $site->getSupportedLocaleNames());
 		$userDao =& DAORegistry::getDAO('UserDAO');
+        $templateMgr->assign('reviewingInterests', $userDao->getReviewingInterests());
 		$templateMgr->assign('genderOptions', $userDao->getGenderOptions());
 
 		$countryDao =& DAORegistry::getDAO('CountryDAO');
@@ -108,6 +116,7 @@ class CreateExternalReviewerForm extends Form {
 			'gossip',
 			'userLocales',
 			'sendNotify',
+			'reviewingInterest', 
 			'username'
 		));
 
@@ -184,19 +193,12 @@ class CreateExternalReviewerForm extends Form {
 
 		// Add reviewing interests to interests table
 		$interestDao =& DAORegistry::getDAO('InterestDAO');
-		$interests = Request::getUserVar('interestsKeywords');
-		$interests = array_map('urldecode', $interests); // The interests are coming in encoded -- Decode them for DB storage
-		$interestTextOnly = Request::getUserVar('interests');
-		if(!empty($interestsTextOnly)) {
-			// If JS is disabled, this will be the input to read
-			$interestsTextOnly = explode(",", $interestTextOnly);
-		} else $interestsTextOnly = null;
-		if ($interestsTextOnly && !isset($interests)) {
-			$interests = $interestsTextOnly;
-		} elseif (isset($interests) && !is_array($interests)) {
-			$interests = array($interests);
+
+		$reviewingInterestArray = Request::getUserVar('reviewingInterest');
+		if (is_array($reviewingInterestArray)){
+        	$reviewingInterest = implode(",", $reviewingInterestArray[$this->getFormLocale()]);
+     		$user->setInterests($reviewingInterest);
 		}
-		$interestDao->insertInterests($interests, $user->getId(), true);
 
 		$roleDao =& DAORegistry::getDAO('RoleDAO');
 		$journal =& Request::getJournal();

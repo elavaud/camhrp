@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : agencies.xml
+
+-->
+
+<agencies>
+    <agency name="Aeras Global TB Vaccine Foundation" code="AERAS" />
+    <agency name="Adventist Development and Relief Agency" code="ADRA" />
+    <agency name="Agence Française de Développement" code="AFD" />
+    <agency name="Agence Nationale de Recherche sur le SIDA, France" code="ANRS" />
+    <agency name="Alere (Inverness Medical Innovations)" code="ALERE" />
+    <agency name="Alliance for Safe Children (TASC)" code="TASC" />
+    <agency name="Armed Forces Research Institute of Medical Sciences (AFRIMS)" code="AFRIMS" />
+    <agency name="Asian Development Bank (ADB)" code="ADB" />
+    <agency name="Australian Agency for International Development (AUSAID)" code="AUSAID" />
+    <agency name="Bayer Schering Pharma AG" code="BSP" />
+    <agency name="BBC World Service Trust" code="BBCWST" />
+    <agency name="Bill and Melinda Gates Foundation" code="BMGF" />
+    <agency name="Canadian Institutes of Health Research" code="CIHR" />
+    <agency name="Cooperative for Assistance and Relief Everywhere (CARE)" code="CARE" />
+    <agency name="Danish International Development Agency (DANIDA)" code="DANIDA" />
+    <agency name="Defence Science Organisation (DSO)" code="DSO" />
+    <agency name="Department For International Development, United Kingdom (DFID)" code="UKDFID" />
+    <agency name="Duke University" code="DUKE" />
+    <agency name="Eastern Mennonite Mission" code="EMM" />
+    <agency name="EBEWE Pharma" code="EBEWE" />
+    <agency name="Elton Johns AIDS Foundation" code="EJAIDS" />
+    <agency name="ESTHER" code="ESTHER" />
+    <agency name="European Commission" code="EC" />
+    <agency name="Family Health International (FHI)" code="FHI" />
+    <agency name="Fogarty International Center" code="FIC" />
+    <agency name="Federal Ministry of Economic Cooperation and Development, Germany" code="BMZ" />
+    <agency name="Ford Foundation" code="FF" />
+    <agency name="Fred Hollows Foundation" code="FHF" />
+    <agency name="German Research Foundation" code="DGF" />
+    <agency name="Global Fund" code="GF" />
+    <agency name="Gwangju Institute of Sciences and Technology" code="GIST" />
+    <agency name="H.J. Heinz Company Foundation" code="HCF" />
+    <agency name="Heiwa Nakajima Foundation" code="HNF" />
+    <agency name="Institut de Recherche pour le Développement (IRD)" code="IRD" />
+    <agency name="Institut Pasteur" code="IP" />
+    <agency name="Institute of Tropical Medicine, Antwerp" code="ITM" />
+    <agency name="International Center for Research on Women" code="ICRW" />
+    <agency name="International Development Research Centre" code="IDRC" />
+    <agency name="International Labour Organization (ILO)" code="ILO" />
+    <agency name="International Life Sciences Institute Research Foundation" code="ILSIRF" />
+    <agency name="International Medical Center of Japan" code="IMCJ" />
+    <agency name="International Organization for Migration" code="IOM" />
+    <agency name="International Vaccine Institute" code="IVC" />
+    <agency name="Ipas" code="IPAS" />
+    <agency name="Japan International Cooperation Agency" code="JICA" />
+    <agency name="Johns Hopkins University, USA" code="HOPK" />
+    <agency name="Joint United Nations Programme on HIV/AIDS (UNAIDS)" code="UNAIDS" />
+    <agency name="Korean Centers for Disease Control and Prevention" code="KCDC" />
+    <agency name="Korean International Cooperation Agency (KOICA)" code="KOICA" />
+    <agency name="La Trobe University, Australia" code="ULTR" />
+    <agency name="Kreditanstalt für Wiederaufbau (KfW)" code="KfW" />
+    <agency name="Li Ka Shing Foundation" code="LKSF" />
+    <agency name="MAC AIDS Fund" code="MACAIDS" />
+    <agency name="Médecins Sans Frontières (MSF)" code="MSF" />
+    <agency name="Medicines for Malaria Venture" code="MMV" />
+    <agency name="Ministry of Foreign Affairs, Norway" code="MoFA" />
+    <agency name="Ministry of Health, Labour and Welfare, Japan" code="MHLW" />
+    <agency name="Monash University, Australia" code="UMON" />
+    <agency name="Ministry of Health (Kingdom of Cambodia)" code="MoH" />
+    <agency name="Nagoya University, Japan" code="UNGY" />
+    <agency name="Nagasaki University, Japan" code="UNGS" />
+    <agency name="National Center for Global Health and Medicine, Japan" code="NCGHM" />
+    <agency name="National Center for HIV/AIDS Dermatology and STD, Cambodia" code="NCHADS" />
+    <agency name="National Institute of Allergy and Infectious Diseases, USA" code="NIAID" />
+    <agency name="National Institutes of Health, USA (NIH)" code="USNIH" />
+    <agency name="Naval Medical Research Center, USA" code="NMRC" />
+    <agency name="Netherlands Leprosy Relief" code="NLR" />
+    <agency name="New Zealand Agency for International Development (NZAID)" code="NZAID" />
+    <agency name="Neys-van Hoogstraten Foundation" code="NVHF" />
+    <agency name="Norwegian Plasma Fund" code="NPF" />
+    <agency name="Norwegian Research Council" code="NRC" />
+    <agency name="Nossal Institute for Global Health" code="NIGH" />
+    <agency name="Partners for Development" code="PFD" />
+    <agency name="Program for Appropriate Technology in Health" code="PATH" />
+    <agency name="Population Services International (PSI)" code="PSI" />
+    <agency name="Reproductive and Child Health Alliance" code="RACHA" />
+    <agency name="Research for International Tobacco Control" code="RITC" />
+    <agency name="Rockfeller Foundation" code="RF" />
+    <agency name="RMIT University, Australia" code="RMIT" />
+    <agency name="Sanofi-Aventis" code="SAN" />
+    <agency name="Save the Children" code="STC" />
+    <agency name="Shin Poong Pharmaceuticals" code="SPONG" />
+    <agency name="Southeast Asia Tobacco Control Alliance" code="SEATCA" />
+    <agency name="Swiss National Science Foundation" code="SNSF" />
+    <agency name="Swiss Tropical and Public Health Institute" code="STPHI" />
+    <agency name="Toyota Fundation" code="TF" />
+    <agency name="Therapeutics Research, Education and AIDS" code="TREAT" />
+    <agency name="UAB Sparkman Center for Global Health" code="UABSCGH" />
+    <agency name="UBS Optimus Foundation" code="UBSOF" />
+    <agency name="United Nations Children's Fund (UNICEF)" code="UNICEF" />
+    <agency name="United Nations Development Program (UNDP)" code="UNDP" />
+    <agency name="United Nations Educational, Scientific and Cultural Organization (UNESCO)" code="UNESCO" />
+    <agency name="United Nations Population Fund (UNFPA)" code="UNFPA" />
+    <agency name="United Nations University (UNU)" code="UNU" />
+    <agency name="United States Agency for International Development (USAID)" code="USAID" />
+    <agency name="United States Army Medical" code="USAM" />
+    <agency name="United States Centers for Disease Control and Prevention (USCDC)" code="USCDC" />
+    <agency name="University Hospital of Norway" code="UHN" />
+    <agency name="University of California, USA" code="UCAL" />
+    <agency name="University of Health Sciences, Cambodia" code="UHSC" />
+    <agency name="University of Limoge, France" code="ULIM" />
+    <agency name="University of New South Wales, Australia" code="UNSW" />
+    <agency name="University of North Carolina, USA" code="UNCA" />
+    <agency name="University of Oxford, UK" code="UOXF" />
+    <agency name="University of Queensland, Australia" code="UQUE" />
+    <agency name="University of Tokyo, Japan" code="UTOK" />
+    <agency name="University of Washington, USA" code="UWASH" />
+    <agency name="Valent BioSciences" code="VBS" />
+    <agency name="Voluntary Service Overseas International" code="VSOI" />
+    <agency name="Vrije Universiteit Amsterdam" code="VUA" />
+    <agency name="Wellcome Trust" code="WT" />
+    <agency name="World Bank (WB)" code="WB" />
+    <agency name="World Food Program (WFP)" code="WFP" />
+    <agency name="World Health Organization (WHO)" code="WHO" />
+    <agency name="World Vision" code="WV" />
+    <agency name="Other(s)" code="OTHER" />
+    <!-- Do not change code of OTHER -->
+</agencies>

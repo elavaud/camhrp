@@ -34,20 +34,20 @@ class AuthorSubmitStep4Form extends AuthorSubmitForm {
                 // Start Edit Raf Tan 04/30/2011
                 // Add Options drop-down list for WHO journals
                 $typeOptions = array(
-                    "author.submit.suppFile.who.summary" => "author.submit.suppFile.who.summary",
-                    //"author.submit.suppFile.who.proposal" => "author.submit.suppFile.who.proposal",
-                    "author.submit.suppFile.who.informedConsent" => "author.submit.suppFile.who.informedConsent",
-                    "author.submit.suppFile.who.localEthicalApproval" => "author.submit.suppFile.who.localEthicalApproval",
-                    "author.submit.suppFile.who.funding" => "author.submit.suppFile.who.funding",
-                    "author.submit.suppFile.who.cv" => "author.submit.suppFile.who.cv",
-                    "author.submit.suppFile.who.questionnaire" => "author.submit.suppFile.who.questionnaire",
-                    // Deleted author.submit.suppFile.who.local option as supplementary file - 9Dec2011 - spf
-                    // "author.submit.suppFile.who.local" => "author.submit.suppFile.who.local",
-                    "author.submit.suppFile.who.ethicalClearance" => "author.submit.suppFile.who.ethicalClearance",
-                    "author.submit.suppFile.who.proofOfRegistration" => "author.submit.suppFile.who.proofOfRegistration",
-                    "author.submit.suppFile.who.otherErcDecision" => "author.submit.suppFile.who.otherErcDecision",
-                    //"author.submit.suppFile.who.review" => "author.submit.suppFile.who.review",
-                    "common.other" => "common.other"
+                    "SUMMARY" => "common.submit.suppFile.who.summary",
+                    //"common.submit.suppFile.who.proposal" => "common.submit.suppFile.who.proposal",
+                    "INFORMED_CONSENT" => "common.submit.suppFile.who.informedConsent",
+                    //"common.submit.suppFile.who.localEthicalApproval" => "common.submit.suppFile.who.localEthicalApproval",
+                    "FUNDING" => "common.submit.suppFile.who.funding",
+                    "CV" => "common.submit.suppFile.who.cv",
+                    "QUESTIONNAIRE" => "common.submit.suppFile.who.questionnaire",
+                    // Deleted common.submit.suppFile.who.local option as supplementary file - 9Dec2011 - spf
+                    // "common.submit.suppFile.who.local" => "common.submit.suppFile.who.local",
+                    //"common.submit.suppFile.who.ethicalClearance" => "common.submit.suppFile.who.ethicalClearance",
+                    "PROOF_OF_REGISTRATION" => "common.submit.suppFile.who.proofOfRegistration",
+                    "ERC_DECISION" => "common.submit.suppFile.who.otherErcDecision",
+                    //"common.submit.suppFile.who.review" => "common.submit.suppFile.who.review",
+                    "OTHER" => "common.other"
 		);
 		//$typeOptionsValues = $typeOptionsOutput;
 		//array_push($typeOptionsOutput, 'common.other');

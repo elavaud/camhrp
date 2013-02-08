@@ -128,6 +128,72 @@ class UserDAO extends PKPUserDAO {
 		$this->flushCache();
 		return $userId;
 	}
+	
+	function deleteExternalReviewer($userId, $locale) {	
+		$this->update('DELETE FROM user_settings WHERE user_id = '.$userId.' AND setting_name = "externalReviewer"');
+		$this->flushCache();
+		return $userId;
+	}
+
+	/**
+	 * Get all possible reviewing interests.
+	 * @param none
+	 * @return array reviewingInterests
+	 */
+	function getReviewingInterests() {
+		$locale = Locale::getLocale();
+		$filename = "lib/pkp/locale/".$locale."/reviewingInterests.xml";
+
+		$xmlDao = new XMLDAO();
+		$data = $xmlDao->parseStruct($filename, array('reviewingInterests', 'reviewingInterest'));
+
+		$reviewingInterests = array();
+		if (isset($data['reviewingInterests'])) {
+			$i=0;
+			foreach ($data['reviewingInterest'] as $reviewingInterestData) {
+				$reviewingInterest['code'] = $reviewingInterestData['attributes']['code'];
+				$reviewingInterest['name'] = $reviewingInterestData['attributes']['name'];
+				array_push($reviewingInterests, $reviewingInterest);
+			}
+			$i++;
+		}
+
+
+		return $reviewingInterests;
+
+	}
+	
+	/**********************************************************************
+	 * Get research field by code
+	 * Added by el
+	 ***********************************************************************/
+	function getReviewingInterest($code) {
+                $reviewingInterestCodeArray = explode("+", $code);
+                $reviewingInterestTextArray = array();
+                foreach($reviewingInterestCodeArray as $rInterestCode) {
+                    $interestText = $this->getReviewingInterestSingle($rInterestCode);
+                    array_push($reviewingInterestTextArray, $interestText);
+                }
+                
+                $reviewingInterestText = "";
+                foreach($reviewingInterestTextArray as $i => $rInterest) {
+                    $reviewingInterestText = $reviewingInterestText . $rInterest;
+                    if($i < count($reviewingInterestTextArray)-1) $reviewingInterestText = $reviewingInterestText . ", ";
+                }
+
+                return $reviewingInterestText;
+	}
+
+        function getReviewingInterestSingle($code) {
+            $reviewingInterests = $this->getReviewingInterests();
+            foreach($reviewingInterests as $ri) {
+                if ($ri['code'] == $code) {
+                    return $ri['name'];
+                }
+            }
+            return $code;
+        }
+
 }
 
 ?>

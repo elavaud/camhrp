@@ -27,7 +27,7 @@ class ProfileForm extends Form {
 	 */
 	function ProfileForm() {
 		parent::Form('user/profile.tpl');
-
+		
 		$user =& Request::getUser();
 		$this->user =& $user;
 
@@ -36,6 +36,10 @@ class ProfileForm extends Form {
 		// Validation checks for this form
 		$this->addCheck(new FormValidator($this, 'firstName', 'required', 'user.profile.form.firstNameRequired'));
 		$this->addCheck(new FormValidator($this, 'lastName', 'required', 'user.profile.form.lastNameRequired'));
+		$this->addCheck(new FormValidatorLocale($this, 'affiliation', 'required', 'user.profile.form.affiliationRequired'));
+		$this->addCheck(new FormValidator($this, 'phone', 'required', 'user.profile.form.phoneRequired'));
+		$this->addCheck(new FormValidator($this, 'mailingAddress', 'required', 'user.profile.form.mailingAddressRequired'));
+		$this->addCheck(new FormValidator($this, 'country', 'required', 'user.profile.form.countryRequired'));
 		$this->addCheck(new FormValidatorUrl($this, 'userUrl', 'optional', 'user.profile.form.urlInvalid'));
 		$this->addCheck(new FormValidatorEmail($this, 'email', 'required', 'user.profile.form.emailRequired'));
 		$this->addCheck(new FormValidatorCustom($this, 'email', 'required', 'user.register.form.emailExists', array(DAORegistry::getDAO('UserDAO'), 'userExistsByEmail'), array($user->getId(), true), true));
@@ -121,7 +125,8 @@ class ProfileForm extends Form {
 				break;
 			}
 		}
-
+		
+        $templateMgr->assign('reviewingInterests', $userDao->getReviewingInterests());
 		$templateMgr->assign('genderOptions', $userDao->getGenderOptions());
 
 		$journals =& $journalDao->getEnabledJournals();
@@ -161,18 +166,15 @@ class ProfileForm extends Form {
 	 * Initialize form data from current settings.
 	 */
 	function initData(&$args, &$request) {
+
 		$user =& $request->getUser();
 		$interestDao =& DAORegistry::getDAO('InterestDAO');
-
-		// Get all available interests to populate the autocomplete with
-		if ($interestDao->getAllUniqueInterests()) {
-			$existingInterests = $interestDao->getAllUniqueInterests();
-		} else $existingInterests = null;
+		$locale = 'en_US';
 		// Get the user's current set of interests
 		if ($interestDao->getInterests($user->getId())) {
-			$currentInterests = $interestDao->getInterests($user->getId());
-		} else $currentInterests = null;
-
+			$currentInterests = array ($locale => $interestDao->getInterests($user->getId()));
+		} else $currentInterests = array($locale => array('0'=>''));;
+				
 		$this->_data = array(
 			'salutation' => $user->getSalutation(),
 			'firstName' => $user->getFirstName(),
@@ -191,10 +193,10 @@ class ProfileForm extends Form {
 			'biography' => $user->getBiography(null), // Localized
 			'userLocales' => $user->getLocales(),
 			'isAuthor' => Validation::isAuthor(),
-			'isReader' => Validation::isReader(),
+			//'isReader' => Validation::isReader(),
 			'isReviewer' => Validation::isReviewer(),
 			'existingInterests' => $existingInterests,
-			'interestsKeywords' => $currentInterests
+			'reviewingInterest' => $currentInterests
 		);
 	}
 
@@ -218,11 +220,11 @@ class ProfileForm extends Form {
 			'mailingAddress',
 			'country',
 			'biography',
-			'interestsKeywords',
 			'userLocales',
 			'readerRole',
 			'authorRole',
-			'reviewerRole'
+			'reviewerRole',
+			'reviewingInterest'
 		));
 
 		if ($this->getData('userLocales') == null || !is_array($this->getData('userLocales'))) {
@@ -252,23 +254,14 @@ class ProfileForm extends Form {
 		$user->setCountry($this->getData('country'));
 		$user->setBiography($this->getData('biography'), null); // Localized
 
-		// Add reviewing interests to interests table
+		// Add reviewing interests to interests table	
 		$interestDao =& DAORegistry::getDAO('InterestDAO');
-		$interests = Request::getUserVar('interestsKeywords');
-		$interests = array_map('urldecode', $interests); // The interests are coming in encoded -- Decode them for DB storage
-		$interestTextOnly = Request::getUserVar('interests');
-		if(!empty($interestsTextOnly)) {
-			// If JS is disabled, this will be the input to read
-			$interestsTextOnly = explode(",", $interestTextOnly);
-		} else $interestsTextOnly = null;
-		if ($interestsTextOnly && !isset($interests)) {
-			$interests = $interestsTextOnly;
-		} elseif (isset($interests) && !is_array($interests)) {
-			$interests = array($interests);
+		$reviewingInterestArray = Request::getUserVar('reviewingInterest');
+		if (is_array($reviewingInterestArray)){
+        	$reviewingInterest = implode(",", $reviewingInterestArray['en_US']);
+     		$user->setInterests($reviewingInterest);
 		}
-		$interestDao->insertInterests($interests, $user->getId(), true);
-
-
+		
 		$site =& Request::getSite();
 		$availableLocales = $site->getSupportedLocales();
 
@@ -296,21 +289,21 @@ class ProfileForm extends Form {
 				$role->setRoleId(ROLE_ID_REVIEWER);
 				$hasRole = Validation::isReviewer();
 				$wantsRole = Request::getUserVar('reviewerRole');
-				if ($hasRole && !$wantsRole) $roleDao->deleteRole($role);
+				//if ($hasRole && !$wantsRole) $roleDao->deleteRole($role);
 				if (!$hasRole && $wantsRole) $roleDao->insertRole($role);
 			}
 			if ($journal->getSetting('allowRegAuthor')) {
 				$role->setRoleId(ROLE_ID_AUTHOR);
 				$hasRole = Validation::isAuthor();
 				$wantsRole = Request::getUserVar('authorRole');
-				if ($hasRole && !$wantsRole) $roleDao->deleteRole($role);
+				//if ($hasRole && !$wantsRole) $roleDao->deleteRole($role);
 				if (!$hasRole && $wantsRole) $roleDao->insertRole($role);
 			}
 			if ($journal->getSetting('allowRegReader')) {
 				$role->setRoleId(ROLE_ID_READER);
 				$hasRole = Validation::isReader();
 				$wantsRole = Request::getUserVar('readerRole');
-				if ($hasRole && !$wantsRole) $roleDao->deleteRole($role);
+				//if ($hasRole && !$wantsRole) $roleDao->deleteRole($role);
 				if (!$hasRole && $wantsRole) $roleDao->insertRole($role);
 			}
 		}

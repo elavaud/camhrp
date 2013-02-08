@@ -49,11 +49,13 @@ class UserManagementForm extends Form {
 		}
 		$this->addCheck(new FormValidator($this, 'firstName', 'required', 'user.profile.form.firstNameRequired'));
 		$this->addCheck(new FormValidator($this, 'lastName', 'required', 'user.profile.form.lastNameRequired'));
+		$this->addCheck(new FormValidatorLocale($this, 'affiliation', 'required', 'user.profile.form.affiliationRequired'));
+		$this->addCheck(new FormValidator($this, 'phone', 'required', 'user.profile.form.phoneRequired'));
+		$this->addCheck(new FormValidator($this, 'mailingAddress', 'required', 'user.profile.form.mailingAddressRequired'));
+		$this->addCheck(new FormValidator($this, 'country', 'required', 'user.profile.form.countryRequired'));
 		$this->addCheck(new FormValidatorUrl($this, 'userUrl', 'optional', 'user.profile.form.urlInvalid'));
 		$this->addCheck(new FormValidatorEmail($this, 'email', 'required', 'user.profile.form.emailRequired'));
 		$this->addCheck(new FormValidatorCustom($this, 'email', 'required', 'user.register.form.emailExists', array(DAORegistry::getDAO('UserDAO'), 'userExistsByEmail'), array($this->userId, true), true));
-		$this->addCheck(new FormValidatorLocale($this, 'healthAffiliation', 'required', 'user.profile.form.healthAffiliationRequired'));
-		$this->addCheck(new FormValidatorLocale($this, 'wproAffiliation', 'required', 'user.profile.form.wproAffiliationRequired'));
 		
 		$this->addCheck(new FormValidatorPost($this));
 	}
@@ -65,7 +67,8 @@ class UserManagementForm extends Form {
 		$userDao =& DAORegistry::getDAO('UserDAO');
 		$templateMgr =& TemplateManager::getManager();
 		$site =& Request::getSite();
-
+		
+        $templateMgr->assign('reviewingInterests', $userDao->getReviewingInterests());
 		$templateMgr->assign('genderOptions', $userDao->getGenderOptions());
 		$templateMgr->assign('minPasswordLength', $site->getMinPasswordLength());
 		$templateMgr->assign('source', Request::getUserVar('source'));
@@ -86,7 +89,7 @@ class UserManagementForm extends Form {
 				'' => 'manager.people.doNotEnroll',
 				'manager' => 'user.role.manager',
 				'editor' => 'user.role.editor',
-				//'sectionEditor' => 'user.role.sectionEditor',
+				'sectionEditor' => 'user.role.sectionEditor',
 				);
 		
 		foreach($rolePrefs as $roleKey=>$use) {
@@ -145,19 +148,16 @@ class UserManagementForm extends Form {
 	 */
 	function initData(&$args, &$request) {
 		$interestDao =& DAORegistry::getDAO('InterestDAO');
+		$locale = 'en_US';
 		if (isset($this->userId)) {
 			$userDao =& DAORegistry::getDAO('UserDAO');
 			$user =& $userDao->getUser($this->userId);
 
-			// Get all available interests to populate the autocomplete with
-			if ($interestDao->getAllUniqueInterests()) {
-				$existingInterests = $interestDao->getAllUniqueInterests();
-			} else $existingInterests = null;
 			// Get the user's current set of interests
 			if ($interestDao->getInterests($user->getId())) {
-				$currentInterests = $interestDao->getInterests($user->getId());
-			} else $currentInterests = null;
-
+				$currentInterests = array ($locale => $interestDao->getInterests($user->getId()));
+			} $currentInterests = array($locale => array('0'=>''));
+					
 			if ($user != null) {
 				$this->_data = array(
 					'authId' => $user->getAuthId(),
@@ -178,7 +178,7 @@ class UserManagementForm extends Form {
 					'country' => $user->getCountry(),
 					'biography' => $user->getBiography(null), // Localized
 					'existingInterests' => $existingInterests,
-					'interestsKeywords' => $currentInterests,
+					'reviewingInterest' => $currentInterests,
 					'gossip' => $user->getGossip(null), // Localized
 					/*
 					 * Init data for additional user settings
@@ -198,9 +198,11 @@ class UserManagementForm extends Form {
 			$roleDao =& DAORegistry::getDAO('RoleDAO');
 			$roleId = Request::getUserVar('roleId');
 			$roleSymbolic = $roleDao->getRolePath($roleId);
-
+			$currentInterests = array($locale => array('0'=>''));
+			
 			$this->_data = array(
-				'enrollAs' => array($roleSymbolic)
+				'enrollAs' => array($roleSymbolic),
+				'reviewingInterest' => $currentInterests
 			);
 		}
 	}
@@ -229,19 +231,14 @@ class UserManagementForm extends Form {
 			'mailingAddress',
 			'country',
 			'biography',
-			'interestsKeywords',
 			'gossip',
 			'userLocales',
 			'generatePassword',
 			'sendNotify',
 			'mustChangePassword',
-			/*
-			 * Read input data of additional user settings
-			 * Added by aglet
-			 * Last Update: 6/20/2011
-			 */
 			'healthAffiliation',
-			'wproAffiliation'
+			'wproAffiliation',
+			'reviewingInterest'
 		));
 		if ($this->userId == null) {
 			$this->readUserVars(array('username'));
@@ -283,7 +280,7 @@ class UserManagementForm extends Form {
 		$user->setLastName($this->getData('lastName'));
 		$user->setInitials($this->getData('initials'));
 		$user->setGender($this->getData('gender'));
-		$user->setAffiliation($this->getData('affiliation'), null); // Localized
+		$user->setAffiliation($this->getData('affiliation'), null); // Localized	
 		$user->setSignature($this->getData('signature'), null); // Localized
 		$user->setEmail($this->getData('email'));
 		$user->setUrl($this->getData('userUrl'));
@@ -376,28 +373,26 @@ class UserManagementForm extends Form {
 				// Send welcome email to user
 				import('classes.mail.MailTemplate');
 				$mail = new MailTemplate('USER_REGISTER');
-				$mail->setFrom($journal->getSetting('contactEmail'), $journal->getSetting('contactName'));
-				$mail->assignParams(array('username' => $this->getData('username'), 'password' => $password, 'userFullName' => $user->getFullName()));
+				$mail->setFrom($journal->getSetting('supportEmail'), $journal->getSetting('supportName'));
+			
+				$mail->assignParams(array(
+					'username' => $this->getData('username'),
+					'password' => String::substr($this->getData('password'), 0, 30),
+					'supportName' => $journal->getSetting('supportName'),
+					'userFullName' => $user->getFullName()
+				));
 				$mail->addRecipient($user->getEmail(), $user->getFullName());
 				$mail->send();
 			}
 		}
 
-		// Add reviewing interests to interests table
+		// Add reviewing interests to interests table	
 		$interestDao =& DAORegistry::getDAO('InterestDAO');
-		$interests = Request::getUserVar('interestsKeywords');
-		$interests = array_map('urldecode', $interests); // The interests are coming in encoded -- Decode them for DB storage
-		$interestTextOnly = Request::getUserVar('interests');
-		if(!empty($interestsTextOnly)) {
-			// If JS is disabled, this will be the input to read
-			$interestsTextOnly = explode(",", $interestTextOnly);
-		} else $interestsTextOnly = null;
-		if ($interestsTextOnly && !isset($interests)) {
-			$interests = $interestsTextOnly;
-		} elseif (isset($interests) && !is_array($interests)) {
-			$interests = array($interests);
+		$reviewingInterestArray = Request::getUserVar('reviewingInterest');
+		if (is_array($reviewingInterestArray)){
+        	$reviewingInterest = implode(",", $reviewingInterestArray[$this->getFormLocale()]);
+     		$user->setInterests($reviewingInterest);
 		}
-		$interestDao->insertInterests($interests, $userId, true);
 	}
 }
 

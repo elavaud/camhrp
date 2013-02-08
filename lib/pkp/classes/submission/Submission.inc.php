@@ -38,7 +38,7 @@ class Submission extends DataObject {
 	
 	/** @var DAO for proposal countries */
 	/* Added by igm 9/28/11 */
-	var $countryDAO;
+	var $provincesOfCambodiaDAO;
 	
 	/** @var DAO for technical units */
 	/* Added by igm 9/28/11 */
@@ -47,6 +47,9 @@ class Submission extends DataObject {
 	/** @var DAO for article */
 	/* Added by igm 9/28/11 */
 	var $articleDAO;
+	
+	var $countryDAO;
+	
 	/**
 	 * Constructor.
 	 */
@@ -54,9 +57,10 @@ class Submission extends DataObject {
 		parent::DataObject();
 		$this->authors = array();
 		$this->removedAuthors = array();
-                $this->countryDAO =& DAORegistry::getDAO('AsiaPacificCountryDAO');
+                $this->provincesOfCambodiaDAO =& DAORegistry::getDAO('ProvincesOfCambodiaDAO');
                 $this->technicalUnitDAO =& DAORegistry::getDAO('TechnicalUnitDAO');
                 $this->articleDAO =& DAORegistry::getDAO('ArticleDAO');
+                $this->countryDAO =& DAORegistry::getDAO('CountryDAO');
         
 	}
 
@@ -262,11 +266,36 @@ class Submission extends DataObject {
 	}
 
 	/**
+	 * Get localized author's phone number
+	 * @return string
+	 */
+	function getLocalizedAuthorPhoneNumber(){
+		return $this->getLocalizedData('authorPhoneNumber');
+	}
+
+	
+	/**
+	 * Get author's phone number
+	 * @return string
+	 */
+	function getAuthorPhoneNumber($locale){
+		return $this->getData('authorPhoneNumber', $locale);
+	}
+	
+	/**
+	 * Set author's phone number
+	 * @return string
+	 */
+	function setAuthorPhoneNumber($phoneNumber, $locale){
+		return $this->setData('authorPhoneNumber', $phoneNumber);
+	}	
+	
+	/**
 	 * Get "localized" submission title (if applicable).
 	 * @return string
 	 */
 	function getLocalizedTitle() {
-		return $this->getLocalizedData('title');
+		return $this->getLocalizedData('scientificTitle');
 	}
 
 	/**
@@ -274,8 +303,8 @@ class Submission extends DataObject {
 	 * @param $locale
 	 * @return string
 	 */
-	function getTitle($locale) {
-		return $this->getData('title', $locale);
+	function getScientificTitle($locale) {
+		return $this->getData('scientificTitle', $locale);
 	}
 
 	/**
@@ -283,20 +312,57 @@ class Submission extends DataObject {
 	 * @param $title string
 	 * @param $locale
 	 */
-	function setTitle($title, $locale) {
-		$this->setCleanTitle($title, $locale);
-		return $this->setData('title', $title, $locale);
+	function setScientificTitle($title, $locale) {
+		$this->setCleanScientificTitle($title, $locale);
+		return $this->setData('scientificTitle', $title, $locale);
 	}
 
 	/**
-	 * Set 'clean' title (with punctuation removed).
+	 * Set 'clean' scientific title (with punctuation removed).
 	 * @param $cleanTitle string
 	 * @param $locale
 	 */
-	function setCleanTitle($cleanTitle, $locale) {
+	function setCleanScientificTitle($cleanTitle, $locale) {
 		$punctuation = array ("\"", "\'", ",", ".", "!", "?", "-", "$", "(", ")");
 		$cleanTitle = str_replace($punctuation, "", $cleanTitle);
-		return $this->setData('cleanTitle', $cleanTitle, $locale);
+		return $this->setData('cleanScientificTitle', $cleanTitle, $locale);
+	}
+	
+	/**
+	 * Get public title.
+	 * @param $locale
+	 * @return string
+	 */
+	function getPublicTitle($locale) {
+		return $this->getData('publicTitle', $locale);
+	}
+	
+	/**
+	 * Get localized public title.
+	 * @return string
+	 */
+	function getLocalizedPublicTitle() {
+		return $this->getLocalizedData('publicTitle');
+	}
+	/**
+	 * Set public title.
+	 * @param $title string
+	 * @param $locale
+	 */
+	function setPublicTitle($title, $locale) {
+		$this->setCleanPublicTitle($title, $locale);
+		return $this->setData('publicTitle', $title, $locale);
+	}
+
+	/**
+	 * Set 'clean' public title (with punctuation removed).
+	 * @param $cleanTitle string
+	 * @param $locale
+	 */
+	function setCleanPublicTitle($cleanTitle, $locale) {
+		$punctuation = array ("\"", "\'", ",", ".", "!", "?", "-", "$", "(", ")");
+		$cleanTitle = str_replace($punctuation, "", $cleanTitle);
+		return $this->setData('cleanPublicTitle', $cleanTitle, $locale);
 	}
 
 	/**
@@ -323,6 +389,135 @@ class Submission extends DataObject {
 	 */
 	function setAbstract($abstract, $locale) {
 		return $this->setData('abstract', $abstract, $locale);
+	}
+
+	/**
+	 * Get "localized" submission background (if applicable).
+	 * @return string
+	 */
+	function getLocalizedBackground() {
+		return $this->getLocalizedData('background');
+	}
+
+	/**
+	 * Get background.
+	 * @param $locale
+	 * @return string
+	 */
+	function getBackground($locale) {
+		return $this->getData('background', $locale);
+	}
+
+	/**
+	 * Set background.
+	 * @param $background string
+	 * @param $locale
+	 */
+	function setBackground($background, $locale) {
+		return $this->setData('background', $background, $locale);
+	}
+
+	/**
+	 * Set background for csv export
+	 * @param $background string
+	 * @param $locale
+	 */
+	function setCSVBackground($background, $locale) {
+		$background = str_replace(CHR(13).CHR(10)," ",$background);
+		return $this->setData('csvbackground', $background, $locale);
+	}
+	
+	/**
+	 *Get csv background
+	 */
+	function getCSVBackground($locale) {
+		return $this->getData('csvbackground', $locale);
+	}	
+		
+	/**
+	 * Get "localized" submission studdy matters (if applicable).
+	 * @return string
+	 */
+	function getLocalizedStudyMatters() {
+		return $this->getLocalizedData('studyMatters');
+	}
+
+	/**
+	 * Get study matters.
+	 * @param $locale
+	 * @return string
+	 */
+	function getStudyMatters($locale) {
+		return $this->getData('studyMatters', $locale);
+	}
+
+	/**
+	 * Set study matters.
+	 * @param $studyMatters string
+	 * @param $locale
+	 */
+	function setStudyMatters($studyMatters, $locale) {
+		return $this->setData('studyMatters', $studyMatters, $locale);
+	}
+
+	/**
+	 * Set studyMatters for csv export
+	 * @param $studyMatters string
+	 * @param $locale
+	 */
+	function setCSVStudyMatters($studyMatters, $locale) {
+		$studyMatters = str_replace(CHR(13).CHR(10)," ",$studyMatters);
+		return $this->setData('csvstudymatters', $studyMatters, $locale);
+	}
+
+	/**
+	 *Get csv study matters
+	 */
+	function getCSVStudyMatters($locale) {
+		return $this->getData('csvstudymatters', $locale);
+	}
+		
+	/**
+	 * Get "localized" submission expected outcomes & use of results (if applicable).
+	 * @return string
+	 */
+	function getLocalizedExpectedOutcomes() {
+		return $this->getLocalizedData('expectedOutcomes');
+	}
+
+	/**
+	 * Get expected outcomes.
+	 * @param $locale
+	 * @return string
+	 */
+	function getExpectedOutcomes($locale) {
+		return $this->getData('expectedOutcomes', $locale);
+	}
+
+	/**
+	 * Set expected outcomes.
+	 * @param $expectedOutcomes string
+	 * @param $locale
+	 */
+	function setExpectedOutcomes($expectedOutcomes, $locale) {
+		return $this->setData('expectedOutcomes', $expectedOutcomes, $locale);
+	}
+
+	/**
+	 * Set expected outcomes for csv export
+	 * @param $expectedOutcomes string
+	 * @param $locale
+	 */
+	function setCSVExpectedOutcomes($expectedOutcomes, $locale) {
+		$expectedOutcomes = str_replace(CHR(13).CHR(10)," ",$expectedOutcomes);
+		return $this->setData('csvexpectedoutcomes', $expectedOutcomes, $locale);
+	}
+
+	/**
+	 *Get csv expected outcomes
+	 */
+	function getCSVExpectedOutcomes($locale) {
+		return $this->getData('csvexpectedoutcomes', $locale);
 	}
 
 	/**
@@ -1100,7 +1295,7 @@ class Submission extends DataObject {
 
 
 
-        /**
+    /**
 	 * Get "localized" funds required (if applicable).
 	 * @return string
 	 */
@@ -1126,6 +1321,209 @@ class Submission extends DataObject {
 		return $this->setData('fundsRequired', $fundsRequired, $locale);
 	}
 
+
+    /**
+	 * Get "localized" selected Currency (if applicable).
+	 * @return string
+	 */
+	function getLocalizedSelectedCurrency() {
+		return $this->getLocalizedData('selectedCurrency');
+	}
+
+	/**
+	 * Get selected currency.
+	 * @param $locale
+	 * @return string
+	 */
+	function getSelectedCurrency($locale) {
+		return $this->getData('selectedCurrency', $locale);
+	}
+
+	/**
+	 * Set selected Currency.
+	 * @param $selectedCurrency string
+	 * @param $locale
+	 */
+	function setSelectedCurrency($selectedCurrency, $locale) {
+		return $this->setData('selectedCurrency', $selectedCurrency, $locale);
+	}
+	
+    /**
+	 * Get "localized" primary sponsor (if applicable).
+	 * @return string
+	 */
+	function getLocalizedPrimarySponsor() {
+		return $this->getLocalizedData('primarySponsor');
+	}
+	
+    /**
+	 * Get "localized" primary sponsor full text.
+	 * @return string
+	 */	
+	function getLocalizedPrimarySponsorText(){
+		return $this->articleDAO->getAgency($this->getLocalizedPrimarySponsor());
+	}
+	
+	/**
+	 * Get primary sponsor.
+	 * @param $locale
+	 * @return string
+	 */
+	function getPrimarySponsor($locale) {
+		return $this->getData('primarySponsor', $locale);
+	}
+
+	/**
+	 * Set selected Currency.
+	 * @param $primarySponsor string
+	 * @param $locale
+	 */
+	function setPrimarySponsor($primarySponsor, $locale) {
+		return $this->setData('primarySponsor', $primarySponsor, $locale);
+	}    
+	
+
+    /**
+	 * Get "localized" other primary sponsor (if applicable).
+	 * @return string
+	 */
+	function getLocalizedOtherPrimarySponsor() {
+		return $this->getLocalizedData('otherPrimarySponsor');
+	}
+
+	/**
+	 * Get other primary sponsor.
+	 * @param $locale
+	 * @return string
+	 */
+	function getOtherPrimarySponsor($locale) {
+		return $this->getData('otherPrimarySponsor', $locale);
+	}
+
+	/**
+	 * Set other primary sponsor.
+	 * @param $otherPrimarySponsor string
+	 * @param $locale
+	 */
+	function setOtherPrimarySponsor($otherPrimarySponsor, $locale) {
+		return $this->setData('otherPrimarySponsor', $otherPrimarySponsor, $locale);
+	}	
+	
+	
+	/**
+	 * Get "localized" secondary sponsors (if applicable).
+	 * @return string
+	 */
+	function getLocalizedSecondarySponsors() {
+		return $this->getLocalizedData('secondarySponsors');
+	}
+	
+    /**
+	 * Get "localized" secondary sponsor full text.
+	 * @return string
+	 */	
+	function getLocalizedSecondarySponsorText(){
+		return $this->articleDAO->getAgency($this->getLocalizedSecondarySponsors());
+	}
+	
+	/**
+	 * Get secondary sponsors.
+	 * @param $locale
+	 * @return string
+	 */
+	function getSecondarySponsors($locale) {
+		return $this->getData('secondarySponsors', $locale);
+	}
+
+	/**
+	 * Set secondary sponsors.
+	 * @param $secondarySponsors string
+	 * @param $locale
+	 */
+	function setSecondarySponsors($secondarySponsors, $locale) {
+		return $this->setData('secondarySponsors', $secondarySponsors, $locale);
+	}
+	
+    /**
+	 * Get "localized" other Secondary sponsor (if applicable).
+	 * @return string
+	 */
+	function getLocalizedOtherSecondarySponsor() {
+		return $this->getLocalizedData('otherSecondarySponsor');
+	}
+
+	/**
+	 * Get other Secondary sponsor.
+	 * @param $locale
+	 * @return string
+	 */
+	function getOtherSecondarySponsor($locale) {
+		return $this->getData('otherSecondarySponsor', $locale);
+	}
+
+	/**
+	 * Set other Secondary sponsor.
+	 * @param $otherPrimarySponsor string
+	 * @param $locale
+	 */
+	function setOtherSecondarySponsor($otherSecondarySponsor, $locale) {
+		return $this->setData('otherSecondarySponsor', $otherSecondarySponsor, $locale);
+	}
+	
+    /**
+	 * Get "localized" multiCountry 
+	 * @return string
+	 */
+	function getLocalizedMultiCountryResearch() {
+		return $this->getLocalizedData('multiCountryResearch');
+	}
+
+	/**
+	 * Get multiCountry.
+	 * @param $locale
+	 * @return string
+	 */
+	function getMultiCountryResearch($locale) {
+		return $this->getData('multiCountryResearch', $locale);
+	}
+
+	/**
+	 * Set multiCountry (yes/no).
+	 * @param $multiCountryResearch string
+	 * @param $locale
+	 */
+	function setMultiCountryResearch($multiCountryResearch, $locale) {
+		return $this->setData('multiCountryResearch', $multiCountryResearch, $locale);
+	}
+	
+	
+	
+    /**
+	 * Get "localized" nationwide 
+	 * @return string
+	 */
+	function getLocalizedNationwide() {
+		return $this->getLocalizedData('nationwide');
+	}
+
+	/**
+	 * Get nationwide.
+	 * @param $locale
+	 * @return string
+	 */
+	function getNationwide($locale) {
+		return $this->getData('nationwide', $locale);
+	}
+
+	/**
+	 * Set nationwide (yes/no).
+	 * @param $nationwide string
+	 * @param $locale
+	 */
+	function setNationwide($nationwide, $locale) {
+		return $this->setData('nationwide', $nationwide, $locale);
+	}
+	
     /**
 	 * Get "localized" proposal country (if applicable).
 	 * @return string
@@ -1140,7 +1538,7 @@ class Submission extends DataObject {
 	 * @return string
 	 */
 	function getLocalizedProposalCountryText() {
-		return $this->countryDAO->getAsiaPacificCountry($this->getLocalizedProposalCountry());
+		return $this->provincesOfCambodiaDAO->getProvinceOfCambodia($this->getLocalizedProposalCountry());
 	}
 
 	/**
@@ -1160,7 +1558,41 @@ class Submission extends DataObject {
 	function setProposalCountry($proposalCountry, $locale) {
 		return $this->setData('proposalCountry', $proposalCountry, $locale);
 	}
+	
+	
+	/**
+	 * Get "localized" multi country (if applicable).
+	 * @return string
+	 */
+	function getLocalizedMultiCountry() {
+		return $this->getLocalizedData('multiCountry');
+	}
 
+	/**
+	 * Get "localized" multi country full text.
+	 * @return string
+	 */
+	function getLocalizedMultiCountryText() {
+		return $this->countryDAO->getCountry($this->getLocalizedMultiCountry());
+	}
+	
+	/**
+	 * Get multi country.
+	 * @param $locale
+	 * @return string
+	 */
+	function getMultiCountry($locale) {
+		return $this->getData('multiCountry', $locale);
+	}
+
+	/**
+	 * Set multi country.
+	 * @param $proposalCountry string
+	 * @param $locale
+	 */
+	function setMultiCountry($multiCountry, $locale) {
+		return $this->setData('multiCountry', $multiCountry, $locale);
+	}
 
 
     /**
@@ -1226,11 +1658,137 @@ class Submission extends DataObject {
 		return $this->setData('withHumanSubjects', $withHumanSubjects, $locale);
 	}
 
+	/**
+	 * Get "localized" studentInitiatedResearch 
+	 * @return string
+	 */
+	function getLocalizedStudentInitiatedResearch() {
+		return $this->getLocalizedData('studentInitiatedResearch');
+	}
 
+	/**
+	 * Get studentInitiatedResearch.
+	 * @param $locale
+	 * @return string
+	 */
+	function getStudentInitiatedResearch($locale) {
+		return $this->getData('studentInitiatedResearch', $locale);
+	}
 
+	/**
+	 * Set studentInitiatedResearch (yes/no).
+	 * @param $studentInitiatedResearch string
+	 * @param $locale
+	 */
+	function setStudentInitiatedResearch($studentInitiatedResearch, $locale) {
+		return $this->setData('studentInitiatedResearch', $studentInitiatedResearch, $locale);
+	}
 
+	/**
+	 * Get "localized" studentInstitution 
+	 * @return string
+	 */
+	function getLocalizedStudentInstitution() {
+		return $this->getLocalizedData('studentInstitution');
+	}
 
-        /**
+	/**
+	 * Get studentInitiatedResearch.
+	 * @param $locale
+	 * @return string
+	 */
+	function getStudentInstitution($locale) {
+		return $this->getData('studentInstitution', $locale);
+	}
+
+	/**
+	 * Set studentInstitution
+	 * @param $studentInitiatedResearch string
+	 * @param $locale
+	 */
+	function setStudentInstitution($studentInstitution, $locale) {
+		return $this->setData('studentInstitution', $studentInstitution, $locale);
+	}
+
+	/**
+	 * Get "localized" otherResearchField 
+	 * @return string
+	 */
+	function getLocalizedOtherResearchField() {
+		return $this->getLocalizedData('otherResearchField');
+	}
+
+	/**
+	 * Get otherResearchField.
+	 * @param $locale
+	 * @return string
+	 */
+	function getOtherResearchField($locale) {
+		return $this->getData('otherResearchField', $locale);
+	}
+
+	/**
+	 * Set otherResearchField
+	 * @param $otherResearchField string
+	 * @param $locale
+	 */
+	function setOtherResearchField($otherResearchField, $locale) {
+		return $this->setData('otherResearchField', $otherResearchField, $locale);
+	}
+
+	/**
+	 * Get "localized" otherProposalType 
+	 * @return string
+	 */
+	function getLocalizedOtherProposalType() {
+		return $this->getLocalizedData('otherProposalType');
+	}
+
+	/**
+	 * Get otherProposalType.
+	 * @param $locale
+	 * @return string
+	 */
+	function getOtherProposalType($locale) {
+		return $this->getData('otherProposalType', $locale);
+	}
+
+	/**
+	 * Set otherProposalType
+	 * @param $otherProposalType string
+	 * @param $locale
+	 */
+	function setOtherProposalType($otherProposalType, $locale) {
+		return $this->setData('otherProposalType', $otherProposalType, $locale);
+	}
+	
+	/**
+	 * Get "localized" academicDegree 
+	 * @return string
+	 */
+	function getLocalizedAcademicDegree() {
+		return $this->getLocalizedData('academicDegree');
+	}
+
+	/**
+	 * Get academicDegree.
+	 * @param $locale
+	 * @return string
+	 */
+	function getAcademicDegree($locale) {
+		return $this->getData('academicDegree', $locale);
+	}
+
+	/**
+	 * Set academicDegree.
+	 * @param $academicDegree string
+	 * @param $locale
+	 */
+	function setAcademicDegree($academicDegree, $locale) {
+		return $this->setData('academicDegree', $academicDegree, $locale);
+	}
+
+    /**
 	 * Get "localized" proposal type (if applicable).
 	 * @return string
 	 */
@@ -1264,10 +1822,69 @@ class Submission extends DataObject {
 	function setProposalType($proposalType, $locale) {
 		return $this->setData('proposalType', $proposalType, $locale);
 	}
+	
+	 /**
+	 * Get "localized" research field (if applicable).
+	 * @return string
+	 */
+	function getLocalizedResearchField() {
+		return $this->getLocalizedData('researchField');
+	}
+	
+	/**
+	 * Get "localized" research field's full text.
+	 * @return string
+	 */
+	function getLocalizedResearchFieldText() {
+		return $this->articleDAO->getResearchField($this->getLocalizedResearchField());
+	}
+
+	/**
+	 * Get research field.
+	 * @param $locale
+	 * @return string
+	 */
+	function getResearchField($locale) {
+		return $this->getData('researchField', $locale);
+	}
+
+	/**
+	 * Set research field .
+	 * @param $proposalType string
+	 * @param $locale
+	 */
+	function setResearchField($researchField, $locale) {
+		return $this->setData('researchField', $researchField, $locale);
+	}
 
 
+	/**
+	 * Get "localized" data collection 
+	 * @return string
+	 */
+	function getLocalizedDataCollection() {
+		return $this->getLocalizedData('dataCollection');
+	}
 
-        /**
+	/**
+	 * Get data Collection.
+	 * @param $locale
+	 * @return string
+	 */
+	function getDataCollection($locale) {
+		return $this->getData('dataCollection', $locale);
+	}
+
+	/**
+	 * Set data collection.
+	 * @param $dataCollection string
+	 * @param $locale
+	 */
+	function setDataCollection($dataCollection, $locale) {
+		return $this->setData('dataCollection', $dataCollection, $locale);
+	}
+
+    /**
 	 * Get "localized" submittedAsPi (if applicable).
 	 * @return string
 	 */
@@ -1323,7 +1940,7 @@ class Submission extends DataObject {
 
 
 
-        /**
+    /**
 	 * Get "localized" reviewedByOtherErc (if applicable).
 	 * @return string
 	 */
@@ -1522,7 +2139,7 @@ class Submission extends DataObject {
 	function getWithdrawReason($locale) {
 		return $this->getData('withdrawReason', $locale);
 	}
-
+	
 	/**
 	 * Set withdraw reason.
 	 * @param $whoId string
@@ -1597,7 +2214,1130 @@ class Submission extends DataObject {
 	function getAuthorEmail() {
 		return $this->getData("authorEmail");
 	}
+	
+	
+ 	/**
+	 * Get "localized" industryGrant (if applicable).
+	 * @return string
+	 */
+	function getLocalizedIndustryGrant() {
+		return $this->getLocalizedData('industryGrant');
+	}
 
+	/**
+	 * Get industryGrant.
+	 * @param $locale
+	 * @return string
+	 */
+	function getIndustryGrant($locale) {
+		return $this->getData('industryGrant', $locale);
+	}
+
+	/**
+	 * Set industryGrant (yes/no).
+	 * @param $industryGrant string
+	 * @param $locale
+	 */
+	function setIndustryGrant($industryGrant, $locale) {
+		return $this->setData('industryGrant', $industryGrant, $locale);
+	}
+	
+ 	/**
+	 * Get "localized" nameOfIndustry (if applicable).
+	 * @return string
+	 */
+	function getLocalizedNameOfIndustry() {
+		return $this->getLocalizedData('nameOfIndustry');
+	}
+
+	/**
+	 * Get nameOfIndustry.
+	 * @param $locale
+	 * @return string
+	 */
+	function getNameOfIndustry($locale) {
+		return $this->getData('nameOfIndustry', $locale);
+	}
+
+	/**
+	 * Set nameOfIndustry.
+	 * @param $nameOfIndustry string
+	 * @param $locale
+	 */
+	function setNameOfIndustry($nameOfIndustry, $locale) {
+		return $this->setData('nameOfIndustry', $nameOfIndustry, $locale);
+	}
+	
+	/**
+	 * Get "localized" internationalGrant (if applicable).
+	 * @return string
+	 */
+	function getLocalizedInternationalGrant() {
+		return $this->getLocalizedData('internationalGrant');
+	}
+	
+    /**
+	 * Get "localized" internationalGrant full text.
+	 * @return string
+	 */	
+	function getLocalizedInternationalGrantNameText(){
+		return $this->articleDAO->getAgency($this->getLocalizedInternationalGrantName());
+	}
+
+	/**
+	 * Get internationalGrant.
+	 * @param $locale
+	 * @return string
+	 */
+	function getInternationalGrant($locale) {
+		return $this->getData('internationalGrant', $locale);
+	}
+
+	/**
+	 * Set reviewedByOtherErc (yes/no).
+	 * @param $reviewedByOtherErc string
+	 * @param $locale
+	 */
+	function setInternationalGrant($internationalGrant, $locale) {
+		return $this->setData('internationalGrant', $internationalGrant, $locale);
+	}
+	
+ 	/**
+	 * Get "localized" internationalGrantName (if applicable).
+	 * @return string
+	 */
+	function getLocalizedInternationalGrantName() {
+		return $this->getLocalizedData('internationalGrantName');
+	}
+
+	/**
+	 * Get internationalGrantName.
+	 * @param $locale
+	 * @return string
+	 */
+	function getInternationalGrantName($locale) {
+		return $this->getData('internationalGrantName', $locale);
+	}
+
+	/**
+	 * Set internationalGrantName.
+	 * @param $internationalGrantName string
+	 * @param $locale
+	 */
+	function setInternationalGrantName($internationalGrantName, $locale) {
+		return $this->setData('internationalGrantName', $internationalGrantName, $locale);
+	}
+
+	/**
+	 * Get "localized" otherInternationalGrantName (if applicable).
+	 * @return string
+	 */
+	function getLocalizedOtherInternationalGrantName() {
+		return $this->getLocalizedData('otherInternationalGrantName');
+	}
+
+	/**
+	 * Get otherInternationalGrantName.
+	 * @param $locale
+	 * @return string
+	 */
+	function getOtherInternationalGrantName($locale) {
+		return $this->getData('otherInternationalGrantName', $locale);
+	}
+
+	/**
+	 * Set otherInternationalGrantName (yes/no).
+	 * @param $otherInternationalGrantName string
+	 * @param $locale
+	 */
+	function setOtherInternationalGrantName($otherInternationalGrantName, $locale) {
+		return $this->setData('otherInternationalGrantName', $otherInternationalGrantName, $locale);
+	}	
+ 	/**
+	 * Get "localized" mohGrant (if applicable).
+	 * @return string
+	 */
+	function getLocalizedMohGrant() {
+		return $this->getLocalizedData('mohGrant');
+	}
+
+	/**
+	 * Get reviewedByOtherErc.
+	 * @param $locale
+	 * @return string
+	 */
+	function getMohGrant($locale) {
+		return $this->getData('mohGrant', $locale);
+	}
+
+	/**
+	 * Set mohGrant (yes/no).
+	 * @param $mohGrant string
+	 * @param $locale
+	 */
+	function setMohGrant($mohGrant, $locale) {
+		return $this->setData('mohGrant', $mohGrant, $locale);
+	}
+	
+ 	/**
+	 * Get "localized" governmentGrant (if applicable).
+	 * @return string
+	 */
+	function getLocalizedGovernmentGrant() {
+		return $this->getLocalizedData('governmentGrant');
+	}
+
+	/**
+	 * Get governmentGrant.
+	 * @param $locale
+	 * @return string
+	 */
+	function getGovernmentGrant($locale) {
+		return $this->getData('governmentGrant', $locale);
+	}
+
+	/**
+	 * Set governmentGrant (yes/no).
+	 * @param $governmentGrant string
+	 * @param $locale
+	 */
+	function setGovernmentGrant($governmentGrant, $locale) {
+		return $this->setData('governmentGrant', $governmentGrant, $locale);
+	}
+
+ 	/**
+	 * Get "localized" governmentGrantName (if applicable).
+	 * @return string
+	 */
+	function getLocalizedGovernmentGrantName() {
+		return $this->getLocalizedData('governmentGrantName');
+	}
+
+	/**
+	 * Get governmentGrantName.
+	 * @param $locale
+	 * @return string
+	 */
+	function getGovernmentGrantName($locale) {
+		return $this->getData('governmentGrantName', $locale);
+	}
+
+	/**
+	 * Set governmentGrantName (yes/no).
+	 * @param $governmentGrantName string
+	 * @param $locale
+	 */
+	function setGovernmentGrantName($governmentGrantName, $locale) {
+		return $this->setData('governmentGrantName', $governmentGrantName, $locale);
+	}
+		
+ 	/**
+	 * Get "localized" universityGrant (if applicable).
+	 * @return string
+	 */
+	function getLocalizedUniversityGrant() {
+		return $this->getLocalizedData('universityGrant');
+	}
+
+	/**
+	 * Get reviewedByOtherErc.
+	 * @param $locale
+	 * @return string
+	 */
+	function getUniversityGrant($locale) {
+		return $this->getData('universityGrant', $locale);
+	}
+
+	/**
+	 * Set universityGrant (yes/no).
+	 * @param $universityGrant string
+	 * @param $locale
+	 */
+	function setUniversityGrant($universityGrant, $locale) {
+		return $this->setData('universityGrant', $universityGrant, $locale);
+	}
+	
+ 	/**
+	 * Get "localized" selfFunding (if applicable).
+	 * @return string
+	 */
+	function getLocalizedSelfFunding() {
+		return $this->getLocalizedData('selfFunding');
+	}
+
+	/**
+	 * Get selfFunding.
+	 * @param $locale
+	 * @return string
+	 */
+	function getSelfFunding($locale) {
+		return $this->getData('selfFunding', $locale);
+	}
+
+	/**
+	 * Set selfFunding (yes/no).
+	 * @param $selfFunding string
+	 * @param $locale
+	 */
+	function setSelfFunding($selfFunding, $locale) {
+		return $this->setData('selfFunding', $selfFunding, $locale);
+	}
+	
+ 	/**
+	 * Get "localized" otherGrant (if applicable).
+	 * @return string
+	 */
+	function getLocalizedOtherGrant() {
+		return $this->getLocalizedData('otherGrant');
+	}
+
+	/**
+	 * Get otherGrant.
+	 * @param $locale
+	 * @return string
+	 */
+	function getOtherGrant($locale) {
+		return $this->getData('otherGrant', $locale);
+	}
+
+	/**
+	 * Set otherGrant (yes or no).
+	 * @param $otherGrant string
+	 * @param $locale
+	 */
+	function setOtherGrant($otherGrant, $locale) {
+		return $this->setData('otherGrant', $otherGrant, $locale);
+	}
+	
+ 	/**
+	 * Get "localized" specifyOtherGrant (if applicable).
+	 * @return string
+	 */
+	function getLocalizedSpecifyOtherGrant() {
+		return $this->getLocalizedData('specifyOtherGrant');
+	}
+
+	/**
+	 * Get specifyOtherGrant.
+	 * @param $locale
+	 * @return string
+	 */
+	function getSpecifyOtherGrant($locale) {
+		return $this->getData('specifyOtherGrant', $locale);
+	}
+
+	/**
+	 * Set specifyOtherGrant (yes/no).
+	 * @param $specifyOtherGrantField string
+	 * @param $locale
+	 */
+	function setSpecifyOtherGrant($specifyOtherGrant, $locale) {
+		return $this->setData('specifyOtherGrant', $specifyOtherGrant, $locale);
+	}
+
+	function getInvestigatorAffiliation(){
+		return $this->getData('investigatorAffiliation');
+	}
+	function setInvestigatorAffiliation($investigatorAffiliation){
+		return $this->setData('investigatorAffiliation', $investigatorAffiliation);
+	}
+
+	/*
+	 * check if the submission is due
+	 */
+    function isSubmissionDue() {
+    	if ($this->getApprovalDate($this->getLocale()) == null) $startdate = strtotime($this->getDateStatusModified());   
+    	else $startdate = strtotime($this->getApprovalDate($this->getLocale()));
+        $afteroneyear = $newdate = strtotime ('+1 year', $startdate);
+        $today = time();
+        return ($today >= $afteroneyear);
+    }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////// New Fields for Cambodia ////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ 	/**
+	 * Get "localized" identityRevealed (if applicable).
+	 * @return string
+	 */
+	function getLocalizedIdentityRevealed() {
+		return $this->getLocalizedData('identityRevealed');
+	}
+
+	/**
+	 * Get identityRevealed.
+	 * @param $locale
+	 * @return string
+	 */
+	function getIdentityRevealed($locale) {
+		return $this->getData('identityRevealed', $locale);
+	}
+
+	/**
+	 * Set identityRevealed (yes/no).
+	 * @param $identityRevealed string
+	 * @param $locale
+	 */
+	function setIdentityRevealed($identityRevealed, $locale) {
+		return $this->setData('identityRevealed', $identityRevealed, $locale);
+	}
+
+ 	/**
+	 * Get "localized" unableToConsent (if applicable).
+	 * @return string
+	 */
+	function getLocalizedUnableToConsent() {
+		return $this->getLocalizedData('unableToConsent');
+	}
+
+	/**
+	 * Get unableToConsent.
+	 * @param $locale
+	 * @return string
+	 */
+	function getUnableToConsent($locale) {
+		return $this->getData('unableToConsent', $locale);
+	}
+
+	/**
+	 * Set unableToConsent (yes/no).
+	 * @param $unableToConsent string
+	 * @param $locale
+	 */
+	function setUnableToConsent($unableToConsent, $locale) {
+		return $this->setData('unableToConsent', $unableToConsent, $locale);
+	}
+
+ 	/**
+	 * Get "localized" under18 (if applicable).
+	 * @return string
+	 */
+	function getLocalizedUnder18() {
+		return $this->getLocalizedData('under18');
+	}
+
+	/**
+	 * Get under18.
+	 * @param $locale
+	 * @return string
+	 */
+	function getUnder18($locale) {
+		return $this->getData('under18', $locale);
+	}
+
+	/**
+	 * Set under18 (yes/no).
+	 * @param $under18 string
+	 * @param $locale
+	 */
+	function setUnder18($under18, $locale) {
+		return $this->setData('under18', $under18, $locale);
+	}
+
+ 	/**
+	 * Get "localized" dependentRelationship (if applicable).
+	 * @return string
+	 */
+	function getLocalizedDependentRelationship() {
+		return $this->getLocalizedData('dependentRelationship');
+	}
+
+	/**
+	 * Get dependentRelationship.
+	 * @param $locale
+	 * @return string
+	 */
+	function getDependentRelationship($locale) {
+		return $this->getData('dependentRelationship', $locale);
+	}
+
+	/**
+	 * Set dependentRelationship (yes/no).
+	 * @param $dependentRelationship string
+	 * @param $locale
+	 */
+	function setDependentRelationship($dependentRelationship, $locale) {
+		return $this->setData('dependentRelationship', $dependentRelationship, $locale);
+	}
+
+ 	/**
+	 * Get "localized" ethnicMinority (if applicable).
+	 * @return string
+	 */
+	function getLocalizedEthnicMinority() {
+		return $this->getLocalizedData('ethnicMinority');
+	}
+
+	/**
+	 * Get ethnicMinority.
+	 * @param $locale
+	 * @return string
+	 */
+	function getEthnicMinority($locale) {
+		return $this->getData('ethnicMinority', $locale);
+	}
+
+	/**
+	 * Set ethnicMinority (yes/no).
+	 * @param $ethnicMinority string
+	 * @param $locale
+	 */
+	function setEthnicMinority($ethnicMinority, $locale) {
+		return $this->setData('ethnicMinority', $ethnicMinority, $locale);
+	}
+
+ 	/**
+	 * Get "localized" impairment (if applicable).
+	 * @return string
+	 */
+	function getLocalizedImpairment() {
+		return $this->getLocalizedData('impairment');
+	}
+
+	/**
+	 * Get impairment.
+	 * @param $locale
+	 * @return string
+	 */
+	function getImpairment($locale) {
+		return $this->getData('impairment', $locale);
+	}
+
+	/**
+	 * Set impairment (yes/no).
+	 * @param $impairment string
+	 * @param $locale
+	 */
+	function setImpairment($impairment, $locale) {
+		return $this->setData('impairment', $impairment, $locale);
+	}
+
+
+ 	/**
+	 * Get "localized" pregnant (if applicable).
+	 * @return string
+	 */
+	function getLocalizedPregnant() {
+		return $this->getLocalizedData('pregnant');
+	}
+
+	/**
+	 * Get pregnant.
+	 * @param $locale
+	 * @return string
+	 */
+	function getPregnant($locale) {
+		return $this->getData('pregnant', $locale);
+	}
+
+	/**
+	 * Set pregnant (yes/no).
+	 * @param $pregnant string
+	 * @param $locale
+	 */
+	function setPregnant($pregnant, $locale) {
+		return $this->setData('pregnant', $pregnant, $locale);
+	}
+
+ 	/**
+	 * Get "localized" newTreatment (if applicable).
+	 * @return string
+	 */
+	function getLocalizedNewTreatment() {
+		return $this->getLocalizedData('newTreatment');
+	}
+
+	/**
+	 * Get newTreatment.
+	 * @param $locale
+	 * @return string
+	 */
+	function getNewTreatment($locale) {
+		return $this->getData('newTreatment', $locale);
+	}
+
+	/**
+	 * Set newTreatment (yes/no).
+	 * @param $newTreatment string
+	 * @param $locale
+	 */
+	function setNewTreatment($newTreatment, $locale) {
+		return $this->setData('newTreatment', $newTreatment, $locale);
+	}
+
+ 	/**
+	 * Get "bioSamples" identityRevealed (if applicable).
+	 * @return string
+	 */
+	function getLocalizedBioSamples() {
+		return $this->getLocalizedData('bioSamples');
+	}
+
+	/**
+	 * Get bioSamples.
+	 * @param $locale
+	 * @return string
+	 */
+	function getBioSamples($locale) {
+		return $this->getData('bioSamples', $locale);
+	}
+
+	/**
+	 * Set bioSamples (yes/no).
+	 * @param $bioSamples string
+	 * @param $locale
+	 */
+	function setBioSamples($bioSamples, $locale) {
+		return $this->setData('bioSamples', $bioSamples, $locale);
+	}
+
+ 	/**
+	 * Get "localized" radiation (if applicable).
+	 * @return string
+	 */
+	function getLocalizedRadiation() {
+		return $this->getLocalizedData('radiation');
+	}
+
+	/**
+	 * Get radiation.
+	 * @param $locale
+	 * @return string
+	 */
+	function getRadiation($locale) {
+		return $this->getData('radiation', $locale);
+	}
+
+	/**
+	 * Set radiation (yes/no).
+	 * @param $radiation string
+	 * @param $locale
+	 */
+	function setRadiation($radiation, $locale) {
+		return $this->setData('radiation', $radiation, $locale);
+	}
+
+ 	/**
+	 * Get "localized" distress (if applicable).
+	 * @return string
+	 */
+	function getLocalizedDistress() {
+		return $this->getLocalizedData('distress');
+	}
+
+	/**
+	 * Get distress.
+	 * @param $locale
+	 * @return string
+	 */
+	function getDistress($locale) {
+		return $this->getData('distress', $locale);
+	}
+
+	/**
+	 * Set distress (yes/no).
+	 * @param $distress string
+	 * @param $locale
+	 */
+	function setDistress($distress, $locale) {
+		return $this->setData('distress', $distress, $locale);
+	}
+
+ 	/**
+	 * Get "localized" inducements (if applicable).
+	 * @return string
+	 */
+	function getLocalizedInducements() {
+		return $this->getLocalizedData('inducements');
+	}
+
+	/**
+	 * Get inducements.
+	 * @param $locale
+	 * @return string
+	 */
+	function getInducements($locale) {
+		return $this->getData('inducements', $locale);
+	}
+
+	/**
+	 * Set inducements (yes/no).
+	 * @param $inducements string
+	 * @param $locale
+	 */
+	function setInducements($inducements, $locale) {
+		return $this->setData('inducements', $inducements, $locale);
+	}
+
+ 	/**
+	 * Get "localized" sensitiveInfo (if applicable).
+	 * @return string
+	 */
+	function getLocalizedSensitiveInfo() {
+		return $this->getLocalizedData('sensitiveInfo');
+	}
+
+	/**
+	 * Get sensitiveInfo.
+	 * @param $locale
+	 * @return string
+	 */
+	function getSensitiveInfo($locale) {
+		return $this->getData('sensitiveInfo', $locale);
+	}
+
+	/**
+	 * Set sensitiveInfo (yes/no).
+	 * @param $sensitiveInfo string
+	 * @param $locale
+	 */
+	function setSensitiveInfo($sensitiveInfo, $locale) {
+		return $this->setData('sensitiveInfo', $sensitiveInfo, $locale);
+	}
+
+ 	/**
+	 * Get "localized" deception (if applicable).
+	 * @return string
+	 */
+	function getLocalizedDeception() {
+		return $this->getLocalizedData('deception');
+	}
+
+	/**
+	 * Get deception.
+	 * @param $locale
+	 * @return string
+	 */
+	function getDeception($locale) {
+		return $this->getData('deception', $locale);
+	}
+
+	/**
+	 * Set deception (yes/no).
+	 * @param $deception string
+	 * @param $locale
+	 */
+	function setDeception($deception, $locale) {
+		return $this->setData('deception', $deception, $locale);
+	}
+
+ 	/**
+	 * Get "localized" reproTechnology (if applicable).
+	 * @return string
+	 */
+	function getLocalizedReproTechnology() {
+		return $this->getLocalizedData('reproTechnology');
+	}
+
+	/**
+	 * Get reproTechnology.
+	 * @param $locale
+	 * @return string
+	 */
+	function getReproTechnology($locale) {
+		return $this->getData('reproTechnology', $locale);
+	}
+
+	/**
+	 * Set reproTechnology (yes/no).
+	 * @param $reproTechnology string
+	 * @param $locale
+	 */
+	function setReproTechnology($reproTechnology, $locale) {
+		return $this->setData('reproTechnology', $reproTechnology, $locale);
+	}
+
+ 	/**
+	 * Get "localized" genetics (if applicable).
+	 * @return string
+	 */
+	function getLocalizedGenetics() {
+		return $this->getLocalizedData('genetics');
+	}
+
+	/**
+	 * Get genetics.
+	 * @param $locale
+	 * @return string
+	 */
+	function getGenetics($locale) {
+		return $this->getData('genetics', $locale);
+	}
+
+	/**
+	 * Set genetics (yes/no).
+	 * @param $genetics string
+	 * @param $locale
+	 */
+	function setGenetics($genetics, $locale) {
+		return $this->setData('genetics', $genetics, $locale);
+	}
+
+ 	/**
+	 * Get "localized" stemCell (if applicable).
+	 * @return string
+	 */
+	function getLocalizedStemCell() {
+		return $this->getLocalizedData('stemCell');
+	}
+
+	/**
+	 * Get stemCell.
+	 * @param $locale
+	 * @return string
+	 */
+	function getStemCell($locale) {
+		return $this->getData('stemCell', $locale);
+	}
+
+	/**
+	 * Set stemCell (yes/no).
+	 * @param $stemCell string
+	 * @param $locale
+	 */
+	function setStemCell($stemCell, $locale) {
+		return $this->setData('stemCell', $stemCell, $locale);
+	}
+
+ 	/**
+	 * Get "localized" biosafety (if applicable).
+	 * @return string
+	 */
+	function getLocalizedBiosafety() {
+		return $this->getLocalizedData('biosafety');
+	}
+
+	/**
+	 * Get biosafety.
+	 * @param $locale
+	 * @return string
+	 */
+	function getBiosafety($locale) {
+		return $this->getData('biosafety', $locale);
+	}
+
+	/**
+	 * Set biosafety (yes/no).
+	 * @param $biosafety string
+	 * @param $locale
+	 */
+	function setBiosafety($biosafety, $locale) {
+		return $this->setData('biosafety', $biosafety, $locale);
+	}
+
+
+ 	/**
+	 * Get "localized" export (if applicable).
+	 * @return string
+	 */
+	function getLocalizedExport() {
+		return $this->getLocalizedData('export');
+	}
+
+	/**
+	 * Get export.
+	 * @param $locale
+	 * @return string
+	 */
+	function getExport($locale) {
+		return $this->getData('export', $locale);
+	}
+
+	/**
+	 * Set export (yes/no).
+	 * @param $export string
+	 * @param $locale
+	 */
+	function setExport($export, $locale) {
+		return $this->setData('export', $export, $locale);
+	}
+
+ 	/**
+	 * Get "localized" riskLevel (if applicable).
+	 * @return string
+	 */
+	function getLocalizedRiskLevel() {
+		return $this->getLocalizedData('riskLevel');
+	}
+
+	/**
+	 * Get riskLevel.
+	 * @param $locale
+	 * @return string
+	 */
+	function getRiskLevel($locale) {
+		return $this->getData('riskLevel', $locale);
+	}
+
+	/**
+	 * Set riskLevel (yes/no).
+	 * @param $riskLevel string
+	 * @param $locale
+	 */
+	function setRiskLevel($riskLevel, $locale) {
+		return $this->setData('riskLevel', $riskLevel, $locale);
+	}
+
+ 	/**
+	 * Get "localized" listRisks (if applicable).
+	 * @return string
+	 */
+	function getLocalizedListRisks() {
+		return $this->getLocalizedData('listRisks');
+	}
+
+	/**
+	 * Get listRisks.
+	 * @param $locale
+	 * @return string
+	 */
+	function getListRisks($locale) {
+		return $this->getData('listRisks', $locale);
+	}
+
+	/**
+	 * Set listRisks (yes/no).
+	 * @param $listRisks string
+	 * @param $locale
+	 */
+	function setListRisks($listRisks, $locale) {
+		return $this->setData('listRisks', $listRisks, $locale);
+	}
+
+ 	/**
+	 * Get "localized" howRisksMinimized (if applicable).
+	 * @return string
+	 */
+	function getLocalizedHowRisksMinimized() {
+		return $this->getLocalizedData('howRisksMinimized');
+	}
+
+	/**
+	 * Get howRisksMinimized.
+	 * @param $locale
+	 * @return string
+	 */
+	function getHowRisksMinimized($locale) {
+		return $this->getData('howRisksMinimized', $locale);
+	}
+
+	/**
+	 * Set howRisksMinimized (yes/no).
+	 * @param $identityRevealed string
+	 * @param $locale
+	 */
+	function setHowRisksMinimized($howRisksMinimized, $locale) {
+		return $this->setData('howRisksMinimized', $howRisksMinimized, $locale);
+	}
+
+ 	/**
+	 * Get "localized" riskApplyTo (if applicable).
+	 * @return string
+	 */
+	function getLocalizedRiskApplyTo() {
+		return unserialize($this->getLocalizedData('riskApplyTo'));
+	}
+
+	/**
+	 * Get riskApplyTo.
+	 * @param $locale
+	 * @return string
+	 */
+	function getRiskApplyTo($locale) {
+		$riskApply = $this->getData('riskApplyTo', $locale);		
+		if (is_array($riskApply) && is_string($riskApply['en_US'])) {
+			$riskapplyarrayreplace = array('en_US' => unserialize($riskApply['en_US']));
+			foreach ($riskapplyarrayreplace as $key => $value) {
+            	$riskApply[$key] = $value;
+            }
+			return $riskApply;
+		} return null;
+	}
+
+	/**
+	 * Set riskApplyTo (yes/no).
+	 * @param $riskApplyTo string
+	 * @param $locale
+	 */
+	function setRiskApplyTo($riskApplyarray, $locale) {
+        $riskapplyarrayreplace = array('en_US' => serialize($riskApplyarray['en_US']));
+		foreach ($riskapplyarrayreplace as $key => $value) {
+        	$riskApplyarray[$key] = $value;
+        }
+  		return $this->setData('riskApplyTo', $riskApplyarray, $locale);
+	}
+
+ 	/**
+	 * Get "localized" benefitsFromTheProject (if applicable).
+	 * @return string
+	 */
+	function getLocalizedBenefitsFromTheProject() {
+		return unserialize($this->getLocalizedData('benefitsFromTheProject'));
+	}
+
+	/**
+	 * Get benefitsFromTheProject.
+	 * @param $locale
+	 * @return string
+	 */
+	function getBenefitsFromTheProject($locale) {
+        $benefits = $this->getData('benefitsFromTheProject', $locale);
+		if (is_array($benefits) && is_string($benefits['en_US'])) {
+			$benefitsarrayreplace = array('en_US' => unserialize($benefits['en_US']));
+			foreach ($benefitsarrayreplace as $key => $value) {
+        		$benefitsArray[$key] = $value;
+        	}
+			return $benefitsArray;
+		} return null;
+	}
+
+	/**
+	 * Set benefitsFromTheProject (yes/no).
+	 * @param $benefitsFromTheProject string
+	 * @param $locale
+	 */
+	function setBenefitsFromTheProject($benefitsFromTheProject, $locale) {
+        $benefitsFromTheProjectArray = array('en_US' => serialize($benefitsFromTheProject['en_US']));
+		foreach ($benefitsFromTheProjectArray as $key => $value) {
+        	$benefitsFromTheProject[$key] = $value;
+        }
+		return $this->setData('benefitsFromTheProject', $benefitsFromTheProject, $locale);
+	}
+
+ 	/**
+	 * Get "localized" multiInstitutions (if applicable).
+	 * @return string
+	 */
+	function getLocalizedMultiInstitutions() {
+		return $this->getLocalizedData('multiInstitutions');
+	}
+
+	/**
+	 * Get multiInstitutions.
+	 * @param $locale
+	 * @return string
+	 */
+	function getMultiInstitutions($locale) {
+		return $this->getData('multiInstitutions', $locale);
+	}
+
+	/**
+	 * Set multiInstitutions (yes/no).
+	 * @param $multiInstitutions string
+	 * @param $locale
+	 */
+	function setMultiInstitutions($multiInstitutions, $locale) {
+		return $this->setData('multiInstitutions', $multiInstitutions, $locale);
+	}
+///////////////////////////////////////////
+//////////////////////////////////////////
+//////////////////////////////////////////
+ 	/**
+	 * Get "localized" supervisorFullName (if applicable).
+	 * @return string
+	 */
+	function getLocalizedSupervisorFullName() {
+		return $this->getLocalizedData('supervisorFullName');
+	}
+
+	/**
+	 * Get supervisorFullName.
+	 * @param $locale
+	 * @return string
+	 */
+	function getSupervisorFullName($locale) {
+		return $this->getData('supervisorFullName', $locale);
+	}
+
+	/**
+	 * Set supervisorFullName 
+	 * @param $supervisorFullName string
+	 * @param $locale
+	 */
+	function setSupervisorFullName($supervisorFullName, $locale) {
+		return $this->setData('supervisorFullName', $supervisorFullName, $locale);
+	} 	
+	
+	/**
+	 * Get "localized" supervisorEmail (if applicable).
+	 * @return string
+	 */
+	function getLocalizedSupervisorEmail() {
+		return $this->getLocalizedData('supervisorEmail');
+	}
+
+	/**
+	 * Get supervisorEmail.
+	 * @param $locale
+	 * @return string
+	 */
+	function getSupervisorEmail($locale) {
+		return $this->getData('supervisorEmail', $locale);
+	}
+
+	/**
+	 * Set supervisorEmail.
+	 * @param $supervisorEmail string
+	 * @param $locale
+	 */
+	function setSupervisorEmail($supervisorEmail, $locale) {
+		return $this->setData('supervisorEmail', $supervisorEmail, $locale);
+	} 	
+	
+	/**
+	 * Get "localized" supervisorPhone (if applicable).
+	 * @return string
+	 */
+	function getLocalizedSupervisorPhone() {
+		return $this->getLocalizedData('supervisorPhone');
+	}
+
+	/**
+	 * Get supervisorPhone.
+	 * @param $locale
+	 * @return string
+	 */
+	function getSupervisorPhone($locale) {
+		return $this->getData('supervisorPhone', $locale);
+	}
+
+	/**
+	 * Set supervisorPhone.
+	 * @param $supervisorPhone string
+	 * @param $locale
+	 */
+	function setSupervisorPhone($supervisorPhone, $locale) {
+		return $this->setData('supervisorPhone', $supervisorPhone, $locale);
+	} 	
+	
+	/**
+	 * Get "localized" supervisorAffiliation (if applicable).
+	 * @return string
+	 */
+	function getLocalizedSupervisorAffiliation() {
+		return $this->getLocalizedData('supervisorAffiliation');
+	}
+
+	/**
+	 * Get supervisorAffiliation.
+	 * @param $locale
+	 * @return string
+	 */
+	function getSupervisorAffiliation($locale) {
+		return $this->getData('supervisorAffiliation', $locale);
+	}
+
+	/**
+	 * Set supervisorAffiliation.
+	 * @param $supervisorAffiliation string
+	 * @param $locale
+	 */
+	function setSupervisorAffiliation($supervisorAffiliation, $locale) {
+		return $this->setData('supervisorAffiliation', $supervisorAffiliation, $locale);
+	}
 }
 
 ?>

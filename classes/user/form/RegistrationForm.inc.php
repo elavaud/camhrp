@@ -69,6 +69,10 @@ class RegistrationForm extends Form {
 				$this->addCheck(new FormValidatorCustom($this, 'password', 'required', 'user.register.form.passwordsDoNotMatch', create_function('$password,$form', 'return $password == $form->getData(\'password2\');'), array(&$this)));
 				$this->addCheck(new FormValidator($this, 'firstName', 'required', 'user.profile.form.firstNameRequired'));
 				$this->addCheck(new FormValidator($this, 'lastName', 'required', 'user.profile.form.lastNameRequired'));
+				$this->addCheck(new FormValidatorLocale($this, 'affiliation', 'required', 'user.profile.form.affiliationRequired'));
+				$this->addCheck(new FormValidator($this, 'phone', 'required', 'user.profile.form.phoneRequired'));
+				$this->addCheck(new FormValidator($this, 'mailingAddress', 'required', 'user.profile.form.mailingAddressRequired'));
+				$this->addCheck(new FormValidator($this, 'country', 'required', 'user.profile.form.countryRequired'));
 				$this->addCheck(new FormValidatorUrl($this, 'userUrl', 'optional', 'user.profile.form.urlInvalid'));
 				$this->addCheck(new FormValidatorEmail($this, 'email', 'required', 'user.profile.form.emailRequired'));
 				$this->addCheck(new FormValidatorCustom($this, 'email', 'required', 'user.register.form.emailsDoNotMatch', create_function('$email,$form', 'return $email == $form->getData(\'confirmEmail\');'), array(&$this)));
@@ -106,13 +110,15 @@ class RegistrationForm extends Form {
 				$this->setData('captchaId', $captcha->getId());
 			}
 		}
-
+        
 		$countryDao =& DAORegistry::getDAO('CountryDAO');
+		
 		$countries =& $countryDao->getCountries();
 		$templateMgr->assign_by_ref('countries', $countries);
 
 		$userDao =& DAORegistry::getDAO('UserDAO');
 		$templateMgr->assign('genderOptions', $userDao->getGenderOptions());
+        $templateMgr->assign('reviewingInterests', $userDao->getReviewingInterests());
 
 		$templateMgr->assign('privacyStatement', $journal->getLocalizedSetting('privacyStatement'));
 		$templateMgr->assign('allowRegReader', $journal->getSetting('allowRegReader'));
@@ -141,13 +147,9 @@ class RegistrationForm extends Form {
 		$this->setData('existingUser', $this->existingUser);
 		$this->setData('userLocales', array());
 		$this->setData('sendPassword', 1);
-
-		$interestDao =& DAORegistry::getDAO('InterestDAO');
-		// Get all available interests to populate the autocomplete with
-		if ($interestDao->getAllUniqueInterests()) {
-			$existingInterests = $interestDao->getAllUniqueInterests();
-		} else $existingInterests = null;
-		$this->setData('existingInterests', $existingInterests);
+		$locale = 'en_US';
+		$interests = array($locale => array('0'=>''));
+		$this->setData('reviewingInterest', $interests);
 	}
 
 	/**
@@ -155,13 +157,29 @@ class RegistrationForm extends Form {
 	 */
 	function readInputData() {
 		$userVars = array(
-			'username', 'password', 'password2',
-			'salutation', 'firstName', 'middleName', 'lastName',
-			'gender', 'initials', 'country',
-			'affiliation', 'email', 'confirmEmail', 'userUrl', 'phone', 'fax', 'signature',
-			'mailingAddress', 'biography', 'interestsKeywords', 'userLocales',
-			'registerAsReader', 'openAccessNotification', 'registerAsAuthor',
-			'registerAsReviewer', 'existingUser', 'sendPassword'
+			'username', 
+			'password', 
+			'password2',
+			'salutation', 
+			'firstName', 
+			'middleName', 
+			'lastName',
+			'gender', 
+			'country',
+			'affiliation', 
+			'email', 
+			'confirmEmail', 
+			'phone', 
+			'mailingAddress', 
+			'biography', 
+			'userLocales',
+			'registerAsReader', 
+			'openAccessNotification', 
+			'registerAsAuthor', 
+			'registerAsReviewer',
+			'reviewingInterest', 
+			'existingUser', 
+			'sendPassword'
 		);
 		if ($this->captchaEnabled) {
 			$userVars[] = 'captchaId';
@@ -262,20 +280,13 @@ class RegistrationForm extends Form {
 
 			// Add reviewing interests to interests table
 			$interestDao =& DAORegistry::getDAO('InterestDAO');
-			$interests = Request::getUserVar('interestsKeywords');
-			$interests = array_map('urldecode', $interests); // The interests are coming in encoded -- Decode them for DB storage
-			$interestTextOnly = Request::getUserVar('interests');
-			if(!empty($interestsTextOnly)) {
-				// If JS is disabled, this will be the input to read
-				$interestsTextOnly = explode(",", $interestTextOnly);
-			} else $interestsTextOnly = null;
-			if ($interestsTextOnly && !isset($interests)) {
-				$interests = $interestsTextOnly;
-			} elseif (isset($interests) && !is_array($interests)) {
-				$interests = array($interests);
-			}
-			$interestDao->insertInterests($interests, $user->getId(), true);
 
+			$reviewingInterestArray = Request::getUserVar('reviewingInterest');
+			if (is_array($reviewingInterestArray)){
+        		$reviewingInterest = implode(",", $reviewingInterestArray['en_US']);
+     			$user->setInterests($reviewingInterest);
+			}
+			
 			$sessionManager =& SessionManager::getManager();
 			$session =& $sessionManager->getUserSession();
 			$session->setSessionVar('username', $user->getUsername());
@@ -333,10 +344,11 @@ class RegistrationForm extends Form {
 			if ($this->getData('sendPassword')) {
 				// Send welcome email to user
 				$mail = new MailTemplate('USER_REGISTER');
-				$mail->setFrom($journal->getSetting('contactEmail'), $journal->getSetting('contactName'));
+				$mail->setFrom($journal->getSetting('supportEmail'), $journal->getSetting('supportName'));
 				$mail->assignParams(array(
 					'username' => $this->getData('username'),
-					'password' => String::substr($this->getData('password'), 0, 30), // Prevent mailer abuse via long passwords
+					'password' => String::substr($this->getData('password'), 0, 30),
+					'supportName' => $journal->getSetting('supportName'),
 					'userFullName' => $user->getFullName()
 				));
 				$mail->addRecipient($user->getEmail(), $user->getFullName());

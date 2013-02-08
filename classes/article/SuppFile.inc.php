@@ -171,6 +171,65 @@ class SuppFile extends ArticleFile {
 	}
 
 	/**
+	 * Get typeTranslated (method/approach).
+	 * @return string
+	 */
+	function getTypeTranslated() {
+		$keysUnexplode = $this->getData('type');
+		$keysArray = explode(", ", $keysUnexplode);
+		$type = '';
+		foreach ($keysArray as $key) {
+			if ($key == 'SUMMARY') {
+				if ($type != '') $type = $type.', '.Locale::translate('common.submit.suppFile.who.summary');
+				else $type = Locale::translate('common.submit.suppFile.who.summary');
+			} elseif ($key == 'INFORMED_CONSENT') {
+				if ($type != '') $type = $type.', '.Locale::translate('common.submit.suppFile.who.informedConsent');
+				else $type = Locale::translate('common.submit.suppFile.who.informedConsent');
+			} elseif ($key == 'FUNDING') {
+				if ($type != '') $type = $type.', '.Locale::translate('common.submit.suppFile.who.funding');
+				else $type = Locale::translate('common.submit.suppFile.who.funding');
+			} elseif ($key == 'CV') {
+				if ($type != '') $type = $type.', '.Locale::translate('common.submit.suppFile.who.cv');
+				else $type = Locale::translate('common.submit.suppFile.who.cv');
+			} elseif ($key == 'QUESTIONNAIRE') {
+				if ($type != '') $type = $type.', '.Locale::translate('common.submit.suppFile.who.questionnaire');
+				else $type = Locale::translate('common.submit.suppFile.who.questionnaire');
+			} elseif ($key == 'PROOF_OF_REGISTRATION') {
+				if ($type != '') $type = $type.', '.Locale::translate('common.submit.suppFile.who.proofOfRegistration');
+				else $type = Locale::translate('common.submit.suppFile.who.proofOfRegistration');
+			} elseif ($key == 'ERC_DECISION') {
+				if ($type != '') $type = $type.', '.Locale::translate('common.submit.suppFile.who.otherErcDecision');
+				else $type = Locale::translate('common.submit.suppFile.who.otherErcDecision');
+			} elseif ($key == 'FINAL_DECISION') {
+				if ($type != '') $type = $type.', '.Locale::translate('common.submit.suppFile.who.finalDecision');
+				else $type = Locale::translate('common.submit.suppFile.who.finalDecision');
+			} elseif ($key == 'RAW_DATA') {
+				if ($type != '') $type = $type.', '.Locale::translate('common.submit.suppFile.who.rawData');
+				else $type = Locale::translate('common.submit.suppFile.who.rawData');
+			} elseif ($key == 'EXTENSION_REQUEST') {
+				if ($type != '') $type = $type.', '.Locale::translate('common.submit.suppFile.who.extensionRequest');
+				else $type = Locale::translate('common.submit.suppFile.who.extensionRequest');
+			} elseif ($key == 'COMPLETION_REPORT') {
+				if ($type != '') $type = $type.', '.Locale::translate('common.submit.suppFile.who.completionReport');
+				else $type = Locale::translate('common.submit.suppFile.who.completionReport');
+			} elseif ($key == 'PROGRESS_REPORT') {
+				if ($type != '') $type = $type.', '.Locale::translate('common.submit.suppFile.who.progressReport');
+				else $type = Locale::translate('common.submit.suppFile.who.progressReport');
+			} elseif ($key == 'OTHER_OUTPUTS') {
+				if ($type != '') $type = $type.', '.Locale::translate('common.submit.suppFile.who.otherOutputs');
+				else $type = Locale::translate('common.submit.suppFile.who.otherOutputs');
+			} elseif ($key == 'WITHDRAW') {
+				if ($type != '') $type = $type.', '.Locale::translate('common.submit.suppFile.who.withdrawReport');
+				else $type = Locale::translate('common.submit.suppFile.who.withdrawReport');
+			} else {
+				if ($type != '') $type = $type.', '.$key;
+				else $type = $key;
+			}			
+		}
+		return $type;
+	}
+	
+	/**
 	 * Set type (method/approach).
 	 * @param $type string
 	 */

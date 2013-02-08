@@ -357,6 +357,23 @@ class SectionEditorSubmission extends Article {
 	}
 
 	/**
+	 * Get previousFiles.
+	 * @return ArticleFile
+	 */
+	function &getPreviousFiles() {
+		$returner =& $this->getData('previousFiles');
+		return $returner;
+	}
+
+	/**
+	 * Set previousFiles.
+	 * @param $reviewFile ArticleFile
+	 */
+	function setPreviousFiles($previousFiles) {
+		return $this->setData('previousFiles', $previousFiles);
+	}
+	
+	/**
 	 * Get all editor file revisions.
 	 * @return array ArticleFiles
 	 */
@@ -575,7 +592,7 @@ class SectionEditorSubmission extends Article {
 	function &getExemptionOptions() {
 		static $exemptionOptions = array(
 			'' => 'common.chooseOne',
-			SUBMISSION_EDITOR_DECISION_EXEMPTED => 'editor.article.decision.exempted',
+			//SUBMISSION_EDITOR_DECISION_EXEMPTED => 'editor.article.decision.exempted',
 			SUBMISSION_EDITOR_DECISION_ASSIGNED => 'editor.article.decision.assigned',
 			SUBMISSION_EDITOR_DECISION_EXPEDITED => 'editor.article.decision.expedited'
 		);
