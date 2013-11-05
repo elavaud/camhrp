@@ -74,7 +74,7 @@
 			{if $submission->getStatus() == 11}
 				{foreach name="suppFiles" from=$suppFiles item=suppFile}
 					{if $suppFile->getType() == "COMPLETION_REPORT"}
-						<br/><a href="{url op="downloadFile" path=$submission->getArticleId()|to_array:$suppFile->getFileId()}" class="file"><b>{translate key="search.completionReport"}</b></a>
+						<br/><a href="{url op="downloadFile" path=$submission->getArticleId()|to_array:$suppFile->getFileId():$suppFile->getSuppFileId()}" class="file"><b>{translate key="search.completionReport"}</b></a>
 					{/if}
 				{/foreach}
 			{/if}

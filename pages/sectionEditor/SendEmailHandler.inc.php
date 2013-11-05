@@ -44,7 +44,7 @@ class SendEmailHandler extends Handler {
                 HookRegistry::call('SendEmailHandler::sendEmailAllUsers', array(&$send));
                 
                 $email->send();
-                
+                Request::redirect(null, null, 'index');
             }else {
                 $sender =& Request::getUser();
                 $journal =& Request::getJournal();
@@ -74,8 +74,6 @@ class SendEmailHandler extends Handler {
 
                 $email->displayEditForm(Request::url(null, null, 'sendEmailAllUsers', 'send'), null, 'email/email_hiderecipients.tpl', array('totalRecipients' => $totalRecipients));
             }
-            
-            Request::redirect(null, null, 'index');
         }
         
         function sendEmailERCMembers($send=false) {
@@ -86,6 +84,7 @@ class SendEmailHandler extends Handler {
                 HookRegistry::call('SendEmailHandler::sendEmailERCMembers', array(&$send));
                 
                 $email->send();
+                Request::redirect(null, null, 'index');
                 
             } else {
                 $sender =& Request::getUser();
@@ -117,10 +116,8 @@ class SendEmailHandler extends Handler {
                     unset($reviewer);
                 }
 
-                $email->displayEditForm(Request::url(null, null, 'sendEmailAllUsers', 'send'), null, 'email/email.tpl', array('totalRecipients' => $totalRecipients));
-            }
-            
-            Request::redirect(null, null, 'index');           
+                $email->displayEditForm(Request::url(null, null, 'sendEmailERCMembers', 'send'), null, 'email/email.tpl', array('totalRecipients' => $totalRecipients));
+            }           
         }
         
         function sendEmailRTOs($send=false) {
@@ -131,6 +128,7 @@ class SendEmailHandler extends Handler {
                 HookRegistry::call('SendEmailHandler::sendEmailRTOs', array(&$send));
                 
                 $email->send();
+                Request::redirect(null, null, 'index'); 
                 
             } else {
                 $sender =& Request::getUser();
@@ -163,9 +161,7 @@ class SendEmailHandler extends Handler {
                 }
 
                 $email->displayEditForm(Request::url(null, null, 'sendEmailRTOs', 'send'), null, 'email/email_hiderecipients.tpl', array('totalRecipients' => $totalRecipients));
-            }
-            
-            Request::redirect(null, null, 'index');           
+            }          
         }
 }
 

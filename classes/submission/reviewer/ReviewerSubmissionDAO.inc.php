@@ -359,7 +359,7 @@ class ReviewerSubmissionDAO extends DAO {
 	function getSubmissionsForFullReview($reviewerId){
 		$userDao =& DAORegistry::getDAO('UserDAO');
 		$user =& $userDao->getUser($reviewerId);
-		$section == ' ';
+		$section = (string)' ';
 		if ($user->isNechrMember() && !$user->isUhsMember()) $section = 'AND a.section_id = 1';
 		else if (!$user->isNechrMember() && $user->isUhsMember()) $section = 'AND a.section_id = 2';
 		$sql = 'SELECT a.*

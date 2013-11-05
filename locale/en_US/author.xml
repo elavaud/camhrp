@@ -55,7 +55,7 @@
 	<message key="author.submit.howToSubmit"><![CDATA[Encountering difficulties? Contact <a href="mailto:{$supportEmail}">{$supportName}</a> for assistance ({$supportPhone}).]]></message>
 	<message key="author.submit.howToSubmitNoPhone"><![CDATA[Encountering difficulties? Contact <a href="mailto:{$supportEmail}">{$supportName}</a> for assistance.]]></message>
 	<message key="author.submit.journalSection">Ethics Committees</message>
-	<message key="author.submit.journalSectionDescription">If the proposal is submitted by a student enrolled in the Hanoi School of Public Health (HSPH) or affiliated with HPSH or if the research is conducted by HPSH staff, please select the Hanoi School of Public Health Ethics Review Committee, but if the research is conducted with an external partner (not in collaboration with HPSH) or ministry of health staff, please select the National Clinical Trial Ethics Review Committee.</message>
+	<message key="author.submit.journalSectionDescription">If the proposal is submitted by a student enrolled in the univesity of Health Sciences (HSPH) or affiliated with UHS or if the research is conducted by UHS staff, please select the UHS Ethics Review Committee, but if the research is conducted with an external partner (not in collaboration with HPSH) or ministry of health staff, please select the National Clinical Trial Ethics Review Committee.</message>
 	<message key="author.submit.selectSection">Please select an Ethics Committee...</message>
 	<message key="author.submit.submissionLocale">Submission Language</message>
 	<message key="author.submit.submissionLocaleDescription">This site accepts submissions in several languages. Choose the primary language of the submission from the pulldown below.</message>
