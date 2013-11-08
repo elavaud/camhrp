@@ -119,7 +119,7 @@ class AboutHandler extends Handler {
 		$templateMgr =& TemplateManager::getManager();
 		$userSettingsDao =& DAORegistry::getDAO('UserSettingsDAO');	
 		
-		$secretary =& $userSettingsDao->getUsersBySetting("secretaryStatus", "IRB Chair");
+		$secretary =& $userSettingsDao->getUsersBySetting("secretaryStatus", "Manager");
 		$secretary =& $secretary->toArray();
 		
 		$nechrChair =& $userSettingsDao->getUsersBySetting("nechrMemberStatus", "NECHR Chair");

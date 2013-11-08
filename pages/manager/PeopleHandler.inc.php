@@ -92,7 +92,7 @@ class PeopleHandler extends ManagerHandler {
 				//	break;
 				case ROLE_ID_REVIEWER:
 					$helpTopicId = 'journal.roles.reviewer';
-					//For IRB Members
+					//For Reviewers & Reporters
 					$reviewers =& $roleDao->getUsersByRoleId('4096', $journal->getId(), $searchType, $search, $searchMatch, $rangeInfo, $sort);
 					$templateMgr->assign_by_ref('reviewers', $reviewers);
 					break;
@@ -248,7 +248,7 @@ class PeopleHandler extends ManagerHandler {
 		$freeUhsSecretaryPlaces = 3 - $countUhsSecretary;
 		if($countUhsSecretary>'2') $areUhsSecretary = '1';
 
-		$nechrSecretary =& $userSettingsDao->getUsersBySetting("secretaryStatus", "IRB Chair");
+		$nechrSecretary =& $userSettingsDao->getUsersBySetting("secretaryStatus", "Manager");
 		$nechrSecretary =& $nechrSecretary->toArray();
 		$areNechrSecretary = '0';
 		$countNechrSecretary = count($nechrSecretary);
@@ -438,7 +438,7 @@ class PeopleHandler extends ManagerHandler {
 		$freeUhsSecretaryPlaces = 3 - $countUhsSecretary;
 		if($countUhsSecretary>'2') $areUhsSecretary = '1';
 
-		$nechrSecretary =& $userSettingsDao->getUsersBySetting("secretaryStatus", "IRB Chair");
+		$nechrSecretary =& $userSettingsDao->getUsersBySetting("secretaryStatus", "Manager");
 		$nechrSecretary =& $nechrSecretary->toArray();
 		$areNechrSecretary = '0';
 		$countNechrSecretary = count($nechrSecretary);
@@ -643,7 +643,7 @@ class PeopleHandler extends ManagerHandler {
 						}						
 					}
 				}
-				// new adding for IRB Members
+				// new adding for Reviewers & Reporters
 				else if ($ercMemberStatus == 'ExtReviewer'){
 					$roleId = '4096';
 					$rolePath = 'reviewer';
@@ -663,7 +663,7 @@ class PeopleHandler extends ManagerHandler {
 			}
 			elseif($ethicsCommittee == "NECHR"){
 				if($ercMemberStatus == "ERC, Secretary" ){
-					$nechrSecretary =& $userSettingsDao->getUsersBySetting("secretaryStatus", "IRB Chair");
+					$nechrSecretary =& $userSettingsDao->getUsersBySetting("secretaryStatus", "Manager");
 					$nechrSecretary =& $nechrSecretary->toArray();
 					$rolePath = 'sectionEditor';
 					$roleId = '512';
@@ -680,7 +680,7 @@ class PeopleHandler extends ManagerHandler {
 								$role->setJournalId($journal->getId());
 								$role->setUserId($users[$i]);
 								$role->setRoleId(0x00000200);
-								$userSettingsDao->updateSetting($users[$i], 'secretaryStatus', 'IRB Chair');
+								$userSettingsDao->updateSetting($users[$i], 'secretaryStatus', 'Manager');
 								$roleDao->insertRole($role);
 								$sectionEditorsDAO->insertEditor($journal->getId(), '1', $users[$i], '1', '0');
 							}
@@ -692,7 +692,7 @@ class PeopleHandler extends ManagerHandler {
 					$nechrChair =& $nechrChair->toArray();
 					if(count($nechrChair)<'1'){
 						for ($i=0; $i<count($users); $i++) {
-							if (($userSettingsDao->getSetting($users[$i], 'secretaryStatus', '4')) == "IRB Chair"){
+							if (($userSettingsDao->getSetting($users[$i], 'secretaryStatus', '4')) == "Manager"){
 								$userSettingsDao->updateSetting($users[$i], 'secretaryStatus', 'Retired', 'string', 0, 0);
 								$roleDao->deleteRoleByUserId($users[$i], '4', '512');
 							}
@@ -712,7 +712,7 @@ class PeopleHandler extends ManagerHandler {
 					$nechrViceChair =& $nechrViceChair->toArray();
 					if(count($nechrViceChair)<'1'){
 						for ($i=0; $i<count($users); $i++) {
-							if (($userSettingsDao->getSetting($users[$i], 'secretaryStatus', '4')) == "IRB Chair"){
+							if (($userSettingsDao->getSetting($users[$i], 'secretaryStatus', '4')) == "Manager"){
 								$userSettingsDao->updateSetting($users[$i], 'secretaryStatus', 'Retired', 'string', 0, 0);
 								$roleDao->deleteRoleByUserId($users[$i], '4', '512');
 							}
@@ -732,7 +732,7 @@ class PeopleHandler extends ManagerHandler {
 					$nechrMember =& $nechrMember->toArray();
 					if(count($nechrMember)<'15'){
 						for ($i=0; $i<count($users); $i++) {
-							if (($userSettingsDao->getSetting($users[$i], 'secretaryStatus', '4')) == "IRB Chair"){
+							if (($userSettingsDao->getSetting($users[$i], 'secretaryStatus', '4')) == "Manager"){
 								$userSettingsDao->updateSetting($users[$i], 'secretaryStatus', 'Retired', 'string', 0, 0);
 								$roleDao->deleteRoleByUserId($users[$i], '4', '512');
 							}
@@ -747,7 +747,7 @@ class PeopleHandler extends ManagerHandler {
 						}						
 					}
 				}
-				// new adding for IRB Members
+				// new adding for Reviewers & Reporters
 				else if ($ercMemberStatus == 'ExtReviewer'){
 					$roleId = '4096';
 					$rolePath = 'reviewer';

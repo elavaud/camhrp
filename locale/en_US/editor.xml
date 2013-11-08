@@ -16,7 +16,7 @@
 	<message key="editor.article.reviewForms">Review Forms</message>
 	<message key="editor.article.selectReviewForm">Select Review Form</message>
 	<message key="editor.article.clearReviewForm">Clear Review Form</message>
-    <message key="editor.article.createExternalReview">Create IRB Member</message>
+    <message key="editor.article.createExternalReview">Create Reviewer &amp; Reporter</message>
     <message key="editor.article.backToReview">Back to review page</message>
     <message key="editor.article.assignAndNotify">Assign and notify</message>
 
@@ -131,9 +131,9 @@
 	<message key="editor.article.enterRecommendation">Enter Recommendation</message>
 	<message key="editor.article.enterReviewerRecommendation">Enter Reviewer Recommendation</message>
 	<message key="editor.article.recommendation">Recommendation</message>
-	<message key="editor.article.selectReviewer">Assign another IRB Member</message>
+	<message key="editor.article.selectReviewer">Assign another Reviewer</message>
 	<message key="editor.article.unassignedReviewers">Unassigned NECHR Members</message>
-    <message key="editor.article.assignExternalReviewers">Assign IRB Member(s)</message>
+    <message key="editor.article.assignExternalReviewers">Assign Reviewer(s)</message>
 	<message key="editor.article.replaceReviewer">Replace Reviewer</message>
 	<message key="editor.article.editorToEnter">Editor to enter recommendation/comments for reviewer</message>
 	<message key="editor.article.uploadReviewForReviewer">Upload review</message>
@@ -168,8 +168,8 @@
 	<message key="editor.article.authorProofing">Author Proofing</message>
 	<message key="editor.article.archiveSubmission">Reject and Archive Submission</message>
 	<message key="editor.article.restoreToQueue">Restore to Active List</message>
-	<message key="editor.article.assignSectionEditor">Assign IRB Chair</message>
-	<message key="editor.article.assignEditor">Assign IRB Chair</message>
+	<message key="editor.article.assignSectionEditor">Assign Manager</message>
+	<message key="editor.article.assignEditor">Assign Manager</message>
 	<message key="editor.article.selectEditor">Select {$roleName}</message>
 
 	<!-- *********************************************
@@ -505,7 +505,7 @@
     <message key="editor.reports.review">Review</message>
 	<message key="editor.reports.whoId">Proposal ID</message>
     <message key="editor.reports.erc">Ethics Committee</message>
-    <message key="editor.reports.decision">Last IRB Chair decision</message>
+    <message key="editor.reports.decision">Last NECHR decision</message>
     <message key="editor.reports.submitDate">Date Submitted</message>
     <message key="editor.reports.approveDate">Date Approved</message>
     <message key="editor.reports.approveDateInstruct">Choosing an approval date will automatically select an "approved" decision.</message>

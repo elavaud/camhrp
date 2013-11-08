@@ -146,11 +146,8 @@
 	<message key="article.coverageSample"> Research sample characteristics</message>
 	<message key="article.type">Type, method or approach</message>
 	<message key="article.language">Language</message>
-    
-        <!-- Changed "Secreatary" by "IRB Chair Administrative Assistant. EL April 4 2012-->
-        <message key="article.sectionEditor">IRB Chair Administrative Assistant</message> /*replace section editor with IRB Chair */
-        
-	<message key="article.commentsToEditor">Investigator comments</message> /*replace Author to Investigator */
+    <message key="article.sectionEditor">Manager Administrative Assistant</message>
+	<message key="article.commentsToEditor">Investigator comments</message>
     <message key="article.commentsToEditorInstruct">Here is a comment of the submitter about this research proposal.</message>
 	<message key="article.submission">Submission</message>
 	<message key="article.submissions">Submissions</message>
@@ -268,7 +265,7 @@
         <message key="proposal.reviewedByOtherErc">Review by other ERC</message>
             <!-- Added by EL on April 17, 2012-->
             <message key="proposal.rtoOffice">Office</message>
-        <message key="proposal.otherErcDecision">If yes, other ERC Decision </message>
+        <message key="proposal.otherErcDecision">If yes, other committee Decision </message>
         <message key="proposal.otherErcDecisionUnderReview">Under Review</message>
         <message key="proposal.otherErcDecisionFinalAvailable">Final decision available</message>
         <message key="proposal.nameOfIndustry">If yes, please specify:</message>
@@ -380,14 +377,14 @@
 	<message key="submission.changeSection">Change to</message>
 	<message key="submission.sent">Sent</message>
 	<message key="submission.round">Round&amp;nbsp;{$round}</message>
-	<message key="submission.editorReview">IRB Chair Review</message> /*editor to IRB Chair*/
+	<message key="submission.editorReview">Manager Review</message>
 	<message key="submission.notifyAuthor">Notify Investigator</message>
     <message key="submission.notifyAuthorInstruct">Please click on the mail icon for sending an email to investigator. Please click on the speech bubble icon for opening the chat room between you and the investigator.</message> /*Author to Investigator */
-	<message key="submission.notifyEditor">Notify IRB Chair</message> /*editor to IRB Chair*/
-	<message key="submission.editorAuthorRecord">Email to investigator</message> /*editor to IRB Chair and author to Investigator*/
+	<message key="submission.notifyEditor">Notify Manager</message>
+	<message key="submission.editorAuthorRecord">Email to investigator</message>
 	<message key="submission.reviewersVersion">Reviewer's annotated version of file</message>
 	<message key="submission.postReviewVersion">Post-review version of file</message>
-	<message key="submission.editorVersion">IRB Chair Version</message> /*editor to IRB Chair*/
+	<message key="submission.editorVersion">Manager Version</message>
     <message key="submission.ethicalReview">Ethical Review</message>
     <message key="submission.organizingMeeting">Ethical Review</message>
     <message key="submission.backToReview">Back to review page</message>
@@ -453,21 +450,17 @@
         <message key="user.role.chair">Chair</message>
         <message key="user.role.viceChair">Vice-Chair</message>
         <message key="user.role.manager">Administrator</message>
-        <!-- Replaced Editor with IRB Chair - spf -->
-        <message key="user.role.editor">IRB Chair</message>
+        <message key="user.role.editor">Manager</message>
         <message key="user.role.coordinator">Coordinator</message>
-        <!-- Replaced "IRB Chair" by "IRB Chair Administrative Assistants". EL April 4 2012-->
-        <message key="user.role.sectionEditor">IRB Chair</message>
+        <message key="user.role.sectionEditor">Manager</message>
         
-        <!-- Added NECHR roles. EL April 10 2012-->
         <message key="user.ercrole.chair">Chair</message>
         <message key="user.ercrole.viceChair">Vice-Chair</message>
         <message key="user.ercrole.secretariat">Secretariat</message>
         <message key="user.ercrole.ercMembers">Members</message>
-        <message key="user.ercrole.extReviewers">IRB Members</message>
+        <message key="user.ercrole.extReviewers">Reviewers &amp; Reporters</message>
         <message key="user.ercrole.extMembers">External Members (non-affiliated members)</message>
         
-        <!-- Added by EL on April 19, 2012 -->
         <message key="user.ercrole.status">NECHR Member Status</message>
         
 	<message key="user.role.reviewer">NECHR Member</message> /* Reviewer to NECHR Member */
@@ -476,10 +469,10 @@
 	<message key="user.role.proofreader">Proofreader</message>
 	<message key="user.role.author">Investigator</message> /*Author to Investigator */
     <message key="user.role.coinvestigator">Co-Investigator</message>
-    <message key="user.role.externalReviewer">IRB Member</message>
+    <message key="user.role.externalReviewer">Reviewer &amp; Reporter</message>
 	<message key="user.role.subscriptionManager">Subscription Manager</message>
 	<message key="user.role.managers">Administrators</message> /* Replaced Journal Managers with NECHR Admins - spf */
-    <message key="user.role.editors">IRB Chairs</message> /*Editor to Secretary*/
+    <message key="user.role.editors">Managers</message> /*Editor to Secretary*/
     <message key="user.role.coordinators">Coordinators</message>
         <message key="user.role.sectionEditors">Ethics Committees Secretaries</message>
         
@@ -550,9 +543,9 @@
 
 	<message key="submission.event.general.authorRevision">Investigator revision file updated</message>
 	
-	<message key="submission.event.editor.editorAssigned">IRB Chair assigned to submission</message>
-	<message key="submission.event.editor.editorUnassigned">IRB Chair unassigned from submission</message>
-	<message key="submission.event.editor.editorDecision">IRB Chair decision submitted</message>
+	<message key="submission.event.editor.editorAssigned">Manager assigned to submission</message>
+	<message key="submission.event.editor.editorUnassigned">Manager unassigned from submission</message>
+	<message key="submission.event.editor.editorDecision">Manager decision submitted</message>
 	<message key="submission.event.editor.editorFile">NECHR file updated</message>
 	<message key="submission.event.editor.submissionArchived">Submission sent to archive</message>
 	<message key="submission.event.editor.submissionRestored">Submission restored from archive</message>
@@ -676,7 +669,7 @@ Note that the OAI interface can be disabled for this site by editing the OJS sys
 	<!-- Setup Step 2 -->
 
 
-	<message key="manager.setup.reviewProcessEmailDescription">The NECHR IRB Chair sends to the NECHR Members the request to review with the proposal attached to the email. NECHR Members email the IRB Chair their assent (or regrets), as well as the review and recommendation. The IRB Chair enters the NECHR Member's assent (or regrets), as well as the review and recommendation on the proposal's Review page, to record the review process.</message>
+	<message key="manager.setup.reviewProcessEmailDescription">The Manager sends to the NECHR Members the request to review with the proposal attached to the email. NECHR Members email the Manager their assent (or regrets), as well as the review and recommendation. The Manager enters the NECHR Member's assent (or regrets), as well as the review and recommendation on the proposal's Review page, to record the review process.</message>
 
 
 	<message key="manager.setup.lockssDescription"><![CDATA[Open Journal Systems supports the <a href="http://lockss.org/" target="_blank">LOCKSS</a> (Lots of Copies Keep Stuff Safe) system to ensure a secure and permanent archive for the journal. LOCKSS is open source software developed at Stanford University Library that enables libraries to preserve selected web journals by regularly polling registered journal websites for newly published content and archiving it. Each archive is continually validated against other library caches, and if content is found to be corrupted or lost, the other caches or the journal is used to restore it.
@@ -805,7 +798,7 @@ Active is how many reviews are currently being considered or underway.]]></messa
 	<message key="sectionEditor.review.createReviewer">Create New Reviewer</message>
 
 	
-	<message key="sectionEditor.review.createExternalReviewer">Create IRB Member</message>
+	<message key="sectionEditor.review.createExternalReviewer">Create Reviewer &amp; Reporter</message>
 
 	<!-- Layout Editor -->
 	<message key="layoutEditor.activeEditorialAssignments">Active Editorial Assignments</message>
@@ -850,7 +843,7 @@ Active is how many reviews are currently being considered or underway.]]></messa
 	<message key="reviewer.article.restrictedFileAccess">Submission will be made available, if and when reviewer agrees to undertake review</message>
 	<message key="reviewer.article.submissionEditor">Submission Editor</message>
 	<message key="reviewer.article.reviewerCommentsDescription">Type or paste in review comments here</message>
-	<message key="reviewer.article.editorToEnter">IRB Chair To Enter</message>
+	<message key="reviewer.article.editorToEnter">Manager To Enter</message>
 	<message key="reviewer.article.sendReminder">Send Reminder</message>
 	<message key="reviewer.article.automatic">(Auto)</message>
 	<message key="reviewer.article.recommendation">Recommendation</message>
@@ -859,7 +852,7 @@ Active is how many reviews are currently being considered or underway.]]></messa
 	<message key="reviewer.article.uploadedFile">Uploaded files</message>	
 	<message key="reviewer.article.reviewersAnnotatedVersion">Version uploaded by reviewer</message>
 	<message key="reviewer.article.reviewersAnnotatedVersionDescription">(If you want to annotate the file, for the editor, save on your hard drive and use Browse/Upload.)</message>
-        <message key="reviewer.article.schedule.request">IRB Chair's Request</message>
+        <message key="reviewer.article.schedule.request">Manager's Request</message>
         <message key="reviewer.article.schedule.response">Your Response</message>
         <message key="reviewer.article.schedule.decision">Your Decision</message>
         <message key="reviewer.article.schedule.submitted">Review Submitted</message>
@@ -896,7 +889,7 @@ Active is how many reviews are currently being considered or underway.]]></messa
         <message key="reviewer.article.reviewSteps">Review Steps</message>
         <message key="reviewer.article.reviewerGuidelines">Reviewer Guidelines</message>
 	<message key="reviewer.article.reviewGuidelinesDescription"><![CDATA[The Review Guidelines will provide reviewers with criteria for judging a submission's suitability for publication in the journal, and can include any special instructions for preparing an effective and helpful review. In conducting the review, reviewers are presented with with two open text boxes, the first "for author and editor," and the second "for editor." Alternatively, the Journal Manager can create a peer review form under Review Forms. In all cases, editors will have the option of including the reviews in corresponding with the author.]]></message>
-        <message key="reviewer.article.notifyEditorA">Notify the IRB Chair</message>
+        <message key="reviewer.article.notifyEditorA">Notify the Manager</message>
         <message key="reviewer.article.notifyEditorB">as to whether you will undertake the review.</message>
         <message key="reviewer.article.consultGuidelines">If you are going to do the review, consult Reviewer Guidelines below.</message>
         <message key="reviewer.article.downloadSubmission">Click on file names to download and review (on screen or by printing) the files associated with this submission. Click on "View Metadata" to access to the metadata of this proposal.</message>
@@ -990,17 +983,16 @@ Active is how many reviews are currently being considered or underway.]]></messa
 	<!-- Submission Email Log -->
 	
 	<!-- Submission Comments -->
-	<message key="submission.comments.editorAuthorCorrespondence">IRB Chair/Investigator Correspondence</message> /*IRB Chair, Investigator*/
+	<message key="submission.comments.editorAuthorCorrespondence">Manager/Investigator Correspondence</message>
 	<message key="submission.comments.copyeditComments">Copyedit Comments</message>
 	<message key="submission.comments.viewableDescription"><![CDATA[These comments can be shared with the author.<br />
 (After saving, further comments can be added.)]]></message>
 	<!-- Edited by ayveemallare 7/19/2011 -->
-	<!-- Changed Editor to NECHR, Author to Investigator -->
 	<message key="submission.comments.canShareWithAuthor">Can share with Investigator</message>
 	<message key="submission.comments.cannotShareWithAuthor">Cannot share with Investigator</message>
 	<message key="submission.comments.blindCcReviewers">After sending, present an editable BCC copy to send to reviewers.</message>
-	<message key="submission.comments.forAuthorEditor">For Investigator and IRB Chair</message>
-	<message key="submission.comments.forEditor">For IRB Chair</message>
+	<message key="submission.comments.forAuthorEditor">For Investigator and Manager</message>
+	<message key="submission.comments.forEditor">For Manager</message>
 	<message key="submission.comments.saveAndEmailAuthor">Save and Email Author</message>
 	<message key="submission.comments.saveAndEmailEditor">Save and Email Editor</message>
 	

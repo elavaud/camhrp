@@ -623,9 +623,9 @@ class PKPUser extends DataObject {
 				}
 				if ($this->isLocalizedExternalReviewer() == "Yes"){
 					if ($functions != null){
-						$functions = $functions . ' & IRB Member'; 
+						$functions = $functions . ' & Reviewer and Reporter'; 
 					}else {
-						$functions = 'IRB Member'; 
+						$functions = 'Reviewer and Reporter'; 
 					}
 				}	
 			}
@@ -652,10 +652,10 @@ class PKPUser extends DataObject {
 	function getSecretaryEthicsCommittee(){
 		$ethicsCommittee;
 		$userSettingsDao =& DAORegistry::getDAO('UserSettingsDAO');
-		if (($userSettingsDao->getSetting($this->getId(), 'secretaryStatus', '4')) == "IRB Chair"){
+		if (($userSettingsDao->getSetting($this->getId(), 'secretaryStatus', '4')) == "Manager"){
 			$ethicsCommittee = 'UHS';
 		}
-		if (($userSettingsDao->getSetting($this->getId(), 'secretaryStatus', '4')) == "IRB Chair"){
+		if (($userSettingsDao->getSetting($this->getId(), 'secretaryStatus', '4')) == "Manager"){
 			$ethicsCommittee = 'NECHR';
 		}
 		return $ethicsCommittee;

@@ -75,7 +75,7 @@
 	{if $roleSettings.useProofreaders} 
 		<li>&#187; <a href="{url op="people" path="proofreaders"}">{translate key="user.role.proofreaders"}</a></li>
 	{/if}*}
-	<li>&#187; <a href="{url op="people" path="reviewers"}">{*translate key="user.role.reviewers"*}NECHR & IRB Members</a></li>
+	<li>&#187; <a href="{url op="people" path="reviewers"}">{*translate key="user.role.reviewers"*}NECHR & Reporters</a></li>
 	<li>&#187; <a href="{url op="people" path="authors"}">{translate key="user.role.authors"}</a></li>
 	<li>&#187; <a href="{url op="showNoRole"}">{translate key="manager.people.showNoRole"}</a></li>
 	<!-- <li>&#187; <a href="{url op="people" path="readers"}">{translate key="user.role.readers"}</a></li> Edited by MSB, Nov17,2011-->

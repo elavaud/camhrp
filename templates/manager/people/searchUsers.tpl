@@ -421,7 +421,7 @@ function showOrHideButtons() {ldelim}
 		<td width="20%" class="label"><strong>Ethics Committee :</strong></td>
 		<td width="80%" class="value">
 			<select name="ethicsCommittee" multiple="multiple" size="1" id="ethicsCommittee" class="selectMenu">
-				<option value="NECHR">NECHR & IRB</option>
+				<option value="NECHR">NECHR & Secretariat Team</option>
 				<!--<option value="UHS">UHS</option>-->
 			</select>
 		</td>
@@ -432,7 +432,7 @@ function showOrHideButtons() {ldelim}
         <td width="20%" class="label"><strong>Status :</strong></td>
         <td width="80%" class="value">
 			<select name="ercMemberStatus" multiple="multiple" size="5" id="ercMemberStatus" class="selectMenu">
-				<option value="ERC, Secretary">IRB Chair</option>
+				<option value="ERC, Secretary">Manager</option>
 				<option value="ExtReviewer">{translate key="user.role.externalReviewer"}</option>
 				<option value="ERC, Chair">NECHR Chair</option>
 				<option value="ERC, Vice-Chair">NECHR Vice-Chair</option>

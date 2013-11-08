@@ -26,8 +26,8 @@
 	<message key="about.contact.fax">Fax</message>
 	<message key="about.contact.phone">Phone</message>
 
-        <message key="about.contact.principalContact">IRB Chair</message>
-        <message key="about.contact.subPrincipalContact">IRB Chair Administrative Assistant</message>
+        <message key="about.contact.principalContact">Manager</message>
+        <message key="about.contact.subPrincipalContact">Manager Assistant</message>
         
 	<message key="about.contact.supportContact">Support Contact</message>
 	<message key="about.other">Other</message>
@@ -205,7 +205,7 @@
 	<message key="common.required">Required</message>
     <message key="common.reviewingInterests">Reviewing Interest(s)</message>
     <message key="common.addReviewingInterest">Add another reviewing interest</message>
-    <message key="common.reviewingInterestsInstruct">Only for NECHR and IRB Members</message>
+    <message key="common.reviewingInterestsInstruct">Only for NECHR and Reporters</message>
 	<message key="common.saveAndContinue">Save and continue</message>
 	<message key="common.saveAndEmail">Save and email</message>
 	<message key="common.save">Save</message>
@@ -435,7 +435,7 @@
 	<message key="editor.article.decision.exempted">Exempt From Review</message>
 	<message key="editor.article.decision.expedited">For Expedited Review</message>
 	<message key="editor.article.decision.assigned">For Full Review</message>
-    <message key="editor.article.decisionComments">View comments from IRB Chair</message>
+    <message key="editor.article.decisionComments">View comments from Manager</message>
     <message key="editor.article.decisionLastComment">Last comment</message>
 	
 		<!--  Added by MSB July 7 2011 -->

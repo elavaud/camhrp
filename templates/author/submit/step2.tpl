@@ -13,6 +13,14 @@
 {assign var="cam" value="kh_CA"}
 {assign var="eng" value="en_US"}
 
+{if $journalSettings.supportPhone}
+	{assign var="howToKeyName" value="author.submit.howToSubmit"}
+{else}
+	{assign var="howToKeyName" value="author.submit.howToSubmitNoPhone"}
+{/if}
+
+<p>{translate key=$howToKeyName supportName=$journalSettings.supportName supportEmail=$journalSettings.supportEmail supportPhone=$journalSettings.supportPhone}</p>
+
 <div class="separator"></div>
 	<p><span class="formRequired">{translate key="common.requiredField"}</span></p>
 	<p><span class="formRequired">{translate key="common.mouseOver"}</span></p>
@@ -1469,7 +1477,7 @@
         	<tr valign="top"><td colspan="2"><b>{translate key="proposal.potentialRisk"}</b></td></tr>
         	<tr valign="top"><td colapse="2">&nbsp;</td></tr>
         	<tr valign="top" id="riskLevelField">
-        		<td width="30%" class="label">{fieldLabel name="riskLevel" required="true" key="proposal.riskLevel"}</td>
+        		<td title="Minimal risk means that the probability and magnitude of harm or discomfort anticipated in the research are not greater in and of themselves than those ordinarily encountered in daily life or during the performance of routine physical or psychological examination or tests." width="30%" class="label">[?] {fieldLabel name="riskLevel" required="true" key="proposal.riskLevel"}</td>
         		<td width="70%" class="value">
             		<select name="riskLevel[{$eng|escape}]" class="selectMenu" id="riskLevel">
             			<option value=""></option>

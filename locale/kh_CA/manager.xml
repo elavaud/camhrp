@@ -69,7 +69,7 @@
 	<message key="manager.payment.paymentSolved">Payment issue solved</message>
     <message key="manager.payment.paymentReceived">Payment received in cash or cheque</message>
     <message key="manager.payment.paymentReceivedConfirm">Please be sure you received the payment.</message>
-    <message key="manager.payment.paymentWaived">Waiver by the IRB Chair</message>
+    <message key="manager.payment.paymentWaived">Waiver by the Manager</message>
     <message key="manager.payment.paymentWaivedConfirm">Are you sure to waive this payment?</message>
     <message key="manager.payment.paymentExempted">Exempt of fee (student research)</message>
     <message key="manager.payment.paymentConfirm">Please confirm the reception or the waive of the payment</message>
