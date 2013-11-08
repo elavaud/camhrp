@@ -128,7 +128,7 @@
 	<message key="user.role.siteAdmin">Site Administrator</message>
 	<message key="user.role.siteAdmins">Site Administrators</message>
 	<message key="user.roles">Roles</message>
-	<message key="user.salutation">Surname</message>
+	<message key="user.salutation">Title</message>
     <message key="user.salutation.dr">Dr.</message>
     <message key="user.salutation.prof">Prof.</message>
     <message key="user.salutation.mr">Mr.</message>
