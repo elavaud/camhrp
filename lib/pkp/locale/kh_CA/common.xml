@@ -205,7 +205,7 @@
 	<message key="common.required">Required</message>
     <message key="common.reviewingInterests">Reviewing Interest(s)</message>
     <message key="common.addReviewingInterest">Add another reviewing interest</message>
-    <message key="common.reviewingInterestsInstruct">Only for NECHR and Reporters</message>
+    <message key="common.reviewingInterestsInstruct">Only for NECHR and IRB Members</message>
 	<message key="common.saveAndContinue">Save and continue</message>
 	<message key="common.saveAndEmail">Save and email</message>
 	<message key="common.save">Save</message>

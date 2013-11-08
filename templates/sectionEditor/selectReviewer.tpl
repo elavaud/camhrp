@@ -30,7 +30,7 @@ function sortSearch(heading, direction) {
 <table class="listing">
 	<tr><td colspan="2">&nbsp;</td></tr>
 	<tr colspan="2">			
-		<td colspan="3"><a href="{url op="createExternalReviewer" path=$articleId}" class="action">Create Reviewer & Reporter</a></td>		
+		<td colspan="3"><a href="{url op="createExternalReviewer" path=$articleId}" class="action">Create IRB Member</a></td>		
 	</tr>
 	<tr><td colspan="3">&nbsp;</td></tr>
 	<tr><td colspan="3" class="headseparator">&nbsp;</td></tr>
@@ -51,7 +51,7 @@ function sortSearch(heading, direction) {
 					{if $ercMember->isLocalizedExternalReviewer()==null || $ercMember->isLocalizedExternalReviewer()!="Yes"}
 						NECHR Member
 					{else}
-						Reviewer & Reporter
+						IRB Member
 					{/if}
 				</td>-->
 				<td width="30%">{$ercMember->getFullname()|escape}</td>	
@@ -63,7 +63,7 @@ function sortSearch(heading, direction) {
 	{/foreach}
 	{if $count==0}
 		<tr>
-			<td colspan="3" class="nodata">No unassigned Reviewer & Reporters</td>
+			<td colspan="3" class="nodata">No unassigned Members</td>
 		</tr>
 		<tr>
 			<td colspan="3" class="endseparator">&nbsp;</td>
@@ -73,7 +73,7 @@ function sortSearch(heading, direction) {
 			<td colspan="3" class="endseparator">&nbsp;</td>
 		</tr>
 		<tr>
-			<td colspan="3" align="left">{$count} unassigned Reviewer(s) & Reporter(s)</td>
+			<td colspan="3" align="left">{$count} unassigned Member(s)</td>
 		</tr>
 	{/if}
 </table>

@@ -16,7 +16,7 @@
 	<message key="editor.article.reviewForms">Review Forms</message>
 	<message key="editor.article.selectReviewForm">Select Review Form</message>
 	<message key="editor.article.clearReviewForm">Clear Review Form</message>
-    <message key="editor.article.createExternalReview">Create Reviewer &amp; Reporter</message>
+    <message key="editor.article.createExternalReview">Create IRB Member</message>
     <message key="editor.article.backToReview">Back to review page</message>
     <message key="editor.article.assignAndNotify">Assign and notify</message>
 

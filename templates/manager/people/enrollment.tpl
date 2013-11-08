@@ -43,7 +43,7 @@ function confirmAndPrompt(userId) {
 {/literal}
 </script>
 
-<h3>{if $roleSymbolic=='reviewers'}NECHR & Reporters{else}{translate key=$roleName}{/if}</h3>
+<h3>{if $roleSymbolic=='reviewers'}NECHR & IRB Members{else}{translate key=$roleName}{/if}</h3>
 <form method="post" action="{url path=$roleSymbolic}">
 	<select name="roleSymbolic" class="selectMenu">
 		<option {if $roleSymbolic=='all'}selected="selected" {/if}value="all">{translate key="manager.people.allUsers"}</option>
@@ -59,7 +59,7 @@ function confirmAndPrompt(userId) {
 		{if $roleSettings.useProofreaders}
 			<option {if $roleSymbolic=='proofreaders'}selected="selected" {/if}value="proofreaders">{translate key="user.role.proofreaders"}</option>
 		{/if}
-		<option {if $roleSymbolic=='reviewers'}selected="selected" {/if}value="reviewers">NECHR & Reporters</option>
+		<option {if $roleSymbolic=='reviewers'}selected="selected" {/if}value="reviewers">NECHR & IRB Members</option>
 		<option {if $roleSymbolic=='authors'}selected="selected" {/if}value="authors">{translate key="user.role.authors"}</option>
 
 <!--		<option {if $roleSymbolic=='readers'}selected="selected" {/if}value="readers">{translate key="user.role.readers"}</option> -->
@@ -178,7 +178,7 @@ function confirmAndPrompt(userId) {
 </table>
 
 {if $roleSymbolic=='reviewers'}
-<h6>Reviewer & Reporters</h6>
+<h6>Reviewer & IRB Members</h6>
 <table width="100%" class="listing">
 	<tr>
 		<td colspan="6" class="headseparator">&nbsp;</td>

@@ -54,12 +54,12 @@
 <table class="title">
 	<tr>
 		<td>
-			<h3>Reviewers & Reporters</h3>
+			<h3>IRB Members</h3>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{url op="createExternalReviewer" path=$articleId}" class="action">&#187;Create Reviewer & Reporter</a>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{url op="createExternalReviewer" path=$articleId}" class="action">&#187;Create IRB Member</a>
 		</td>
 	</tr>
 </table>
@@ -96,11 +96,11 @@
 	<div class="separator"></div>
 	<table class="data" width="100%">		
 			<tr class="reviewer">
-				<td align="center"><i>No Reviewers & Reporters into the database.</i></td>
+				<td align="center"><i>No IRB Members into the database.</i></td>
 			</tr>	
 	</table>
 {/if}
 <div class="separator"></div>
-<br/><input type="submit" class="button" value="Select And Notify Reviewers & Reporters" />						
+<br/><input type="submit" class="button" value="Select And Notify IRB Members" />						
 </form>
 </div>

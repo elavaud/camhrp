@@ -148,11 +148,11 @@
 			{if (($user->isNechrMember() == true) && ($user->isUhsMember() == true))} {assign var="NECHR" value="NECHR & UHS"}
 			{elseif $user->isNechrMember() == true} {assign var="NECHR" value="NECHR Member"}
 			{elseif $user->isUhsMember() == true} {assign var="NECHR" value="UHS"}
-			{else} {assign var="NECHR" value="Reviewer & Reporter"} {/if}
+			{else} {assign var="NECHR" value="IRB Member"} {/if}
 			
 			{assign var="reviewerSubmissionsCount" value=$submissionsCount.Reviewer.$journalId}
 			<tr>
-				{if $NECHR=="Reviewer & Reporter"}
+				{if $NECHR=="IRB Member"}
 				<td colspan="2">&#187; <a href="{url journal=$journalPath page="reviewer"}">{$NECHR}</a></td>
 				<td align="right">
 					{if $reviewerSubmissionsCount[0]}

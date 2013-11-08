@@ -27,7 +27,7 @@ function checkSize(){
 
 <table class="data" width="100%">
 	<tr id="reviewersHeader" valign="middle">
-		<td width="30%" colspan="2" ><h4>Active Reviewer & Reporters</h4></td>		
+		<td width="30%" colspan="2" ><h4>Active IRB Members</h4></td>		
 		<td width="70%" align="left" valign="bottom">
 			<a href="{url op="selectReviewer" path=$submission->getId()}" class="action">{translate key="editor.article.selectReviewer"}</a>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

@@ -460,7 +460,7 @@
         <message key="user.ercrole.viceChair">Vice-Chair</message>
         <message key="user.ercrole.secretariat">Secretariat</message>
         <message key="user.ercrole.ercMembers">Members</message>
-        <message key="user.ercrole.extReviewers">Reviewers &amp; Reporters</message>
+        <message key="user.ercrole.extReviewers">IRB Members</message>
         <message key="user.ercrole.extMembers">External Members (non-affiliated members)</message>
         
         <!-- Added by EL on April 19, 2012 -->
@@ -472,7 +472,7 @@
 	<message key="user.role.proofreader">Proofreader</message>
 	<message key="user.role.author">Investigator</message> /*Author to Investigator */
     <message key="user.role.coinvestigator">Co-Investigator</message>
-    <message key="user.role.externalReviewer">Reviewer &amp; Reporter</message>
+    <message key="user.role.externalReviewer">IRB Member</message>
 	<message key="user.role.subscriptionManager">Subscription Manager</message>
 	<message key="user.role.managers">Administrators</message> /* Replaced Journal Managers with NECHR Admins - spf */
     <message key="user.role.editors">Managers</message> 
@@ -801,7 +801,7 @@ Active is how many reviews are currently being considered or underway.]]></messa
 	<message key="sectionEditor.review.createReviewer">Create New Reviewer</message>
 
 	
-	<message key="sectionEditor.review.createExternalReviewer">Create Reviewer &amp; Reporter</message>
+	<message key="sectionEditor.review.createExternalReviewer">Create IRB Member</message>
 
 	<!-- Layout Editor -->
 	<message key="layoutEditor.activeEditorialAssignments">Active Editorial Assignments</message>

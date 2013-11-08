@@ -623,9 +623,9 @@ class PKPUser extends DataObject {
 				}
 				if ($this->isLocalizedExternalReviewer() == "Yes"){
 					if ($functions != null){
-						$functions = $functions . ' & Reviewer and Reporter'; 
+						$functions = $functions . ' & IRB Member'; 
 					}else {
-						$functions = 'Reviewer and Reporter'; 
+						$functions = 'IRB Member'; 
 					}
 				}	
 			}

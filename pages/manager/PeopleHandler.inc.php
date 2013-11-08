@@ -92,7 +92,7 @@ class PeopleHandler extends ManagerHandler {
 				//	break;
 				case ROLE_ID_REVIEWER:
 					$helpTopicId = 'journal.roles.reviewer';
-					//For Reviewers & Reporters
+					//For IRB Members
 					$reviewers =& $roleDao->getUsersByRoleId('4096', $journal->getId(), $searchType, $search, $searchMatch, $rangeInfo, $sort);
 					$templateMgr->assign_by_ref('reviewers', $reviewers);
 					break;
@@ -643,7 +643,7 @@ class PeopleHandler extends ManagerHandler {
 						}						
 					}
 				}
-				// new adding for Reviewers & Reporters
+				// new adding for IRB Members
 				else if ($ercMemberStatus == 'ExtReviewer'){
 					$roleId = '4096';
 					$rolePath = 'reviewer';
@@ -747,7 +747,7 @@ class PeopleHandler extends ManagerHandler {
 						}						
 					}
 				}
-				// new adding for Reviewers & Reporters
+				// new adding for IRB Members
 				else if ($ercMemberStatus == 'ExtReviewer'){
 					$roleId = '4096';
 					$rolePath = 'reviewer';
